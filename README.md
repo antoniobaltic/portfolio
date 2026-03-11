@@ -1,4 +1,4 @@
-# antoniobaltic.com
+# antoniobaltic.vercel.app
 
 Personal developer portfolio. One page, no dependencies, no build step.
 
