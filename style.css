@@ -53,6 +53,13 @@ body::after {
   z-index: 9000;
 }
 
+/* Focus styles */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -279,7 +286,7 @@ body::after {
 
 .card-desc {
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: var(--text-dim);
   line-height: 1.7;
   font-weight: 300;
   margin-bottom: 1.5rem;
