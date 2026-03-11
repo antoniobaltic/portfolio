@@ -234,13 +234,11 @@ body::after {
 }
 
 .card {
-  display: block;
-  text-decoration: none;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 2px;
   padding: 2rem;
-  cursor: pointer;
+  cursor: default;
   position: relative;
   transition:
     border-color 0.25s ease,
@@ -268,9 +266,6 @@ body::after {
 .card:hover::before { opacity: 1; }
 
 .card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 1rem;
 }
 
@@ -280,20 +275,6 @@ body::after {
   color: var(--accent);
   letter-spacing: 0.02em;
   line-height: 1.3;
-}
-
-.card-arrow {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  transition: transform 0.2s ease, color 0.2s ease;
-  flex-shrink: 0;
-  margin-left: 1rem;
-  margin-top: 0.1rem;
-}
-
-.card:hover .card-arrow {
-  transform: translateX(4px);
-  color: var(--accent-dim);
 }
 
 .card-desc {
@@ -326,6 +307,24 @@ body::after {
   border-color: rgba(212, 146, 74, 0.25);
   color: rgba(212, 146, 74, 0.55);
 }
+
+.card-links {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 1.4rem;
+}
+
+.card-link {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s ease;
+}
+
+.card-link:hover { color: var(--accent); }
 
 /* ─────────────────────────────────────────────────────
    Footer

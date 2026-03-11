@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutzerklärung — Ducky</title>
+  <meta name="description" content="Datenschutzerklärung für die Ducky App">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Privacy page overrides ─────────────────────── */
+    .page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1.2rem var(--px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .page-nav-back {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .page-nav-back:hover { color: var(--accent); }
+
+    .page-nav-app {
+      font-size: 0.7rem;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-left: 1rem;
+      letter-spacing: 0.08em;
+    }
+
+    .policy-wrap {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 6rem) var(--px) clamp(5rem, 10vw, 8rem);
+    }
+
+    .policy-header {
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-label {
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      opacity: 0.65;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .policy-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    .policy-app {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .policy-section {
+      margin-bottom: 3rem;
+    }
+
+    .policy-section h2 {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .policy-section h2 .section-num {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .policy-section p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 0.6rem;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .policy-section ul li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      font-weight: 300;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .policy-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .policy-section a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .policy-section a:hover { opacity: 1; }
+
+    .policy-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.8rem;
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .policy-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Nav ───────────────────────────────────────────── -->
+  <nav class="page-nav">
+    <a href="index.html" class="page-nav-back">← back</a>
+    <span class="page-nav-app">Ducky</span>
+  </nav>
+
+  <!-- ─── Policy ────────────────────────────────────────── -->
+  <main class="policy-wrap">
+
+    <header class="policy-header">
+      <span class="policy-label">// rechtliches</span>
+      <h1 class="policy-title">Datenschutzerklärung</h1>
+      <p class="policy-app">Ducky — iOS App</p>
+    </header>
+
+    <!-- 1 -->
+    <section class="policy-section">
+      <h2><span class="section-num">01</span> Verantwortlicher</h2>
+      <ul>
+        <li>Antonio Baltic</li>
+        <li>Schörgelgasse 55, 8010 Graz, Österreich</li>
+        <li><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 2 -->
+    <section class="policy-section">
+      <h2><span class="section-num">02</span> Welche Daten verarbeitet die App?</h2>
+      <ul>
+        <li><strong style="color: var(--text); font-weight: 500;">Standortdaten</strong> — Nur nach deiner Freigabe, um Gewässer in deiner Nähe zu zeigen und Distanzen zu berechnen.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Technische Anfragen</strong> — Beim Laden von Wetter-, Qualitäts- und Karteninhalten werden API-Anfragen an externe Dienste gestellt.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Lokaler Cache</strong> — Gewässer- und Wetterdaten werden auf dem Gerät zwischengespeichert, damit die App schneller startet.</li>
+        <li>Keine Konten, keine Tracking-ID, keine Werbung, kein Profiling.</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 3 -->
+    <section class="policy-section">
+      <h2><span class="section-num">03</span> Wofür und auf welcher Grundlage?</h2>
+      <ul>
+        <li>Die Verarbeitung erfolgt zur Bereitstellung der Kernfunktionen der App.</li>
+        <li>Standortdaten nur mit deiner Einwilligung (Berechtigung in iOS).</li>
+        <li>Sonstige Verarbeitung zur Vertragserfüllung bzw. zur technischen Funktionsfähigkeit.</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 4 -->
+    <section class="policy-section">
+      <h2><span class="section-num">04</span> Empfänger / externe Dienste</h2>
+      <ul>
+        <li><strong style="color: var(--text); font-weight: 500;">AGES</strong> — Badegewässerdaten</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Open-Meteo</strong> — Wetterdaten</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia API</strong> — Wissensinhalte pro Gewässer</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Apple Maps</strong> — Routen- und Ortsfunktionen</li>
+      </ul>
+      <p class="policy-note">Dabei kann deine IP-Adresse technisch bedingt beim jeweiligen Dienst verarbeitet werden.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 5 -->
+    <section class="policy-section">
+      <h2><span class="section-num">05</span> Speicherdauer</h2>
+      <ul>
+        <li>Zwischengespeicherte Gewässer- und Wetterdaten werden lokal im App-Cache gespeichert.</li>
+        <li>Du kannst den Cache jederzeit in den Einstellungen löschen.</li>
+        <li>Es gibt keine Benutzerkonten in der App.</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 6 -->
+    <section class="policy-section">
+      <h2><span class="section-num">06</span> Deine Rechte</h2>
+      <ul>
+        <li>Du hast Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung und Datenübertragbarkeit nach DSGVO.</li>
+        <li>Du kannst den Standortzugriff jederzeit in iOS entziehen.</li>
+        <li>Beschwerdestelle in Österreich: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">Datenschutzbehörde (DSB)</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>
+</html>
