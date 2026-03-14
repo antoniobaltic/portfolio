@@ -69,8 +69,7 @@ function initTheme() {
   const label     = document.getElementById('theme-label');
   const metaTheme = document.querySelector('meta[name="theme-color"]');
 
-  const stored = localStorage.getItem('theme');
-  let theme = stored || 'light';
+  let theme = 'light';
 
   function apply(t) {
     document.documentElement.setAttribute('data-theme', t);
