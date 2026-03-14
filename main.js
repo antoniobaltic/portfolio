@@ -61,9 +61,41 @@ function initScrollReveal() {
 }
 
 /* ─────────────────────────────────────────────────────
+   Theme toggle
+───────────────────────────────────────────────────── */
+function initTheme() {
+  const btn       = document.getElementById('theme-btn');
+  const icon      = document.getElementById('theme-icon');
+  const label     = document.getElementById('theme-label');
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  const stored = localStorage.getItem('theme');
+  let theme = stored || 'light';
+
+  function apply(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    if (t === 'light') {
+      icon.textContent  = '◐';
+      label.textContent = 'dark_mode';
+      if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
+    } else {
+      icon.textContent  = '◑';
+      label.textContent = 'light_mode';
+      if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
+    }
+    localStorage.setItem('theme', t);
+    theme = t;
+  }
+
+  apply(theme);
+  btn.addEventListener('click', () => apply(theme === 'dark' ? 'light' : 'dark'));
+}
+
+/* ─────────────────────────────────────────────────────
    Init
 ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   runHeroSequence();
   initScrollReveal();
 });

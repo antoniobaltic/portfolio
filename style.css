@@ -18,6 +18,88 @@
 }
 
 /* ─────────────────────────────────────────────────────
+   Light theme
+───────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:           #f4efe6;
+  --surface:      #ede7da;
+  --border:       #d4cbbf;
+  --border-hover: #b8ad9f;
+  --accent:       #b5642a;
+  --accent-glow:  rgba(181, 100, 42, 0.1);
+  --accent-dim:   rgba(181, 100, 42, 0.5);
+  --text:         #1c1714;
+  --text-dim:     #5c5248;
+  --text-muted:   #9c9088;
+}
+
+[data-theme="light"] .card:hover {
+  box-shadow: 0 0 32px rgba(181, 100, 42, 0.1), 0 8px 24px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .card::before {
+  background: linear-gradient(135deg, rgba(181,100,42,0.05) 0%, transparent 60%);
+}
+
+[data-theme="light"] .card:hover .tag {
+  border-color: rgba(181, 100, 42, 0.3);
+  color: rgba(181, 100, 42, 0.7);
+}
+
+[data-theme="light"] .hero::before {
+  background: radial-gradient(circle, rgba(181, 100, 42, 0.06) 0%, transparent 65%);
+}
+
+/* ─────────────────────────────────────────────────────
+   Theme toggle
+───────────────────────────────────────────────────── */
+.theme-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: clamp(1.5rem, 5vw, 4rem);
+  z-index: 9999;
+  background: var(--surface);
+  border: 1px solid var(--border-hover);
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  padding: 0.42em 0.8em;
+  cursor: pointer;
+  border-radius: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  transition:
+    border-color 0.2s ease,
+    color        0.2s ease,
+    background   0.2s ease,
+    box-shadow   0.2s ease;
+  user-select: none;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.theme-btn:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.theme-icon {
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.theme-btn:hover .theme-icon { opacity: 1; }
+
+/* ─────────────────────────────────────────────────────
    Reset
 ───────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -274,6 +356,10 @@ body::after {
 
 .card-top {
   margin-bottom: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .card-name {
@@ -282,6 +368,39 @@ body::after {
   color: var(--accent);
   letter-spacing: 0.02em;
   line-height: 1.3;
+}
+
+.card-name-link {
+  color: inherit;
+  text-decoration: none !important;
+  transition: opacity 0.2s ease;
+}
+
+.card-name-link:hover { opacity: 0.75; }
+
+.card-status {
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.3); }
 }
 
 .card-desc {
@@ -320,7 +439,8 @@ body::after {
   padding-top: 1rem;
   border-top: 1px solid var(--border);
   display: flex;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
 }
 
 .card-link {
@@ -328,10 +448,18 @@ body::after {
   color: var(--text-muted);
   text-decoration: none;
   letter-spacing: 0.06em;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
 .card-link:hover { color: var(--accent); }
+
+.card-link--primary {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.card-link--primary:hover { opacity: 1; color: var(--accent); }
 
 /* ─────────────────────────────────────────────────────
    Footer

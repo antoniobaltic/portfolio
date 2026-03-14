@@ -1,12 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#0a0a0a"/>
+  <!-- Background -->
+  <rect width="32" height="32" fill="#f4efe6"/>
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="3" height="32" fill="#b5642a" opacity="0.4"/>
+  <!-- AB initials -->
   <text
-    x="16" y="16"
-    dominant-baseline="central"
-    text-anchor="middle"
-    font-family="'JetBrains Mono', 'Courier New', monospace"
-    font-weight="700"
-    font-size="13"
-    letter-spacing="-0.5"
-    fill="#d4924a">AB</text>
+    x="6" y="22"
+    font-family="Menlo, Monaco, Consolas, monospace"
+    font-size="15"
+    font-weight="bold"
+    fill="#1c1714">AB</text>
+  <!-- Blinking cursor — vertical bar after B -->
+  <rect x="25" y="9" width="2" height="14" rx="0.5" fill="#b5642a">
+    <animate
+      attributeName="opacity"
+      values="1;1;0;0;1"
+      keyTimes="0;0.42;0.5;0.92;1"
+      dur="1.3s"
+      repeatCount="indefinite"/>
+  </rect>
 </svg>
