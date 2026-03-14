@@ -324,6 +324,59 @@ body::after {
 }
 
 /* ─────────────────────────────────────────────────────
+   Work header + filter
+───────────────────────────────────────────────────── */
+.work-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.work-header .section-label {
+  margin-bottom: 0;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  font-family: var(--font);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.3em 0.75em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.filter-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card.hidden {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────
    Cards
 ───────────────────────────────────────────────────── */
 .grid {

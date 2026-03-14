@@ -92,10 +92,33 @@ function initTheme() {
 }
 
 /* ─────────────────────────────────────────────────────
+   Project filter
+───────────────────────────────────────────────────── */
+function initFilter() {
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('#project-grid .card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const tags = card.dataset.tags || '';
+        const match = filter === 'all' || tags.split(' ').includes(filter);
+        card.classList.toggle('hidden', !match);
+      });
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────────────
    Init
 ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   runHeroSequence();
   initScrollReveal();
+  initFilter();
 });

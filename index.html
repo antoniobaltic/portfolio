@@ -53,10 +53,17 @@
     <!-- ─── Work ──────────────────────────────────────────────── -->
     <section class="section" id="work">
       <div class="container">
-        <span class="section-label fade-up">// work</span>
-        <div class="grid">
+        <div class="work-header fade-up">
+          <span class="section-label">// work</span>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">all</button>
+            <button class="filter-btn" data-filter="web">web</button>
+            <button class="filter-btn" data-filter="iOS">iOS</button>
+          </div>
+        </div>
+        <div class="grid" id="project-grid">
 
-          <div class="card fade-up">
+          <div class="card fade-up" data-tags="web">
             <div class="card-top">
               <h2 class="card-name"><a href="https://ams-scraper-studio.vercel.app/" class="card-name-link" target="_blank" rel="noopener">AMS Scraper Studio</a></h2>
             </div>
@@ -71,7 +78,7 @@
             </div>
           </div>
 
-          <div class="card fade-up">
+          <div class="card fade-up" data-tags="iOS">
             <div class="card-top">
               <h2 class="card-name"><a href="https://apps.apple.com/at/app/ducky/id6760419989" class="card-name-link" target="_blank" rel="noopener">Ducky</a></h2>
             </div>
@@ -87,7 +94,7 @@
             </div>
           </div>
 
-          <div class="card fade-up">
+          <div class="card fade-up" data-tags="iOS">
             <div class="card-top">
               <h2 class="card-name">Orbit</h2>
               <span class="card-status"><span class="status-dot"></span>in progress</span>
