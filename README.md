@@ -15,7 +15,7 @@ style.css             styles + animations
 main.js               typewriter sequence + scroll reveals
 ducky-privacy.html    Ducky privacy policy
 orbit-privacy.html    Orbit privacy policy
-favicon.*             favicons + apple touch icon
+antoniobaltic_dev_logo.png   favicon + apple touch icon
 ```
 
 ## Deploy
