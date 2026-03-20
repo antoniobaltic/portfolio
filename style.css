@@ -218,7 +218,7 @@ body::after {
   color: var(--text);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  min-height: 1.2em;
+  min-height: 2.3em;
   position: relative;
 }
 

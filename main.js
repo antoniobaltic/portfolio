@@ -4,8 +4,10 @@
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function typeWriter(el, text, speed = 62) {
+  const node = document.createTextNode('');
+  el.appendChild(node);
   for (const char of text) {
-    el.textContent += char;
+    node.textContent += char;
     await sleep(speed + (Math.random() * 20 - 10)); // slight human jitter
   }
 }
@@ -28,7 +30,9 @@ async function runHeroSequence() {
   nameEl.classList.add('is-typing');
 
   await sleep(120);
-  await typeWriter(nameEl, 'Antonio Baltic', 62);
+  await typeWriter(nameEl, 'Antonio', 62);
+  nameEl.appendChild(document.createElement('br'));
+  await typeWriter(nameEl, 'Baltic', 62);
 
   nameEl.classList.remove('is-typing');
   nameEl.classList.add('is-done');
