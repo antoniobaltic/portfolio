@@ -10,11 +10,14 @@ Personal developer portfolio. One page, no dependencies, no build step.
 ## Structure
 
 ```
-index.html   markup
-style.css    styles + animations
-main.js      typewriter sequence + scroll reveals
+index.html            main portfolio page
+style.css             styles + animations
+main.js               typewriter sequence + scroll reveals
+ducky-privacy.html    Ducky privacy policy
+orbit-privacy.html    Orbit privacy policy
+favicon.*             favicons + apple touch icon
 ```
 
 ## Deploy
 
-Drop the three files anywhere — Vercel, Netlify, GitHub Pages, or a plain static host. No config needed.
+Drop the files anywhere — Vercel, Netlify, GitHub Pages, or a plain static host. No config needed.
