@@ -195,7 +195,7 @@
     <header class="policy-header">
       <span class="policy-label">// rechtliches</span>
       <h1 class="policy-title">Datenschutzerklärung</h1>
-      <p class="policy-app">Ducky — iOS App</p>
+      <p class="policy-app">Transparenz zu Daten, Rechten und Diensten</p>
     </header>
 
     <!-- 1 -->
@@ -214,10 +214,12 @@
     <section class="policy-section">
       <h2><span class="section-num">02</span> Welche Daten verarbeitet die App?</h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">Standortdaten</strong> — Nur nach deiner Freigabe, um Gewässer in deiner Nähe zu zeigen und Distanzen zu berechnen.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Technische Anfragen</strong> — Beim Laden von Wetter-, Qualitäts- und Karteninhalten werden API-Anfragen an externe Dienste gestellt.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Lokaler Cache</strong> — Gewässer- und Wetterdaten werden auf dem Gerät zwischengespeichert, damit die App schneller startet.</li>
-        <li>Keine Konten, keine Tracking-ID, keine Werbung, kein Profiling.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Standort (nur mit deiner Freigabe)</strong> — Wird verwendet, um Gewässer in deiner Nähe zu sortieren und Entfernungen anzuzeigen. Der Standort wird nicht gespeichert oder übertragen.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Netzwerk-Anfragen</strong> — Beim Abruf von Wetter-, Badegewässer-, Karten- und Wikipedia-Daten werden technische Anfragen an externe Dienste gestellt. Dabei wird deine IP-Adresse übermittelt.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Lokaler Cache</strong> — Gewässer- und Wetterdaten werden auf deinem Gerät zwischengespeichert (Caches-Verzeichnis), damit die App schneller startet.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Lokale Nutzerdaten</strong> — Favoriten, besuchte Seen und persönliche Notizen werden ausschließlich auf deinem Gerät gespeichert (SwiftData). Es erfolgt keine Übertragung an Server.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">In-App-Käufe</strong> — Trinkgeld-Käufe werden über Apple (StoreKit) abgewickelt. Der Entwickler erhält keine persönlichen Zahlungsdaten.</li>
+        <li>Kein Tracking, keine Werbung, keine Benutzerkonten, kein Profiling, keine Analyse-SDKs.</li>
       </ul>
     </section>
 
@@ -225,11 +227,11 @@
 
     <!-- 3 -->
     <section class="policy-section">
-      <h2><span class="section-num">03</span> Wofür und auf welcher Grundlage?</h2>
+      <h2><span class="section-num">03</span> Rechtsgrundlagen (DSGVO)</h2>
       <ul>
-        <li>Die Verarbeitung erfolgt zur Bereitstellung der Kernfunktionen der App.</li>
-        <li>Standortdaten nur mit deiner Einwilligung (Berechtigung in iOS).</li>
-        <li>Sonstige Verarbeitung zur Vertragserfüllung bzw. zur technischen Funktionsfähigkeit.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Einwilligung (Art. 6 Abs. 1 lit. a)</strong> — Standortzugriff — nur nach ausdrücklicher Freigabe in iOS.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Vertragserfüllung (Art. 6 Abs. 1 lit. b)</strong> — Abruf von Gewässer- und Wetterdaten zur Bereitstellung der Kernfunktionen.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Berechtigtes Interesse (Art. 6 Abs. 1 lit. f)</strong> — Lokale Zwischenspeicherung zur Verbesserung der Ladezeiten.</li>
       </ul>
     </section>
 
@@ -237,26 +239,29 @@
 
     <!-- 4 -->
     <section class="policy-section">
-      <h2><span class="section-num">04</span> Empfänger / externe Dienste</h2>
+      <h2><span class="section-num">04</span> Empfänger und externe Dienste</h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">AGES</strong> — Badegewässerdaten</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Open-Meteo</strong> — Wetterdaten</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia API</strong> — Wissensinhalte pro Gewässer</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Apple Maps</strong> — Routen- und Ortsfunktionen</li>
+        <li><strong style="color: var(--text); font-weight: 500;">AGES</strong> — Österreichische Agentur für Gesundheit und Ernährungssicherheit (Badegewässerqualität)</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Open-Meteo</strong> — Wetterdaten (Open-Source-API, Server in der EU)</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia / Wikimedia</strong> — Beschreibungen zu Gewässern (deutschsprachige API)</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Apple Maps / MapKit</strong> — Kartenanzeige, Routen und Ortssuche</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Apple StoreKit</strong> — Abwicklung von In-App-Käufen</li>
       </ul>
-      <p class="policy-note">Dabei kann deine IP-Adresse technisch bedingt beim jeweiligen Dienst verarbeitet werden.</p>
+      <p class="policy-note">Bei diesen Anfragen kann deine IP-Adresse technisch bedingt vom jeweiligen Dienst verarbeitet werden. Es werden keine personenbezogenen Daten aktiv übermittelt.</p>
     </section>
 
     <hr class="policy-divider">
 
     <!-- 5 -->
     <section class="policy-section">
-      <h2><span class="section-num">05</span> Speicherdauer</h2>
+      <h2><span class="section-num">05</span> Speicherdauer und Löschung</h2>
       <ul>
-        <li>Zwischengespeicherte Gewässer- und Wetterdaten werden lokal im App-Cache gespeichert.</li>
-        <li>Du kannst den Cache jederzeit in den Einstellungen löschen.</li>
-        <li>Es gibt keine Benutzerkonten in der App.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Gewässer-Cache</strong> — 24 Stunden, danach automatische Aktualisierung.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Wetter-Cache</strong> — 30 Minuten, danach automatische Aktualisierung.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia-Cache</strong> — 30 Tage.</li>
+        <li><strong style="color: var(--text); font-weight: 500;">Favoriten, Besuche und Notizen</strong> — Solange die App installiert ist.</li>
       </ul>
+      <p class="policy-note">Du kannst den Cache jederzeit in den Einstellungen löschen. Favoriten, Besuche und Notizen werden beim Deinstallieren der App gelöscht.</p>
     </section>
 
     <hr class="policy-divider">
@@ -265,9 +270,23 @@
     <section class="policy-section">
       <h2><span class="section-num">06</span> Deine Rechte</h2>
       <ul>
-        <li>Du hast Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung und Datenübertragbarkeit nach DSGVO.</li>
-        <li>Du kannst den Standortzugriff jederzeit in iOS entziehen.</li>
-        <li>Beschwerdestelle in Österreich: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">Datenschutzbehörde (DSB)</a></li>
+        <li>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit (Art. 15–20 DSGVO).</li>
+        <li>Du kannst den Standortzugriff jederzeit in den iOS-Einstellungen widerrufen.</li>
+        <li>Alle lokalen Daten kannst du durch Deinstallation der App vollständig löschen.</li>
+        <li>Anfragen richtest du an: <a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></li>
+        <li>Beschwerderecht: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">Österreichische Datenschutzbehörde (dsb.gv.at)</a></li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 7 -->
+    <section class="policy-section">
+      <h2><span class="section-num">07</span> Sonstiges</h2>
+      <ul>
+        <li>Die App richtet sich nicht an Kinder unter 16 Jahren.</li>
+        <li>Es findet keine automatisierte Entscheidungsfindung oder Profiling statt.</li>
+        <li>Stand: März 2026</li>
       </ul>
     </section>
 
