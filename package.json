@@ -1,0 +1,18 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Antonio Baltic's portfolio website",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "lint": "echo 'No linter configured for vanilla HTML project'",
+    "test": "echo 'No tests configured'"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website"
+  ],
+  "author": "Antonio Baltic",
+  "license": "MIT",
+  "devDependencies": {}
+}
