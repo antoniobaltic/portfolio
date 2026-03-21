@@ -572,6 +572,7 @@ body::after {
   gap: 1.5rem;
 }
 
+.footer-x,
 .footer-github {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -580,6 +581,7 @@ body::after {
   transition: color 0.2s ease;
 }
 
+.footer-x:hover,
 .footer-github:hover { color: var(--accent); }
 
 /* ─────────────────────────────────────────────────────
