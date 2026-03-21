@@ -302,7 +302,6 @@ body::after {
   color: var(--accent);
   letter-spacing: 0.15em;
   margin-bottom: 3rem;
-  opacity: 0.65;
 }
 
 /* ─────────────────────────────────────────────────────
@@ -381,7 +380,8 @@ body::after {
 ───────────────────────────────────────────────────── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
   gap: 1.5rem;
 }
 
@@ -391,6 +391,8 @@ body::after {
   border-radius: 2px;
   padding: 2rem;
   cursor: default;
+  display: flex;
+  flex-direction: column;
   position: relative;
   transition:
     border-color 0.25s ease,
@@ -475,6 +477,7 @@ body::after {
   line-height: 1.7;
   font-weight: 300;
   margin-bottom: 1.5rem;
+  flex: 1;
 }
 
 .card:hover .card-desc { color: var(--text-dim); transition: color 0.25s ease; }
@@ -555,9 +558,9 @@ body::after {
 .footer-email:hover { opacity: 1; }
 
 .footer-copy {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 
 .footer-label {
