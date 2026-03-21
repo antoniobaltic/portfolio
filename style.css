@@ -11,7 +11,7 @@
   --accent-dim:   rgba(212, 146, 74, 0.5);
   --text:         #e2e2e2;
   --text-dim:     #999;
-  --text-muted:   #3d3d3d;
+  --text-muted:   #555;
   --font:         'JetBrains Mono', monospace;
   --max:          860px;
   --px:           clamp(1.5rem, 5vw, 4rem);
