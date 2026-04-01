@@ -93,6 +93,25 @@
       font-weight: 300;
     }
 
+    .policy-updated {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-top: 0.6rem;
+    }
+
+    .policy-tldr {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.85;
+      font-weight: 300;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      margin-bottom: 3rem;
+      background: var(--surface);
+    }
+
     .policy-section {
       margin-bottom: 3rem;
     }
@@ -109,23 +128,135 @@
       gap: 0.6rem;
     }
 
+    .policy-section h2 .section-num {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .policy-section h3 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .policy-section h3:first-of-type {
+      margin-top: 0;
+    }
+
     .policy-section p {
       font-size: 0.85rem;
       color: var(--text-dim);
       line-height: 1.85;
       font-weight: 300;
+      margin-bottom: 0.6rem;
+    }
+
+    .policy-section p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .policy-section ul li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      font-weight: 300;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .policy-section ul li::before {
+      content: '\2014';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .policy-section a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .policy-section a:hover { opacity: 1; }
+
+    .policy-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.8rem;
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .policy-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 3rem;
+    }
+
+    /* Summary table */
+    .policy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.8rem;
+    }
+
+    .policy-table th,
+    .policy-table td {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-table th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .policy-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .policy-footer-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
 
   <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
-    <span class="theme-icon" id="theme-icon">◑</span><span id="theme-label">light_mode</span>
+    <span class="theme-icon" id="theme-icon">&#9681;</span><span id="theme-label">light_mode</span>
   </button>
 
   <!-- ─── Nav ───────────────────────────────────────────── -->
   <nav class="page-nav">
-    <a href="index.html" class="page-nav-back">← back</a>
+    <a href="index.html" class="page-nav-back">&larr; back</a>
     <span class="page-nav-app">Lacuna</span>
   </nav>
 
@@ -135,13 +266,269 @@
     <header class="policy-header">
       <span class="policy-label">// legal</span>
       <h1 class="policy-title">Privacy Policy</h1>
-      <p class="policy-app">Lacuna — iOS App</p>
+      <p class="policy-app">Lacuna &mdash; Time Capsule App</p>
+      <p class="policy-updated">Last updated: April 1, 2026</p>
     </header>
 
+    <p class="policy-tldr"><strong>The short version:</strong> Lacuna stores everything locally on your device. I don't collect, transmit, or have access to any of your data. I can't see your capsules, photos, voice notes, or any other content you create.</p>
+
+    <!-- 1 -->
     <section class="policy-section">
-      <h2>// coming soon</h2>
-      <p>The privacy policy for Lacuna will be published here before the app launches.</p>
+      <h2><span class="section-num">01</span> Data Controller</h2>
+      <ul>
+        <li>Antonio Baltic</li>
+        <li>Austria</li>
+        <li><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></li>
+      </ul>
+      <p>For the purposes of the EU General Data Protection Regulation (GDPR / DSGVO) and the Austrian Datenschutzgesetz (DSG), I am the data controller.</p>
     </section>
+
+    <hr class="policy-divider">
+
+    <!-- 2 -->
+    <section class="policy-section">
+      <h2><span class="section-num">02</span> What Data Is Processed</h2>
+
+      <h3>2.1 Content You Create (Stored Locally Only)</h3>
+      <p>When you create a capsule, the following data is stored <strong>exclusively on your device</strong>:</p>
+      <ul>
+        <li>Text content you write</li>
+        <li>Photos you select from your library or capture with the camera</li>
+        <li>Voice recordings you make</li>
+        <li>Capsule titles, creation dates, and unlock dates</li>
+        <li>Your sender name (if you choose to send a capsule to someone)</li>
+      </ul>
+      <p><strong>This data never leaves your device</strong> unless you explicitly choose to share a capsule with someone using the App's send feature (see Section 2.3).</p>
+      <p>I have no access to any of this data. There are no servers, no cloud storage, no accounts, and no way for me or any third party to view your content.</p>
+
+      <h3>2.2 Preferences (Stored Locally Only)</h3>
+      <p>The App stores your preferences on your device using Apple's standard storage:</p>
+      <ul>
+        <li>Appearance mode (light, dark, or automatic)</li>
+        <li>Your sender name (so you don't have to re-enter it each time you send)</li>
+        <li>Onboarding completion status</li>
+        <li>Notification permission status</li>
+      </ul>
+      <p>These preferences are not transmitted anywhere.</p>
+
+      <h3>2.3 Shared Capsules</h3>
+      <p>When you use the "send to someone" feature, the App packages your capsule content into a <strong>.capsule</strong> file and opens the iOS share sheet. You choose how to share it (e.g., AirDrop, iMessage, email).</p>
+      <ul>
+        <li>The file is created locally on your device</li>
+        <li>It is shared through Apple's standard sharing mechanisms</li>
+        <li>I have no involvement in or access to the transmission</li>
+        <li>The recipient's copy is stored locally on their device</li>
+        <li>Your sender name is included in the file so the recipient knows who sent it</li>
+      </ul>
+      <p>The sharing is entirely peer-to-peer. No data passes through any server I operate.</p>
+
+      <h3>2.4 In-App Purchases</h3>
+      <p>The App offers a one-time in-app purchase ("Lacuna +") processed by Apple through the App Store. Purchase validation and entitlement management is handled by <strong>RevenueCat</strong>, a third-party service (see Section 5). RevenueCat receives:</p>
+      <ul>
+        <li>A randomly generated anonymous user ID (not linked to your Apple ID or any personal information)</li>
+        <li>Purchase transaction data from Apple (product purchased, date, transaction ID)</li>
+        <li>Your device's country/region (for currency and pricing purposes)</li>
+      </ul>
+      <p>RevenueCat does <strong>not</strong> receive your name, Apple ID, email address, payment details, or any other personally identifiable information. The anonymous user ID cannot be used to identify you.</p>
+      <p>I receive aggregate, anonymized sales data (e.g., number of purchases per country) from both Apple and RevenueCat. I do <strong>not</strong> receive any data that could identify individual users.</p>
+
+      <h3>2.5 Notifications</h3>
+      <p>The App uses Apple's local notification system to alert you when a capsule is ready to open. These notifications are:</p>
+      <ul>
+        <li>Scheduled locally on your device</li>
+        <li>Not routed through any external server</li>
+        <li>Not used for marketing or advertising</li>
+      </ul>
+
+      <h3>2.6 Data I Do NOT Collect</h3>
+      <p>To be explicit, the App does <strong>not</strong> collect or process:</p>
+      <ul>
+        <li>Personal identification information (name, email, phone number)</li>
+        <li>Location data</li>
+        <li>Device identifiers or fingerprints</li>
+        <li>Usage analytics or behavioral data</li>
+        <li>Crash reports or diagnostics</li>
+        <li>Advertising identifiers</li>
+        <li>Cookies or tracking technologies</li>
+        <li>Health, financial, or biometric data</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 3 -->
+    <section class="policy-section">
+      <h2><span class="section-num">03</span> Legal Basis for Processing (GDPR Article 6)</h2>
+      <p>The minimal data processing that occurs is based on:</p>
+      <ul>
+        <li><strong>Article 6(1)(b) &mdash; Performance of a contract:</strong> Processing your locally stored content is necessary to provide the App's functionality (creating, sealing, and opening capsules). This also covers the transmission of anonymous purchase data to RevenueCat, which is necessary to validate and deliver the in-app purchase you initiated.</li>
+        <li><strong>Article 6(1)(a) &mdash; Consent:</strong> Notification permissions and camera/microphone/photo library access are granted explicitly by you through iOS system prompts. You can revoke these at any time in your device settings.</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 4 -->
+    <section class="policy-section">
+      <h2><span class="section-num">04</span> Data Storage and Security</h2>
+      <p>All data is stored locally on your device using Apple's standard frameworks:</p>
+      <ul>
+        <li><strong>SwiftData</strong> for capsule metadata and content</li>
+        <li><strong>File system</strong> for voice recordings (stored in the App's sandboxed Documents directory)</li>
+        <li><strong>UserDefaults</strong> for preferences</li>
+      </ul>
+      <p>Data is protected by your device's built-in security features, including:</p>
+      <ul>
+        <li>Device encryption (enabled by default on all modern iOS devices)</li>
+        <li>App sandboxing (other apps cannot access Lacuna's data)</li>
+        <li>Biometric/passcode device lock</li>
+      </ul>
+      <p>I do not implement additional encryption because your device's native encryption already protects all locally stored data.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 5 -->
+    <section class="policy-section">
+      <h2><span class="section-num">05</span> Data Sharing and Third Parties</h2>
+      <p>The App does not share your personal data with any third parties. The App contains:</p>
+      <ul>
+        <li>No analytics SDKs</li>
+        <li>No advertising frameworks</li>
+        <li>No social media tracking</li>
+      </ul>
+      <p>The App uses two third-party services, neither of which receives your personal data:</p>
+      <ul>
+        <li><strong>Apple</strong> processes in-app purchases through the App Store under Apple's own privacy policy: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></li>
+        <li><strong>RevenueCat, Inc.</strong> manages purchase validation and entitlement status. RevenueCat receives only an anonymous, randomly generated user ID and purchase transaction data. RevenueCat's privacy policy: <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">revenuecat.com/privacy</a></li>
+      </ul>
+      <p>RevenueCat acts as a data processor on my behalf under GDPR Article 28. No personal data (name, email, Apple ID, device identifiers) is transmitted to RevenueCat. The anonymous user ID used by RevenueCat is generated locally and cannot be linked to your identity.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 6 -->
+    <section class="policy-section">
+      <h2><span class="section-num">06</span> Data Retention and Deletion</h2>
+      <p>Your data is retained on your device for as long as you keep it:</p>
+      <ul>
+        <li><strong>Capsules</strong> &mdash; Stored until you delete them within the App</li>
+        <li><strong>Preferences</strong> &mdash; Stored until you delete the App</li>
+        <li><strong>Voice recordings</strong> &mdash; Stored as files until the associated capsule is deleted</li>
+      </ul>
+      <p><strong>To delete all data permanently</strong>, simply delete the App from your device. This removes all locally stored data completely and irreversibly.</p>
+      <p>You can also delete individual capsules within the App at any time.</p>
+      <p class="policy-note">If you made an in-app purchase, RevenueCat retains the anonymous purchase record (anonymous user ID and transaction data) for the purpose of restoring your purchase on a new device. This data cannot be linked to your identity. RevenueCat's data retention practices are governed by their privacy policy: <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">revenuecat.com/privacy</a></p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 7 -->
+    <section class="policy-section">
+      <h2><span class="section-num">07</span> Your Rights Under GDPR / DSGVO</h2>
+      <p>Under the General Data Protection Regulation and the Austrian Datenschutzgesetz, you have the following rights:</p>
+      <ul>
+        <li><strong>Right of access</strong> (Article 15 GDPR) &mdash; You can view all your data directly within the App at any time.</li>
+        <li><strong>Right to rectification</strong> (Article 16 GDPR) &mdash; You can modify capsule titles within the App. Sealed capsule content cannot be modified by design &mdash; this is a core feature, not a limitation.</li>
+        <li><strong>Right to erasure</strong> (Article 17 GDPR) &mdash; You can delete any capsule at any time, or delete the App entirely to remove all data.</li>
+        <li><strong>Right to data portability</strong> (Article 20 GDPR) &mdash; You can export capsules as .capsule files using the send feature.</li>
+        <li><strong>Right to restriction of processing</strong> (Article 18 GDPR) &mdash; Since all processing is local and under your control, you can restrict processing by simply not using the App.</li>
+        <li><strong>Right to object</strong> (Article 21 GDPR) &mdash; There is no profiling, automated decision-making, or direct marketing to object to.</li>
+        <li><strong>Right to withdraw consent</strong> (Article 7(3) GDPR) &mdash; You can revoke camera, microphone, photo library, and notification permissions at any time in your iOS Settings.</li>
+      </ul>
+      <p>Since I do not store any of your data on servers or have any way to access it, most of these rights are automatically fulfilled by the App's local-only architecture.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 8 -->
+    <section class="policy-section">
+      <h2><span class="section-num">08</span> International Data Transfers</h2>
+      <p>Your capsule content (text, photos, voice recordings) is never transferred to any server. It remains on your device in the jurisdiction where you use it.</p>
+      <p>When you make an in-app purchase, anonymous transaction data (anonymous user ID, product purchased, transaction ID) is processed by RevenueCat, Inc., which is based in the United States. This transfer is limited to non-personal, anonymous data and is covered by RevenueCat's data processing agreements and standard contractual clauses under GDPR Article 46.</p>
+      <p>When you share a capsule with someone using the send feature, the data transfer occurs through the communication channel you choose (e.g., iMessage, email) and is governed by that service's privacy policy and the applicable laws of the jurisdictions involved.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 9 -->
+    <section class="policy-section">
+      <h2><span class="section-num">09</span> Children's Privacy</h2>
+      <p>The App does not knowingly collect any data from children under the age of 16 (the age threshold under GDPR). Since the App does not collect any personal data from any user, no special measures for children's data are required.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 10 -->
+    <section class="policy-section">
+      <h2><span class="section-num">10</span> Austrian-Specific Provisions (DSG)</h2>
+      <p>In accordance with the Austrian Datenschutzgesetz (DSG) implementing the GDPR:</p>
+      <ul>
+        <li>The responsible data protection authority is the <strong>Österreichische Datenschutzbehörde</strong> (Austrian Data Protection Authority), Barichgasse 40-42, 1030 Wien, Austria. Website: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">dsb.gv.at</a></li>
+        <li>You have the right to lodge a complaint with the Datenschutzbehörde if you believe your data protection rights have been violated.</li>
+        <li>As the App processes no personal data on external servers, no Data Protection Impact Assessment (DPIA) is required under Article 35 GDPR.</li>
+        <li>No Data Protection Officer (DPO) is appointed as I am an individual developer not engaged in large-scale processing of personal data (Article 37 GDPR).</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 11 -->
+    <section class="policy-section">
+      <h2><span class="section-num">11</span> Apple App Store Requirements</h2>
+      <p>In accordance with Apple's App Store Review Guidelines:</p>
+      <ul>
+        <li>The App's privacy nutrition label on the App Store declares "Purchases" and "Identifiers" (anonymous ID) as data used, marked as <strong>not linked to your identity</strong>, in accordance with RevenueCat's data processing for purchase validation.</li>
+        <li>The App requests camera, microphone, and photo library permissions only when needed and explains the purpose in the permission dialogs.</li>
+        <li>The App does not use any Apple frameworks for tracking or advertising.</li>
+      </ul>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 12 -->
+    <section class="policy-section">
+      <h2><span class="section-num">12</span> Changes to This Privacy Policy</h2>
+      <p>I may update this privacy policy from time to time. Any changes will be reflected by updating the "Last updated" date at the top of this policy. Since I have no way to contact you (I don't have your email or any contact information), I encourage you to review this policy periodically.</p>
+      <p>Significant changes will also be noted in the App Store release notes when the App is updated.</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 13 -->
+    <section class="policy-section">
+      <h2><span class="section-num">13</span> Contact</h2>
+      <p>If you have any questions about this privacy policy, your rights, or the App's data practices, please contact me at:</p>
+      <p><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></p>
+      <p>I will respond to privacy-related inquiries within 30 days, as required by GDPR Article 12(3).</p>
+    </section>
+
+    <hr class="policy-divider">
+
+    <!-- 14 -->
+    <section class="policy-section">
+      <h2><span class="section-num">14</span> Summary</h2>
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Do you collect my data?</td><td>No</td></tr>
+          <tr><td>Do you have servers?</td><td>No</td></tr>
+          <tr><td>Can you see my capsules?</td><td>No</td></tr>
+          <tr><td>Do you use analytics?</td><td>No</td></tr>
+          <tr><td>Do you track me?</td><td>No</td></tr>
+          <tr><td>Do you share data with third parties?</td><td>Anonymous purchase data only (RevenueCat)</td></tr>
+          <tr><td>Where is my data stored?</td><td>On your device only</td></tr>
+          <tr><td>How do I delete my data?</td><td>Delete the capsule or delete the App</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="policy-footer-note">This privacy policy is governed by the laws of Austria and the European Union.</p>
 
   </main>
 
@@ -156,10 +543,10 @@
       function apply(t) {
         document.documentElement.setAttribute('data-theme', t);
         if (t === 'light') {
-          icon.textContent = '◐'; label.textContent = 'dark_mode';
+          icon.textContent = '\u25D0'; label.textContent = 'dark_mode';
           if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
         } else {
-          icon.textContent = '◑'; label.textContent = 'light_mode';
+          icon.textContent = '\u25D1'; label.textContent = 'light_mode';
           if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
         }
         localStorage.setItem('theme', t);
