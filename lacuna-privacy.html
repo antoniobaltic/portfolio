@@ -267,7 +267,7 @@
       <span class="policy-label">// legal</span>
       <h1 class="policy-title">Privacy Policy</h1>
       <p class="policy-app">Lacuna &mdash; Time Capsule App</p>
-      <p class="policy-updated">Last updated: April 1, 2026</p>
+      <p class="policy-updated">Last updated: April 4, 2026</p>
     </header>
 
     <p class="policy-tldr"><strong>The short version:</strong> Lacuna stores everything locally on your device. I don't collect, transmit, or have access to any of your data. I can't see your capsules, photos, voice notes, or any other content you create.</p>
@@ -289,8 +289,8 @@
     <section class="policy-section">
       <h2><span class="section-num">02</span> What Data Is Processed</h2>
 
-      <h3>2.1 Content You Create (Stored Locally Only)</h3>
-      <p>When you create a capsule, the following data is stored <strong>exclusively on your device</strong>:</p>
+      <h3>2.1 Content You Create</h3>
+      <p>When you create a capsule, the following data is stored <strong>on your device and, if iCloud is enabled, synced to your personal iCloud account</strong>:</p>
       <ul>
         <li>Text content you write</li>
         <li>Photos you select from your library or capture with the camera</li>
@@ -298,8 +298,9 @@
         <li>Capsule titles, creation dates, and unlock dates</li>
         <li>Your sender name (if you choose to send a capsule to someone)</li>
       </ul>
-      <p><strong>This data never leaves your device</strong> unless you explicitly choose to share a capsule with someone using the App's send feature (see Section 2.3).</p>
-      <p>I have no access to any of this data. There are no servers, no cloud storage, no accounts, and no way for me or any third party to view your content.</p>
+      <p>If you have iCloud enabled on your device, your capsule data is automatically synced across your Apple devices using Apple's CloudKit framework. This data goes to <strong>your personal iCloud storage</strong> &mdash; not to any server I operate. I have no access to your iCloud data. Apple encrypts your data in transit and at rest.</p>
+      <p>If iCloud is disabled, all data remains exclusively on your device.</p>
+      <p>I have no access to any of this data. There are no servers I operate, no accounts, and no way for me or any third party to view your content.</p>
 
       <h3>2.2 Preferences (Stored Locally Only)</h3>
       <p>The App stores your preferences on your device using Apple's standard storage:</p>
@@ -371,11 +372,11 @@
     <!-- 4 -->
     <section class="policy-section">
       <h2><span class="section-num">04</span> Data Storage and Security</h2>
-      <p>All data is stored locally on your device using Apple's standard frameworks:</p>
+      <p>All data is stored on your device and, if iCloud is enabled, synced to your personal iCloud account using Apple's standard frameworks:</p>
       <ul>
         <li><strong>SwiftData</strong> for capsule metadata and content</li>
-        <li><strong>File system</strong> for voice recordings (stored in the App's sandboxed Documents directory)</li>
-        <li><strong>UserDefaults</strong> for preferences</li>
+        <li><strong>Apple CloudKit</strong> for iCloud sync (uses your personal iCloud storage, encrypted by Apple)</li>
+        <li><strong>UserDefaults</strong> for preferences (not synced)</li>
       </ul>
       <p>Data is protected by your device's built-in security features, including:</p>
       <ul>
@@ -444,7 +445,7 @@
     <!-- 8 -->
     <section class="policy-section">
       <h2><span class="section-num">08</span> International Data Transfers</h2>
-      <p>Your capsule content (text, photos, voice recordings) is never transferred to any server. It remains on your device in the jurisdiction where you use it.</p>
+      <p>If iCloud is enabled, your capsule content (text, photos, voice recordings) is synced to Apple's iCloud servers to enable multi-device access. Apple stores this data in data centers across various jurisdictions, subject to Apple's privacy policy. This is your personal iCloud data &mdash; I have no access to it. If iCloud is disabled, your data remains exclusively on your device.</p>
       <p>When you make an in-app purchase, anonymous transaction data (anonymous user ID, product purchased, transaction ID) is processed by RevenueCat, Inc., which is based in the United States. This transfer is limited to non-personal, anonymous data and is covered by RevenueCat's data processing agreements and standard contractual clauses under GDPR Article 46.</p>
       <p>When you share a capsule with someone using the send feature, the data transfer occurs through the communication channel you choose (e.g., iMessage, email) and is governed by that service's privacy policy and the applicable laws of the jurisdictions involved.</p>
     </section>
@@ -522,7 +523,7 @@
           <tr><td>Do you use analytics?</td><td>No</td></tr>
           <tr><td>Do you track me?</td><td>No</td></tr>
           <tr><td>Do you share data with third parties?</td><td>Anonymous purchase data only (RevenueCat)</td></tr>
-          <tr><td>Where is my data stored?</td><td>On your device only</td></tr>
+          <tr><td>Where is my data stored?</td><td>On your device and in your personal iCloud (if enabled)</td></tr>
           <tr><td>How do I delete my data?</td><td>Delete the capsule or delete the App</td></tr>
         </tbody>
       </table>
