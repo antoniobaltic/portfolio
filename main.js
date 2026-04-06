@@ -15,13 +15,12 @@ async function typeWriter(el, text, speed = 62) {
 }
 
 /* ─────────────────────────────────────────────────────
-   Flow Field Particle System
+   Existential Sun — Flow Field Particle System
 ───────────────────────────────────────────────────── */
 function initParticles() {
   const canvas = document.getElementById('hero-particles');
   if (!canvas) return;
 
-  // Respect reduced motion
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     canvas.style.display = 'none';
     return;
@@ -31,49 +30,34 @@ function initParticles() {
   const noise3D = createNoise3D();
 
   // Config
-  const PARTICLE_COUNT = 300;
-  const NOISE_SCALE = 0.003;
-  const NOISE_SPEED = 0.0004;
-  const FORCE = 0.35;
-  const FRICTION = 0.97;
-  const TRAIL_ALPHA = 0.03;
-  const MAX_SPEED = 2.5;
-
-  // Color palettes per theme
-  const palettes = {
-    dark: [
-      { h: 28, s: 75, l: 55 },  // golden amber
-      { h: 18, s: 85, l: 48 },  // burnt orange
-      { h: 35, s: 65, l: 62 },  // warm gold
-      { h: 10, s: 70, l: 42 },  // deep rust
-      { h: 42, s: 55, l: 68 },  // soft wheat
-      { h: 22, s: 90, l: 52 },  // bright amber
-    ],
-    light: [
-      { h: 25, s: 60, l: 40 },  // muted amber
-      { h: 15, s: 55, l: 35 },  // earthy brown
-      { h: 32, s: 50, l: 45 },  // warm tan
-      { h: 8,  s: 45, l: 38 },  // muted rust
-      { h: 38, s: 40, l: 50 },  // soft olive-gold
-      { h: 20, s: 65, l: 42 },  // medium amber
-    ]
-  };
+  const PARTICLE_COUNT = 600;
+  const NOISE_SCALE = 0.0025;
+  const NOISE_SPEED = 0.00035;
+  const FORCE = 0.4;
+  const FRICTION = 0.965;
+  const MAX_SPEED = 3;
 
   let dpr, w, h;
   let zOffset = 0;
   let animId;
-  let mouseX = -1000, mouseY = -1000;
+  let mouseX = -9999, mouseY = -9999;
+  let sunX, sunY;
 
-  // Particles stored as arrays for performance
+  // Particle arrays
   const px = new Float32Array(PARTICLE_COUNT);
   const py = new Float32Array(PARTICLE_COUNT);
   const vx = new Float32Array(PARTICLE_COUNT);
   const vy = new Float32Array(PARTICLE_COUNT);
-  const pAlpha = new Float32Array(PARTICLE_COUNT);
-  const pSize = new Float32Array(PARTICLE_COUNT);
-  const pColorIdx = new Uint8Array(PARTICLE_COUNT);
   const pLife = new Float32Array(PARTICLE_COUNT);
   const pMaxLife = new Float32Array(PARTICLE_COUNT);
+  const pSize = new Float32Array(PARTICLE_COUNT);
+  const pHue = new Float32Array(PARTICLE_COUNT);
+  const pSat = new Float32Array(PARTICLE_COUNT);
+  const pLight = new Float32Array(PARTICLE_COUNT);
+
+  function isDark() {
+    return (document.documentElement.getAttribute('data-theme') || 'dark') !== 'light';
+  }
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -83,99 +67,184 @@ function initParticles() {
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // Clear trails on resize
+    // Sun center: right side, vertically centered
+    sunX = w * 0.72;
+    sunY = h * 0.45;
     ctx.clearRect(0, 0, w, h);
   }
 
   function spawnParticle(i) {
-    // Spawn from edges or random positions with bias toward center
-    const edge = Math.random() < 0.3;
-    if (edge) {
-      const side = Math.floor(Math.random() * 4);
-      switch (side) {
-        case 0: px[i] = Math.random() * w; py[i] = -5; break;
-        case 1: px[i] = w + 5; py[i] = Math.random() * h; break;
-        case 2: px[i] = Math.random() * w; py[i] = h + 5; break;
-        case 3: px[i] = -5; py[i] = Math.random() * h; break;
-      }
-    } else {
-      px[i] = Math.random() * w;
-      py[i] = Math.random() * h;
-    }
-    vx[i] = (Math.random() - 0.5) * 0.5;
-    vy[i] = (Math.random() - 0.5) * 0.5;
-    pAlpha[i] = 0;
-    pSize[i] = 0.5 + Math.random() * 2;
-    pColorIdx[i] = Math.floor(Math.random() * 6);
-    pMaxLife[i] = 200 + Math.random() * 400;
+    // Spawn particles radiating outward from the sun center
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 20 + Math.random() * 60; // near the core
+    px[i] = sunX + Math.cos(angle) * dist;
+    py[i] = sunY + Math.sin(angle) * dist;
+
+    // Initial velocity: radiate outward with some randomness
+    const speed = 0.3 + Math.random() * 1.2;
+    vx[i] = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.5;
+    vy[i] = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.5;
+
+    pMaxLife[i] = 150 + Math.random() * 350;
     pLife[i] = 0;
+    pSize[i] = 0.3 + Math.random() * 2.2;
+
+    // Color range: deep red → orange → golden → white-hot
+    const colorRoll = Math.random();
+    if (colorRoll < 0.15) {
+      // White-hot core
+      pHue[i] = 38 + Math.random() * 10;
+      pSat[i] = 20 + Math.random() * 30;
+      pLight[i] = 85 + Math.random() * 15;
+    } else if (colorRoll < 0.4) {
+      // Bright gold
+      pHue[i] = 35 + Math.random() * 15;
+      pSat[i] = 80 + Math.random() * 20;
+      pLight[i] = 55 + Math.random() * 20;
+    } else if (colorRoll < 0.7) {
+      // Deep orange
+      pHue[i] = 18 + Math.random() * 18;
+      pSat[i] = 85 + Math.random() * 15;
+      pLight[i] = 45 + Math.random() * 20;
+    } else {
+      // Ember red
+      pHue[i] = 2 + Math.random() * 18;
+      pSat[i] = 80 + Math.random() * 20;
+      pLight[i] = 35 + Math.random() * 20;
+    }
   }
 
   function init() {
     resize();
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       spawnParticle(i);
-      pLife[i] = Math.random() * pMaxLife[i]; // stagger initial life
+      pLife[i] = Math.random() * pMaxLife[i];
     }
   }
 
-  function getTheme() {
-    return document.documentElement.getAttribute('data-theme') || 'dark';
-  }
+  function drawSunCore() {
+    const dark = isDark();
+    const time = zOffset * 800;
 
-  function getBgColor() {
-    const theme = getTheme();
-    return theme === 'light' ? '244, 239, 230' : '10, 10, 10';
-  }
+    // Pulsating core glow — multiple layered radial gradients
+    const pulseA = 0.85 + Math.sin(time * 0.7) * 0.15;
+    const pulseB = 0.9 + Math.sin(time * 1.3 + 1) * 0.1;
 
-  function getPalette() {
-    return palettes[getTheme()] || palettes.dark;
+    // Outer halo — huge, soft
+    const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 350);
+    if (dark) {
+      halo.addColorStop(0, `rgba(212, 146, 74, ${0.06 * pulseA})`);
+      halo.addColorStop(0.3, `rgba(200, 100, 40, ${0.03 * pulseA})`);
+      halo.addColorStop(0.6, `rgba(180, 60, 20, ${0.015 * pulseB})`);
+      halo.addColorStop(1, 'rgba(180, 60, 20, 0)');
+    } else {
+      halo.addColorStop(0, `rgba(181, 100, 42, ${0.05 * pulseA})`);
+      halo.addColorStop(0.3, `rgba(160, 80, 30, ${0.025 * pulseA})`);
+      halo.addColorStop(0.6, `rgba(140, 60, 20, ${0.01 * pulseB})`);
+      halo.addColorStop(1, 'rgba(140, 60, 20, 0)');
+    }
+    ctx.fillStyle = halo;
+    ctx.fillRect(0, 0, w, h);
+
+    // Inner corona
+    const corona = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 120);
+    if (dark) {
+      corona.addColorStop(0, `rgba(255, 220, 160, ${0.12 * pulseB})`);
+      corona.addColorStop(0.2, `rgba(230, 160, 80, ${0.08 * pulseA})`);
+      corona.addColorStop(0.5, `rgba(212, 120, 50, ${0.04 * pulseA})`);
+      corona.addColorStop(1, 'rgba(200, 100, 40, 0)');
+    } else {
+      corona.addColorStop(0, `rgba(220, 180, 120, ${0.1 * pulseB})`);
+      corona.addColorStop(0.2, `rgba(200, 130, 60, ${0.06 * pulseA})`);
+      corona.addColorStop(0.5, `rgba(181, 100, 42, ${0.03 * pulseA})`);
+      corona.addColorStop(1, 'rgba(181, 100, 42, 0)');
+    }
+    ctx.fillStyle = corona;
+    ctx.fillRect(0, 0, w, h);
+
+    // Bright core — small, intense
+    const core = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 35);
+    if (dark) {
+      core.addColorStop(0, `rgba(255, 240, 200, ${0.2 * pulseB})`);
+      core.addColorStop(0.4, `rgba(255, 200, 130, ${0.12 * pulseA})`);
+      core.addColorStop(1, 'rgba(230, 160, 80, 0)');
+    } else {
+      core.addColorStop(0, `rgba(240, 210, 160, ${0.15 * pulseB})`);
+      core.addColorStop(0.4, `rgba(220, 170, 100, ${0.08 * pulseA})`);
+      core.addColorStop(1, 'rgba(200, 140, 70, 0)');
+    }
+    ctx.fillStyle = core;
+    ctx.fillRect(0, 0, w, h);
   }
 
   function frame() {
-    const bg = getBgColor();
-    const palette = getPalette();
+    const dark = isDark();
+    const bgR = dark ? 10 : 244;
+    const bgG = dark ? 10 : 239;
+    const bgB = dark ? 10 : 230;
 
-    // Trail overlay — don't clear, just fade
-    ctx.fillStyle = `rgba(${bg}, ${TRAIL_ALPHA})`;
+    // Trail fade — creates flowing streaks
+    ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, 0.06)`;
     ctx.fillRect(0, 0, w, h);
+
+    // Draw pulsating sun core underneath particles
+    drawSunCore();
 
     zOffset += NOISE_SPEED;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       pLife[i]++;
 
-      // Lifecycle alpha: fade in → sustain → fade out
+      // Lifecycle alpha
       const lifeRatio = pLife[i] / pMaxLife[i];
-      if (lifeRatio < 0.1) {
-        pAlpha[i] = lifeRatio / 0.1;
-      } else if (lifeRatio > 0.85) {
-        pAlpha[i] = (1 - lifeRatio) / 0.15;
+      let alpha;
+      if (lifeRatio < 0.08) {
+        alpha = lifeRatio / 0.08;
+      } else if (lifeRatio > 0.75) {
+        alpha = (1 - lifeRatio) / 0.25;
       } else {
-        pAlpha[i] = 1;
+        alpha = 1;
       }
 
-      // Respawn if life exceeded or out of bounds
-      if (pLife[i] > pMaxLife[i] || px[i] < -50 || px[i] > w + 50 || py[i] < -50 || py[i] > h + 50) {
+      // Respawn
+      if (pLife[i] > pMaxLife[i] || px[i] < -80 || px[i] > w + 80 || py[i] < -80 || py[i] > h + 80) {
         spawnParticle(i);
         continue;
       }
 
-      // Flow field angle from noise
-      const angle = noise3D(px[i] * NOISE_SCALE, py[i] * NOISE_SCALE, zOffset) * Math.PI * 2;
+      // Distance from sun center
+      const dxSun = px[i] - sunX;
+      const dySun = py[i] - sunY;
+      const distSun = Math.sqrt(dxSun * dxSun + dySun * dySun) + 0.01;
 
-      // Apply force
-      vx[i] += Math.cos(angle) * FORCE;
-      vy[i] += Math.sin(angle) * FORCE;
+      // Flow field angle — blend noise with radial outward force
+      const noiseAngle = noise3D(px[i] * NOISE_SCALE, py[i] * NOISE_SCALE, zOffset) * Math.PI * 2;
+      const radialAngle = Math.atan2(dySun, dxSun);
 
-      // Mouse repulsion
-      const dx = px[i] - mouseX;
-      const dy = py[i] - mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 80) {
-        const repulse = (80 - dist) / 80 * 2;
-        vx[i] += (dx / dist) * repulse;
-        vy[i] += (dy / dist) * repulse;
+      // Close to core: more radial push. Far away: more noise-driven flow
+      const radialBlend = Math.max(0, 1 - distSun / 250);
+      const angle = noiseAngle * (1 - radialBlend * 0.6) + radialAngle * radialBlend * 0.6;
+
+      // Outward force weakens with distance
+      const outwardForce = FORCE * (0.3 + radialBlend * 0.7);
+      vx[i] += Math.cos(angle) * outwardForce;
+      vy[i] += Math.sin(angle) * outwardForce;
+
+      // Slight tangential swirl near the core
+      if (distSun < 150) {
+        const swirlStrength = (1 - distSun / 150) * 0.15;
+        vx[i] += -dySun / distSun * swirlStrength;
+        vy[i] += dxSun / distSun * swirlStrength;
+      }
+
+      // Mouse interaction — attract gently
+      const dxM = px[i] - mouseX;
+      const dyM = py[i] - mouseY;
+      const distM = Math.sqrt(dxM * dxM + dyM * dyM);
+      if (distM < 120) {
+        const attract = (120 - distM) / 120 * 0.8;
+        vx[i] -= (dxM / distM) * attract;
+        vy[i] -= (dyM / distM) * attract;
       }
 
       // Friction + speed clamp
@@ -187,23 +256,24 @@ function initParticles() {
         vy[i] = (vy[i] / speed) * MAX_SPEED;
       }
 
-      // Move
       px[i] += vx[i];
       py[i] += vy[i];
 
-      // Draw
-      const c = palette[pColorIdx[i]];
-      const alpha = pAlpha[i] * (0.2 + (speed / MAX_SPEED) * 0.5);
+      // Draw particle
+      const intensityBoost = distSun < 80 ? (1 - distSun / 80) * 0.4 : 0;
+      const drawAlpha = alpha * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
+      const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
+
       ctx.beginPath();
       ctx.arc(px[i], py[i], pSize[i], 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${c.h}, ${c.s}%, ${c.l}%, ${alpha})`;
+      ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${drawAlpha})`;
       ctx.fill();
 
-      // Draw glow for larger/faster particles
-      if (pSize[i] > 1.2 && speed > 0.8) {
+      // Glow for brighter/larger particles
+      if (pSize[i] > 1 && speed > 0.6) {
         ctx.beginPath();
-        ctx.arc(px[i], py[i], pSize[i] * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${c.h}, ${c.s}%, ${c.l}%, ${alpha * 0.08})`;
+        ctx.arc(px[i], py[i], pSize[i] * 4, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${drawAlpha * 0.06})`;
         ctx.fill();
       }
     }
@@ -211,19 +281,18 @@ function initParticles() {
     animId = requestAnimationFrame(frame);
   }
 
-  // Mouse tracking on canvas
-  canvas.addEventListener('mousemove', (e) => {
+  // Mouse tracking on hero section
+  const hero = canvas.parentElement;
+  hero.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouseX = e.clientX - rect.left;
     mouseY = e.clientY - rect.top;
   });
-
-  canvas.addEventListener('mouseleave', () => {
-    mouseX = -1000;
-    mouseY = -1000;
+  hero.addEventListener('mouseleave', () => {
+    mouseX = -9999;
+    mouseY = -9999;
   });
 
-  // Pause when hidden
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(animId);
@@ -232,11 +301,13 @@ function initParticles() {
     }
   });
 
-  // Resize handling
-  const ro = new ResizeObserver(() => resize());
+  const ro = new ResizeObserver(() => {
+    resize();
+    // Re-scatter particles around new sun position
+    for (let i = 0; i < PARTICLE_COUNT; i++) spawnParticle(i);
+  });
   ro.observe(canvas);
 
-  // Start
   init();
   animId = requestAnimationFrame(frame);
 }
@@ -264,7 +335,7 @@ async function runHeroSequence() {
   nameEl.classList.remove('is-typing');
   nameEl.classList.add('is-done');
 
-  // Fade in particles alongside subtitle
+  // Fade in the sun
   await sleep(280);
   subEl.classList.add('visible');
   if (particlesEl) particlesEl.classList.add('visible');
