@@ -189,9 +189,32 @@ body::after {
 }
 
 .hero-inner {
-  max-width: 680px;
+  max-width: 1100px;
+  width: 100%;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 680px;
+}
+
+#hero-particles {
+  width: 420px;
+  height: 420px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  border-radius: 50%;
+}
+
+#hero-particles.visible {
+  opacity: 1;
 }
 
 /* Prompt line */
@@ -618,6 +641,11 @@ body::after {
 /* ─────────────────────────────────────────────────────
    Responsive
 ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #hero-particles { display: none; }
+  .hero-inner { max-width: 680px; }
+}
+
 @media (max-width: 600px) {
   .grid { grid-template-columns: 1fr; }
 
