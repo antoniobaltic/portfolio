@@ -1,4 +1,4 @@
-import { createNoise3D } from 'https://cdn.jsdelivr.net/npm/simplex-noise@4.0.3/dist/esm/simplex-noise.js';
+import { createNoise3D } from './lib/simplex-noise.js';
 
 /* ─────────────────────────────────────────────────────
    Utilities
@@ -486,10 +486,12 @@ function initTheme() {
     if (t === 'light') {
       icon.textContent  = '◐';
       label.textContent = 'dark_mode';
+      btn.setAttribute('aria-label', 'Switch to dark mode');
       if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
     } else {
       icon.textContent  = '◑';
       label.textContent = 'light_mode';
+      btn.setAttribute('aria-label', 'Switch to light mode');
       if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
     }
     localStorage.setItem('theme', t);
@@ -509,8 +511,9 @@ function initFilter() {
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
+      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       const filter = btn.dataset.filter;
       cards.forEach(card => {
