@@ -117,8 +117,8 @@ function initParticles() {
   function drawSunCore() {
     const dark = isDark();
     const time = zOffset * 800;
-    // Light mode: much subtler overall
-    const modeScale = dark ? 1 : 0.35;
+    // Light mode: visible glow but with warmer, softer tones
+    const modeScale = dark ? 1 : 0.7;
 
     const pulseA = 0.85 + Math.sin(time * 0.7) * 0.15;
     const pulseB = 0.9 + Math.sin(time * 1.3 + 1) * 0.1;
@@ -178,8 +178,9 @@ function initParticles() {
     const bgG = dark ? 10 : 239;
     const bgB = dark ? 10 : 230;
 
-    // Trail fade
-    ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, 0.1)`;
+    // Trail fade — light mode needs faster fade to avoid ghosting
+    const trailAlpha = dark ? 0.1 : 0.14;
+    ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
     ctx.fillRect(0, 0, w, h);
 
     // Bottom edge blend — gradient to exact bg so there's no visible seam
