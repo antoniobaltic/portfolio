@@ -31,14 +31,12 @@ function initParticles() {
 
   // Config
   const PARTICLE_COUNT = 600;
-  const FLARE_COUNT = 30;
-  const TOTAL = PARTICLE_COUNT + FLARE_COUNT;
+  const TOTAL = PARTICLE_COUNT;
   const NOISE_SCALE = 0.0025;
   const NOISE_SPEED = 0.00035;
   const FORCE = 0.4;
   const FRICTION = 0.965;
   const MAX_SPEED = 3;
-  const FLARE_MAX_SPEED = 8;
 
   let dpr, w, h;
   let zOffset = 0;
@@ -57,7 +55,6 @@ function initParticles() {
   const pHue = new Float32Array(TOTAL);
   const pSat = new Float32Array(TOTAL);
   const pLight = new Float32Array(TOTAL);
-  const isFlare = new Uint8Array(TOTAL); // 1 = solar flare particle
 
   function isDark() {
     return (document.documentElement.getAttribute('data-theme') || 'dark') !== 'light';
@@ -77,66 +74,42 @@ function initParticles() {
     ctx.clearRect(0, 0, w, h);
   }
 
-  function spawnParticle(i, asFlare) {
+  function spawnParticle(i) {
     const angle = Math.random() * Math.PI * 2;
-    isFlare[i] = asFlare ? 1 : 0;
+    const dist = 20 + Math.random() * 60;
+    px[i] = sunX + Math.cos(angle) * dist;
+    py[i] = sunY + Math.sin(angle) * dist;
+    const speed = 0.3 + Math.random() * 1.2;
+    vx[i] = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.5;
+    vy[i] = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.5;
+    pMaxLife[i] = 150 + Math.random() * 350;
+    pLife[i] = 0;
+    pSize[i] = 0.3 + Math.random() * 2.2;
 
-    if (asFlare) {
-      // Solar flare: starts at core, shoots outward fast
-      const dist = 5 + Math.random() * 20;
-      px[i] = sunX + Math.cos(angle) * dist;
-      py[i] = sunY + Math.sin(angle) * dist;
-      const speed = 3 + Math.random() * 5;
-      vx[i] = Math.cos(angle) * speed + (Math.random() - 0.5) * 1.5;
-      vy[i] = Math.sin(angle) * speed + (Math.random() - 0.5) * 1.5;
-      pMaxLife[i] = 30 + Math.random() * 60;
-      pLife[i] = 0;
-      pSize[i] = 1.5 + Math.random() * 2.5;
-      // White-hot to bright gold
-      pHue[i] = 30 + Math.random() * 20;
-      pSat[i] = 60 + Math.random() * 40;
-      pLight[i] = 80 + Math.random() * 20;
+    const colorRoll = Math.random();
+    if (colorRoll < 0.15) {
+      pHue[i] = 38 + Math.random() * 10;
+      pSat[i] = 20 + Math.random() * 30;
+      pLight[i] = 85 + Math.random() * 15;
+    } else if (colorRoll < 0.4) {
+      pHue[i] = 35 + Math.random() * 15;
+      pSat[i] = 80 + Math.random() * 20;
+      pLight[i] = 55 + Math.random() * 20;
+    } else if (colorRoll < 0.7) {
+      pHue[i] = 18 + Math.random() * 18;
+      pSat[i] = 85 + Math.random() * 15;
+      pLight[i] = 45 + Math.random() * 20;
     } else {
-      // Normal particle
-      const dist = 20 + Math.random() * 60;
-      px[i] = sunX + Math.cos(angle) * dist;
-      py[i] = sunY + Math.sin(angle) * dist;
-      const speed = 0.3 + Math.random() * 1.2;
-      vx[i] = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.5;
-      vy[i] = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.5;
-      pMaxLife[i] = 150 + Math.random() * 350;
-      pLife[i] = 0;
-      pSize[i] = 0.3 + Math.random() * 2.2;
-
-      const colorRoll = Math.random();
-      if (colorRoll < 0.15) {
-        pHue[i] = 38 + Math.random() * 10;
-        pSat[i] = 20 + Math.random() * 30;
-        pLight[i] = 85 + Math.random() * 15;
-      } else if (colorRoll < 0.4) {
-        pHue[i] = 35 + Math.random() * 15;
-        pSat[i] = 80 + Math.random() * 20;
-        pLight[i] = 55 + Math.random() * 20;
-      } else if (colorRoll < 0.7) {
-        pHue[i] = 18 + Math.random() * 18;
-        pSat[i] = 85 + Math.random() * 15;
-        pLight[i] = 45 + Math.random() * 20;
-      } else {
-        pHue[i] = 2 + Math.random() * 18;
-        pSat[i] = 80 + Math.random() * 20;
-        pLight[i] = 35 + Math.random() * 20;
-      }
+      pHue[i] = 2 + Math.random() * 18;
+      pSat[i] = 80 + Math.random() * 20;
+      pLight[i] = 35 + Math.random() * 20;
     }
   }
 
   function init() {
     resize();
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      spawnParticle(i, false);
-      pLife[i] = Math.random() * pMaxLife[i];
-    }
-    for (let i = PARTICLE_COUNT; i < TOTAL; i++) {
-      spawnParticle(i, true);
+    for (let i = 0; i < TOTAL; i++) {
+      spawnParticle(i);
       pLife[i] = Math.random() * pMaxLife[i];
     }
   }
@@ -211,7 +184,6 @@ function initParticles() {
     zOffset += NOISE_SPEED;
 
     for (let i = 0; i < TOTAL; i++) {
-      const flare = isFlare[i];
       pLife[i]++;
 
       // Lifecycle alpha
@@ -227,7 +199,7 @@ function initParticles() {
 
       // Respawn
       if (pLife[i] > pMaxLife[i] || px[i] < -80 || px[i] > w + 80 || py[i] < -80 || py[i] > h + 80) {
-        spawnParticle(i, !!flare);
+        spawnParticle(i);
         continue;
       }
 
@@ -236,47 +208,40 @@ function initParticles() {
       const dySun = py[i] - sunY;
       const distSun = Math.sqrt(dxSun * dxSun + dySun * dySun) + 0.01;
 
-      if (flare) {
-        // Flares: minimal friction, just shoot outward
-        vx[i] *= 0.985;
-        vy[i] *= 0.985;
-      } else {
-        // Flow field angle — blend noise with radial outward force
-        const noiseAngle = noise3D(px[i] * NOISE_SCALE, py[i] * NOISE_SCALE, zOffset) * Math.PI * 2;
-        const radialAngle = Math.atan2(dySun, dxSun);
+      // Flow field angle — blend noise with radial outward force
+      const noiseAngle = noise3D(px[i] * NOISE_SCALE, py[i] * NOISE_SCALE, zOffset) * Math.PI * 2;
+      const radialAngle = Math.atan2(dySun, dxSun);
 
-        const radialBlend = Math.max(0, 1 - distSun / 250);
-        const angle = noiseAngle * (1 - radialBlend * 0.6) + radialAngle * radialBlend * 0.6;
+      const radialBlend = Math.max(0, 1 - distSun / 250);
+      const angle = noiseAngle * (1 - radialBlend * 0.6) + radialAngle * radialBlend * 0.6;
 
-        const outwardForce = FORCE * (0.3 + radialBlend * 0.7);
-        vx[i] += Math.cos(angle) * outwardForce;
-        vy[i] += Math.sin(angle) * outwardForce;
+      const outwardForce = FORCE * (0.3 + radialBlend * 0.7);
+      vx[i] += Math.cos(angle) * outwardForce;
+      vy[i] += Math.sin(angle) * outwardForce;
 
-        if (distSun < 150) {
-          const swirlStrength = (1 - distSun / 150) * 0.15;
-          vx[i] += -dySun / distSun * swirlStrength;
-          vy[i] += dxSun / distSun * swirlStrength;
-        }
-
-        // Mouse interaction
-        const dxM = px[i] - mouseX;
-        const dyM = py[i] - mouseY;
-        const distM = Math.sqrt(dxM * dxM + dyM * dyM);
-        if (distM < 120) {
-          const attract = (120 - distM) / 120 * 0.8;
-          vx[i] -= (dxM / distM) * attract;
-          vy[i] -= (dyM / distM) * attract;
-        }
-
-        vx[i] *= FRICTION;
-        vy[i] *= FRICTION;
+      if (distSun < 150) {
+        const swirlStrength = (1 - distSun / 150) * 0.15;
+        vx[i] += -dySun / distSun * swirlStrength;
+        vy[i] += dxSun / distSun * swirlStrength;
       }
 
+      // Mouse interaction
+      const dxM = px[i] - mouseX;
+      const dyM = py[i] - mouseY;
+      const distM = Math.sqrt(dxM * dxM + dyM * dyM);
+      if (distM < 120) {
+        const attract = (120 - distM) / 120 * 0.8;
+        vx[i] -= (dxM / distM) * attract;
+        vy[i] -= (dyM / distM) * attract;
+      }
+
+      vx[i] *= FRICTION;
+      vy[i] *= FRICTION;
+
       const speed = Math.sqrt(vx[i] * vx[i] + vy[i] * vy[i]);
-      const cap = flare ? FLARE_MAX_SPEED : MAX_SPEED;
-      if (speed > cap) {
-        vx[i] = (vx[i] / speed) * cap;
-        vy[i] = (vy[i] / speed) * cap;
+      if (speed > MAX_SPEED) {
+        vx[i] = (vx[i] / speed) * MAX_SPEED;
+        vy[i] = (vy[i] / speed) * MAX_SPEED;
       }
 
       px[i] += vx[i];
@@ -284,9 +249,7 @@ function initParticles() {
 
       // Draw particle
       const intensityBoost = distSun < 80 ? (1 - distSun / 80) * 0.4 : 0;
-      const baseAlpha = flare ? 0.4 : 0.15;
-      const speedRef = flare ? FLARE_MAX_SPEED : MAX_SPEED;
-      const drawAlpha = alpha * (baseAlpha + (speed / speedRef) * 0.55 + intensityBoost);
+      const drawAlpha = alpha * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
       const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
 
       ctx.beginPath();
@@ -294,10 +257,10 @@ function initParticles() {
       ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${drawAlpha})`;
       ctx.fill();
 
-      // Glow for brighter/larger particles and all flares
-      if ((pSize[i] > 1 && speed > 0.6) || flare) {
-        const glowRadius = flare ? pSize[i] * 6 : pSize[i] * 4;
-        const glowAlpha = flare ? drawAlpha * 0.12 : drawAlpha * 0.06;
+      // Glow for brighter/larger particles
+      if (pSize[i] > 1 && speed > 0.6) {
+        const glowRadius = pSize[i] * 4;
+        const glowAlpha = drawAlpha * 0.06;
         ctx.beginPath();
         ctx.arc(px[i], py[i], glowRadius, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${glowAlpha})`;
@@ -330,8 +293,7 @@ function initParticles() {
 
   const ro = new ResizeObserver(() => {
     resize();
-    for (let i = 0; i < PARTICLE_COUNT; i++) spawnParticle(i, false);
-    for (let i = PARTICLE_COUNT; i < TOTAL; i++) spawnParticle(i, true);
+    for (let i = 0; i < TOTAL; i++) spawnParticle(i);
   });
   ro.observe(canvas);
 
