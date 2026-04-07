@@ -251,9 +251,14 @@ function initParticles() {
     const bgB = dark ? 10 : 230;
 
     // ── Offscreen buffer: trail fade + particles ──
-    const trailAlpha = dark ? 0.1 : 0.14;
-    offCtx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
-    offCtx.fillRect(0, 0, w, h);
+    if (dark) {
+      // Dark mode: trail fade for flowing streaks
+      offCtx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, 0.1)`;
+      offCtx.fillRect(0, 0, w, h);
+    } else {
+      // Light mode: full clear each frame — no shadows
+      offCtx.clearRect(0, 0, w, h);
+    }
 
     zOffset += NOISE_SPEED;
 
