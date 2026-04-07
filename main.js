@@ -86,23 +86,48 @@ function initParticles() {
     pLife[i] = 0;
     pSize[i] = 0.3 + Math.random() * 2.2;
 
+    const dark = isDark();
     const colorRoll = Math.random();
-    if (colorRoll < 0.15) {
-      pHue[i] = 38 + Math.random() * 10;
-      pSat[i] = 20 + Math.random() * 30;
-      pLight[i] = 85 + Math.random() * 15;
-    } else if (colorRoll < 0.4) {
-      pHue[i] = 35 + Math.random() * 15;
-      pSat[i] = 80 + Math.random() * 20;
-      pLight[i] = 55 + Math.random() * 20;
-    } else if (colorRoll < 0.7) {
-      pHue[i] = 18 + Math.random() * 18;
-      pSat[i] = 85 + Math.random() * 15;
-      pLight[i] = 45 + Math.random() * 20;
+
+    if (dark) {
+      // Dark mode: white-hot → gold → orange → ember red
+      if (colorRoll < 0.15) {
+        pHue[i] = 38 + Math.random() * 10;
+        pSat[i] = 20 + Math.random() * 30;
+        pLight[i] = 85 + Math.random() * 15;
+      } else if (colorRoll < 0.4) {
+        pHue[i] = 35 + Math.random() * 15;
+        pSat[i] = 80 + Math.random() * 20;
+        pLight[i] = 55 + Math.random() * 20;
+      } else if (colorRoll < 0.7) {
+        pHue[i] = 18 + Math.random() * 18;
+        pSat[i] = 85 + Math.random() * 15;
+        pLight[i] = 45 + Math.random() * 20;
+      } else {
+        pHue[i] = 2 + Math.random() * 18;
+        pSat[i] = 80 + Math.random() * 20;
+        pLight[i] = 35 + Math.random() * 20;
+      }
     } else {
-      pHue[i] = 2 + Math.random() * 18;
-      pSat[i] = 80 + Math.random() * 20;
-      pLight[i] = 35 + Math.random() * 20;
+      // Light mode: deep burnt sienna → terra cotta → dark amber → chocolate
+      // Low lightness + high saturation = vivid strokes on cream background
+      if (colorRoll < 0.15) {
+        pHue[i] = 25 + Math.random() * 15;
+        pSat[i] = 70 + Math.random() * 30;
+        pLight[i] = 40 + Math.random() * 15;
+      } else if (colorRoll < 0.4) {
+        pHue[i] = 18 + Math.random() * 14;
+        pSat[i] = 75 + Math.random() * 25;
+        pLight[i] = 32 + Math.random() * 14;
+      } else if (colorRoll < 0.7) {
+        pHue[i] = 10 + Math.random() * 16;
+        pSat[i] = 80 + Math.random() * 20;
+        pLight[i] = 28 + Math.random() * 15;
+      } else {
+        pHue[i] = 4 + Math.random() * 14;
+        pSat[i] = 65 + Math.random() * 25;
+        pLight[i] = 22 + Math.random() * 14;
+      }
     }
   }
 
@@ -117,59 +142,97 @@ function initParticles() {
   function drawSunCore() {
     const dark = isDark();
     const time = zOffset * 800;
-    // Light mode: subtle glow
-    const modeScale = dark ? 1 : 0.25;
 
     const pulseA = 0.85 + Math.sin(time * 0.7) * 0.15;
     const pulseB = 0.9 + Math.sin(time * 1.3 + 1) * 0.1;
 
-    // Draw all glow layers clipped to the glow region (not full-screen)
     const glowR = 400;
     const gx = sunX - glowR;
     const gy = sunY - glowR;
     const gd = glowR * 2;
 
-    // Outer halo
-    const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, glowR);
-    const haloBase = 0.05 * pulseA * modeScale;
-    halo.addColorStop(0,    `rgba(212, 146, 74, ${haloBase})`);
-    halo.addColorStop(0.08, `rgba(210, 135, 65, ${haloBase * 0.9})`);
-    halo.addColorStop(0.15, `rgba(205, 120, 55, ${haloBase * 0.75})`);
-    halo.addColorStop(0.25, `rgba(200, 105, 45, ${haloBase * 0.55})`);
-    halo.addColorStop(0.4,  `rgba(195, 90, 35, ${haloBase * 0.35})`);
-    halo.addColorStop(0.55, `rgba(190, 75, 28, ${haloBase * 0.2})`);
-    halo.addColorStop(0.7,  `rgba(185, 65, 22, ${haloBase * 0.1})`);
-    halo.addColorStop(0.85, `rgba(180, 60, 20, ${haloBase * 0.04})`);
-    halo.addColorStop(1,    'rgba(180, 60, 20, 0)');
-    ctx.fillStyle = halo;
-    ctx.fillRect(gx, gy, gd, gd);
+    if (dark) {
+      // ── Dark mode glow (unchanged) ──
+      const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, glowR);
+      const hB = 0.05 * pulseA;
+      halo.addColorStop(0,    `rgba(212, 146, 74, ${hB})`);
+      halo.addColorStop(0.08, `rgba(210, 135, 65, ${hB * 0.9})`);
+      halo.addColorStop(0.15, `rgba(205, 120, 55, ${hB * 0.75})`);
+      halo.addColorStop(0.25, `rgba(200, 105, 45, ${hB * 0.55})`);
+      halo.addColorStop(0.4,  `rgba(195, 90, 35, ${hB * 0.35})`);
+      halo.addColorStop(0.55, `rgba(190, 75, 28, ${hB * 0.2})`);
+      halo.addColorStop(0.7,  `rgba(185, 65, 22, ${hB * 0.1})`);
+      halo.addColorStop(0.85, `rgba(180, 60, 20, ${hB * 0.04})`);
+      halo.addColorStop(1,    'rgba(180, 60, 20, 0)');
+      ctx.fillStyle = halo;
+      ctx.fillRect(gx, gy, gd, gd);
 
-    // Inner corona
-    const corona = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 140);
-    const coronaBase = 0.1 * pulseB * modeScale;
-    corona.addColorStop(0,    `rgba(255, 225, 170, ${coronaBase})`);
-    corona.addColorStop(0.1,  `rgba(245, 200, 130, ${coronaBase * 0.85})`);
-    corona.addColorStop(0.2,  `rgba(235, 175, 100, ${coronaBase * 0.65})`);
-    corona.addColorStop(0.35, `rgba(220, 145, 70, ${coronaBase * 0.45})`);
-    corona.addColorStop(0.5,  `rgba(212, 125, 55, ${coronaBase * 0.28})`);
-    corona.addColorStop(0.7,  `rgba(205, 110, 45, ${coronaBase * 0.12})`);
-    corona.addColorStop(0.85, `rgba(200, 100, 40, ${coronaBase * 0.04})`);
-    corona.addColorStop(1,    'rgba(200, 100, 40, 0)');
-    ctx.fillStyle = corona;
-    ctx.fillRect(sunX - 140, sunY - 140, 280, 280);
+      const corona = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 140);
+      const cB = 0.1 * pulseB;
+      corona.addColorStop(0,    `rgba(255, 225, 170, ${cB})`);
+      corona.addColorStop(0.1,  `rgba(245, 200, 130, ${cB * 0.85})`);
+      corona.addColorStop(0.2,  `rgba(235, 175, 100, ${cB * 0.65})`);
+      corona.addColorStop(0.35, `rgba(220, 145, 70, ${cB * 0.45})`);
+      corona.addColorStop(0.5,  `rgba(212, 125, 55, ${cB * 0.28})`);
+      corona.addColorStop(0.7,  `rgba(205, 110, 45, ${cB * 0.12})`);
+      corona.addColorStop(0.85, `rgba(200, 100, 40, ${cB * 0.04})`);
+      corona.addColorStop(1,    'rgba(200, 100, 40, 0)');
+      ctx.fillStyle = corona;
+      ctx.fillRect(sunX - 140, sunY - 140, 280, 280);
 
-    // Bright core
-    const core = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 40);
-    const coreBase = 0.18 * pulseB * modeScale;
-    core.addColorStop(0,    `rgba(255, 245, 210, ${coreBase})`);
-    core.addColorStop(0.15, `rgba(255, 230, 180, ${coreBase * 0.8})`);
-    core.addColorStop(0.3,  `rgba(255, 210, 140, ${coreBase * 0.55})`);
-    core.addColorStop(0.5,  `rgba(245, 190, 110, ${coreBase * 0.3})`);
-    core.addColorStop(0.7,  `rgba(235, 170, 85, ${coreBase * 0.12})`);
-    core.addColorStop(0.85, `rgba(230, 160, 80, ${coreBase * 0.04})`);
-    core.addColorStop(1,    'rgba(230, 160, 80, 0)');
-    ctx.fillStyle = core;
-    ctx.fillRect(sunX - 40, sunY - 40, 80, 80);
+      const core = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 40);
+      const kB = 0.18 * pulseB;
+      core.addColorStop(0,    `rgba(255, 245, 210, ${kB})`);
+      core.addColorStop(0.15, `rgba(255, 230, 180, ${kB * 0.8})`);
+      core.addColorStop(0.3,  `rgba(255, 210, 140, ${kB * 0.55})`);
+      core.addColorStop(0.5,  `rgba(245, 190, 110, ${kB * 0.3})`);
+      core.addColorStop(0.7,  `rgba(235, 170, 85, ${kB * 0.12})`);
+      core.addColorStop(0.85, `rgba(230, 160, 80, ${kB * 0.04})`);
+      core.addColorStop(1,    'rgba(230, 160, 80, 0)');
+      ctx.fillStyle = core;
+      ctx.fillRect(sunX - 40, sunY - 40, 80, 80);
+
+    } else {
+      // ── Light mode glow — darker, earthier tones at moderate opacity ──
+      const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, glowR);
+      const hB = 0.035 * pulseA;
+      halo.addColorStop(0,    `rgba(160, 80, 30, ${hB})`);
+      halo.addColorStop(0.08, `rgba(155, 72, 28, ${hB * 0.9})`);
+      halo.addColorStop(0.15, `rgba(148, 65, 25, ${hB * 0.75})`);
+      halo.addColorStop(0.25, `rgba(140, 58, 22, ${hB * 0.55})`);
+      halo.addColorStop(0.4,  `rgba(132, 50, 18, ${hB * 0.35})`);
+      halo.addColorStop(0.55, `rgba(125, 44, 15, ${hB * 0.2})`);
+      halo.addColorStop(0.7,  `rgba(118, 38, 12, ${hB * 0.1})`);
+      halo.addColorStop(0.85, `rgba(110, 32, 10, ${hB * 0.04})`);
+      halo.addColorStop(1,    'rgba(110, 32, 10, 0)');
+      ctx.fillStyle = halo;
+      ctx.fillRect(gx, gy, gd, gd);
+
+      const corona = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 140);
+      const cB = 0.06 * pulseB;
+      corona.addColorStop(0,    `rgba(190, 110, 50, ${cB})`);
+      corona.addColorStop(0.1,  `rgba(178, 95, 40, ${cB * 0.85})`);
+      corona.addColorStop(0.2,  `rgba(165, 82, 32, ${cB * 0.65})`);
+      corona.addColorStop(0.35, `rgba(150, 70, 25, ${cB * 0.45})`);
+      corona.addColorStop(0.5,  `rgba(140, 60, 20, ${cB * 0.28})`);
+      corona.addColorStop(0.7,  `rgba(130, 52, 16, ${cB * 0.12})`);
+      corona.addColorStop(0.85, `rgba(120, 45, 12, ${cB * 0.04})`);
+      corona.addColorStop(1,    'rgba(120, 45, 12, 0)');
+      ctx.fillStyle = corona;
+      ctx.fillRect(sunX - 140, sunY - 140, 280, 280);
+
+      const core = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 40);
+      const kB = 0.1 * pulseB;
+      core.addColorStop(0,    `rgba(210, 150, 80, ${kB})`);
+      core.addColorStop(0.15, `rgba(195, 130, 60, ${kB * 0.8})`);
+      core.addColorStop(0.3,  `rgba(180, 110, 45, ${kB * 0.55})`);
+      core.addColorStop(0.5,  `rgba(165, 92, 35, ${kB * 0.3})`);
+      core.addColorStop(0.7,  `rgba(150, 78, 28, ${kB * 0.12})`);
+      core.addColorStop(0.85, `rgba(140, 68, 22, ${kB * 0.04})`);
+      core.addColorStop(1,    'rgba(140, 68, 22, 0)');
+      ctx.fillStyle = core;
+      ctx.fillRect(sunX - 40, sunY - 40, 80, 80);
+    }
   }
 
   function frame() {
@@ -179,7 +242,7 @@ function initParticles() {
     const bgB = dark ? 10 : 230;
 
     // Trail fade — light mode needs faster fade to avoid ghosting
-    const trailAlpha = dark ? 0.1 : 0.18;
+    const trailAlpha = dark ? 0.1 : 0.14;
     ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
     ctx.fillRect(0, 0, w, h);
 
@@ -275,9 +338,7 @@ function initParticles() {
 
       // Draw particle
       const intensityBoost = distSun < 80 ? (1 - distSun / 80) * 0.4 : 0;
-      const particleOpacity = dark ? (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost)
-                                   : (0.08 + (speed / MAX_SPEED) * 0.3 + intensityBoost * 0.5);
-      const drawAlpha = alpha * edgeFade * particleOpacity;
+      const drawAlpha = alpha * edgeFade * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
       const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
 
       ctx.beginPath();
