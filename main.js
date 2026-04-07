@@ -117,8 +117,8 @@ function initParticles() {
   function drawSunCore() {
     const dark = isDark();
     const time = zOffset * 800;
-    // Light mode: visible glow but with warmer, softer tones
-    const modeScale = dark ? 1 : 0.7;
+    // Light mode: subtle glow
+    const modeScale = dark ? 1 : 0.25;
 
     const pulseA = 0.85 + Math.sin(time * 0.7) * 0.15;
     const pulseB = 0.9 + Math.sin(time * 1.3 + 1) * 0.1;
@@ -179,7 +179,7 @@ function initParticles() {
     const bgB = dark ? 10 : 230;
 
     // Trail fade — light mode needs faster fade to avoid ghosting
-    const trailAlpha = dark ? 0.1 : 0.14;
+    const trailAlpha = dark ? 0.1 : 0.18;
     ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
     ctx.fillRect(0, 0, w, h);
 
@@ -275,7 +275,9 @@ function initParticles() {
 
       // Draw particle
       const intensityBoost = distSun < 80 ? (1 - distSun / 80) * 0.4 : 0;
-      const drawAlpha = alpha * edgeFade * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
+      const particleOpacity = dark ? (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost)
+                                   : (0.08 + (speed / MAX_SPEED) * 0.3 + intensityBoost * 0.5);
+      const drawAlpha = alpha * edgeFade * particleOpacity;
       const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
 
       ctx.beginPath();
