@@ -178,9 +178,24 @@ function initParticles() {
     const bgG = dark ? 10 : 239;
     const bgB = dark ? 10 : 230;
 
-    // Trail fade — faster to keep trails crisp
+    // Trail fade
     ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, 0.1)`;
     ctx.fillRect(0, 0, w, h);
+
+    // Bottom edge blend — gradient to exact bg so there's no visible seam
+    const edgeH = 120;
+    const edgeGrad = ctx.createLinearGradient(0, h - edgeH, 0, h);
+    edgeGrad.addColorStop(0, `rgba(${bgR}, ${bgG}, ${bgB}, 0)`);
+    edgeGrad.addColorStop(1, `rgba(${bgR}, ${bgG}, ${bgB}, 1)`);
+    ctx.fillStyle = edgeGrad;
+    ctx.fillRect(0, h - edgeH, w, edgeH);
+
+    // Left edge blend
+    const leftGrad = ctx.createLinearGradient(0, 0, 80, 0);
+    leftGrad.addColorStop(0, `rgba(${bgR}, ${bgG}, ${bgB}, 1)`);
+    leftGrad.addColorStop(1, `rgba(${bgR}, ${bgG}, ${bgB}, 0)`);
+    ctx.fillStyle = leftGrad;
+    ctx.fillRect(0, 0, 80, h);
 
     // Draw sun core
     drawSunCore();
@@ -251,9 +266,15 @@ function initParticles() {
       px[i] += vx[i];
       py[i] += vy[i];
 
+      // Edge fade — particles fade as they approach canvas boundaries
+      const edgeFadeX = Math.min(1, px[i] / 80, (w - px[i]) / 80);
+      const edgeFadeTop = Math.min(1, py[i] / 60);
+      const edgeFadeBot = Math.min(1, (h - py[i]) / 120);
+      const edgeFade = Math.max(0, Math.min(edgeFadeX, edgeFadeTop, edgeFadeBot));
+
       // Draw particle
       const intensityBoost = distSun < 80 ? (1 - distSun / 80) * 0.4 : 0;
-      const drawAlpha = alpha * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
+      const drawAlpha = alpha * edgeFade * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
       const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
 
       ctx.beginPath();
