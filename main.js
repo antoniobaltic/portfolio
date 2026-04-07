@@ -44,6 +44,10 @@ function initParticles() {
   let mouseX = -9999, mouseY = -9999;
   let sunX, sunY;
 
+  // Offscreen buffer for trails (avoids bg tint accumulation on main canvas)
+  const offscreen = document.createElement('canvas');
+  const offCtx = offscreen.getContext('2d');
+
   // Particle arrays
   const px = new Float32Array(TOTAL);
   const py = new Float32Array(TOTAL);
@@ -68,10 +72,15 @@ function initParticles() {
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Size offscreen buffer to match
+    offscreen.width = w * dpr;
+    offscreen.height = h * dpr;
+    offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // Sun center: right side, vertically centered
     sunX = w * 0.72;
     sunY = h * 0.45;
     ctx.clearRect(0, 0, w, h);
+    offCtx.clearRect(0, 0, w, h);
   }
 
   function spawnParticle(i) {
@@ -241,28 +250,10 @@ function initParticles() {
     const bgG = dark ? 10 : 239;
     const bgB = dark ? 10 : 230;
 
-    // Trail fade — light mode needs faster fade to avoid ghosting
+    // ── Offscreen buffer: trail fade + particles ──
     const trailAlpha = dark ? 0.1 : 0.14;
-    ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
-    ctx.fillRect(0, 0, w, h);
-
-    // Bottom edge blend — gradient to exact bg so there's no visible seam
-    const edgeH = 120;
-    const edgeGrad = ctx.createLinearGradient(0, h - edgeH, 0, h);
-    edgeGrad.addColorStop(0, `rgba(${bgR}, ${bgG}, ${bgB}, 0)`);
-    edgeGrad.addColorStop(1, `rgba(${bgR}, ${bgG}, ${bgB}, 1)`);
-    ctx.fillStyle = edgeGrad;
-    ctx.fillRect(0, h - edgeH, w, edgeH);
-
-    // Left edge blend
-    const leftGrad = ctx.createLinearGradient(0, 0, 80, 0);
-    leftGrad.addColorStop(0, `rgba(${bgR}, ${bgG}, ${bgB}, 1)`);
-    leftGrad.addColorStop(1, `rgba(${bgR}, ${bgG}, ${bgB}, 0)`);
-    ctx.fillStyle = leftGrad;
-    ctx.fillRect(0, 0, 80, h);
-
-    // Draw sun core
-    drawSunCore();
+    offCtx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, ${trailAlpha})`;
+    offCtx.fillRect(0, 0, w, h);
 
     zOffset += NOISE_SPEED;
 
@@ -341,21 +332,59 @@ function initParticles() {
       const drawAlpha = alpha * edgeFade * (0.15 + (speed / MAX_SPEED) * 0.55 + intensityBoost);
       const drawLight = Math.min(100, pLight[i] + intensityBoost * 40);
 
-      ctx.beginPath();
-      ctx.arc(px[i], py[i], pSize[i], 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${drawAlpha})`;
-      ctx.fill();
+      offCtx.beginPath();
+      offCtx.arc(px[i], py[i], pSize[i], 0, Math.PI * 2);
+      offCtx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${drawAlpha})`;
+      offCtx.fill();
 
       // Glow for brighter/larger particles
       if (pSize[i] > 1 && speed > 0.6) {
         const glowRadius = pSize[i] * 4;
         const glowAlpha = drawAlpha * 0.06;
-        ctx.beginPath();
-        ctx.arc(px[i], py[i], glowRadius, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${glowAlpha})`;
-        ctx.fill();
+        offCtx.beginPath();
+        offCtx.arc(px[i], py[i], glowRadius, 0, Math.PI * 2);
+        offCtx.fillStyle = `hsla(${pHue[i]}, ${pSat[i]}%, ${drawLight}%, ${glowAlpha})`;
+        offCtx.fill();
       }
     }
+
+    // ── Composite to main canvas (fully cleared each frame) ──
+    ctx.clearRect(0, 0, w, h);
+
+    // Sun glow drawn fresh (no accumulation)
+    drawSunCore();
+
+    // Copy trails + particles from offscreen buffer
+    ctx.drawImage(offscreen, 0, 0, offscreen.width, offscreen.height, 0, 0, w, h);
+
+    // Edge blends to transparent (CSS bg shows through perfectly)
+    const edgeH = 120;
+    const edgeGrad = ctx.createLinearGradient(0, h - edgeH, 0, h);
+    edgeGrad.addColorStop(0, 'rgba(0,0,0,0)');
+    edgeGrad.addColorStop(1, 'rgba(0,0,0,1)');
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = edgeGrad;
+    ctx.fillRect(0, h - edgeH, w, edgeH);
+
+    const leftGrad = ctx.createLinearGradient(0, 0, 80, 0);
+    leftGrad.addColorStop(0, 'rgba(0,0,0,1)');
+    leftGrad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = leftGrad;
+    ctx.fillRect(0, 0, 80, h);
+
+    const topGrad = ctx.createLinearGradient(0, 0, 0, 60);
+    topGrad.addColorStop(0, 'rgba(0,0,0,1)');
+    topGrad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = topGrad;
+    ctx.fillRect(0, 0, w, 60);
+
+    const rightGrad = ctx.createLinearGradient(w - 60, 0, w, 0);
+    rightGrad.addColorStop(0, 'rgba(0,0,0,0)');
+    rightGrad.addColorStop(1, 'rgba(0,0,0,1)');
+    ctx.fillStyle = rightGrad;
+    ctx.fillRect(w - 60, 0, 60, h);
+    ctx.restore();
 
     animId = requestAnimationFrame(frame);
   }
