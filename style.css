@@ -46,9 +46,7 @@
   color: rgba(181, 100, 42, 0.7);
 }
 
-[data-theme="light"] .hero::before {
-  background: radial-gradient(circle, rgba(181, 100, 42, 0.06) 0%, transparent 65%);
-}
+/* Light hero glow handled by canvas */
 
 /* ─────────────────────────────────────────────────────
    Theme toggle
@@ -169,24 +167,7 @@ body::after {
   padding: 0 var(--px);
 }
 
-/* Ambient amber glow */
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 700px;
-  height: 700px;
-  top: 50%;
-  left: 0;
-  transform: translate(-20%, -50%);
-  background: radial-gradient(circle, rgba(212, 146, 74, 0.06) 0%, transparent 65%);
-  pointer-events: none;
-  animation: ambient 8s ease-in-out infinite;
-}
-
-@keyframes ambient {
-  0%, 100% { opacity: 0.6; transform: translate(-20%, -50%) scale(1); }
-  50%       { opacity: 1;   transform: translate(-20%, -50%) scale(1.08); }
-}
+/* Ambient glow replaced by canvas sun */
 
 .hero-inner {
   max-width: 680px;
