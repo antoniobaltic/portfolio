@@ -123,8 +123,14 @@ function initParticles() {
     const pulseA = 0.85 + Math.sin(time * 0.7) * 0.15;
     const pulseB = 0.9 + Math.sin(time * 1.3 + 1) * 0.1;
 
-    // Outer halo — huge, smooth (many stops to avoid banding)
-    const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 400);
+    // Draw all glow layers clipped to the glow region (not full-screen)
+    const glowR = 400;
+    const gx = sunX - glowR;
+    const gy = sunY - glowR;
+    const gd = glowR * 2;
+
+    // Outer halo
+    const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, glowR);
     const haloBase = 0.05 * pulseA * modeScale;
     halo.addColorStop(0,    `rgba(212, 146, 74, ${haloBase})`);
     halo.addColorStop(0.08, `rgba(210, 135, 65, ${haloBase * 0.9})`);
@@ -136,9 +142,9 @@ function initParticles() {
     halo.addColorStop(0.85, `rgba(180, 60, 20, ${haloBase * 0.04})`);
     halo.addColorStop(1,    'rgba(180, 60, 20, 0)');
     ctx.fillStyle = halo;
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(gx, gy, gd, gd);
 
-    // Inner corona — smooth transition
+    // Inner corona
     const corona = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 140);
     const coronaBase = 0.1 * pulseB * modeScale;
     corona.addColorStop(0,    `rgba(255, 225, 170, ${coronaBase})`);
@@ -150,9 +156,9 @@ function initParticles() {
     corona.addColorStop(0.85, `rgba(200, 100, 40, ${coronaBase * 0.04})`);
     corona.addColorStop(1,    'rgba(200, 100, 40, 0)');
     ctx.fillStyle = corona;
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(sunX - 140, sunY - 140, 280, 280);
 
-    // Bright core — small, intense, smooth
+    // Bright core
     const core = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 40);
     const coreBase = 0.18 * pulseB * modeScale;
     core.addColorStop(0,    `rgba(255, 245, 210, ${coreBase})`);
@@ -163,7 +169,7 @@ function initParticles() {
     core.addColorStop(0.85, `rgba(230, 160, 80, ${coreBase * 0.04})`);
     core.addColorStop(1,    'rgba(230, 160, 80, 0)');
     ctx.fillStyle = core;
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(sunX - 40, sunY - 40, 80, 80);
   }
 
   function frame() {
@@ -176,10 +182,8 @@ function initParticles() {
     ctx.fillStyle = `rgba(${bgR}, ${bgG}, ${bgB}, 0.1)`;
     ctx.fillRect(0, 0, w, h);
 
-    // Draw sun core — use additive blending on dark for natural glow
-    if (dark) ctx.globalCompositeOperation = 'lighter';
+    // Draw sun core
     drawSunCore();
-    ctx.globalCompositeOperation = 'source-over';
 
     zOffset += NOISE_SPEED;
 
