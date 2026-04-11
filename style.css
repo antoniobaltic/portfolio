@@ -621,7 +621,9 @@ body::after {
 /* ─────────────────────────────────────────────────────
    Responsive
 ───────────────────────────────────────────────────── */
+.sub-break { display: block; }
 @media (max-width: 600px) {
+  .sub-break { display: none; }
   .grid { grid-template-columns: 1fr; }
 
   .footer-inner {
