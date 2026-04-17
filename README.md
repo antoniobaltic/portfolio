@@ -1,28 +1,28 @@
 # antoniobaltic.xyz
 
-Personal developer portfolio. One page, no build step.
+Personal portfolio for an indie iOS / web developer based in Graz, Austria.
+One page, no build step, deployed on Vercel.
 
 ## Stack
 
-- HTML + CSS + vanilla JS
-- [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts
-- [simplex-noise.js](https://github.com/jwagner/simplex-noise.js) for hero particle animation
+- HTML + CSS + vanilla JS (ES module)
+- [Inter Tight](https://fonts.google.com/specimen/Inter+Tight) and [Geist Mono](https://fonts.google.com/specimen/Geist+Mono) via Google Fonts
+- Vercel Web Analytics
 
 ## Structure
 
 ```
 index.html              main portfolio page
-style.css               styles + animations
-main.js                 typewriter, particle sun, scroll reveals
-lib/simplex-noise.js    self-hosted noise module
-404.html                custom 404 page
-ducky-privacy.html      Ducky privacy policy
-lacuna-privacy.html     Lacuna privacy policy
-og-image.png            social preview card
+style.css               full design system + page styles
+main.js                 clock, project filter, row clicks, scroll reveal
+404.html                custom not-found page
+lacuna-privacy.html     Lacuna privacy policy (English)
+ducky-privacy.html      Ducky privacy policy (German)
+favicon.ico / *.png     favicons
+antoniobaltic_ogimage.png  social preview card (1200×630)
 site.webmanifest        PWA manifest
-favicon.ico / *.png     favicons + apple touch icon
 ```
 
 ## Deploy
 
-Drop the files anywhere — Vercel, Netlify, GitHub Pages, or a plain static host. No config needed.
+Static files — drop them on any host. Vercel reads the directory as-is, no config needed.

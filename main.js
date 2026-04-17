@@ -1,125 +1,104 @@
 /* ─────────────────────────────────────────────────────
-   Utilities
+   Antonio Baltic — Index 2026
 ───────────────────────────────────────────────────── */
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function typeWriter(el, text, speed = 62) {
-  const node = document.createTextNode('');
-  el.appendChild(node);
-  for (const char of text) {
-    node.textContent += char;
-    await sleep(speed + (Math.random() * 20 - 10));
-  }
+/* ───────── Local time (Graz) ───────── */
+function initClock() {
+  const el = document.getElementById('local-time');
+  if (!el) return;
+
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Vienna',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const tick = () => { el.textContent = fmt.format(new Date()); };
+  tick();
+  setInterval(tick, 30_000);
 }
 
-/* ─────────────────────────────────────────────────────
-   Hero sequence
-───────────────────────────────────────────────────── */
-async function runHeroSequence() {
-  const promptCursor = document.getElementById('prompt-cursor');
-  const nameEl       = document.getElementById('hero-name');
-  const subEl        = document.getElementById('hero-sub');
-  const scrollEl     = document.getElementById('hero-scroll');
-  await sleep(1400);
-
-  promptCursor.style.visibility = 'hidden';
-  nameEl.classList.add('is-typing');
-
-  await sleep(120);
-  await typeWriter(nameEl, 'Antonio', 62);
-  nameEl.appendChild(document.createElement('br'));
-  await typeWriter(nameEl, 'Baltic', 62);
-
-  nameEl.classList.remove('is-typing');
-  nameEl.classList.add('is-done');
-
-  await sleep(280);
-  subEl.classList.add('visible');
-
-  await sleep(520);
-  scrollEl.classList.add('visible');
-}
-
-/* ─────────────────────────────────────────────────────
-   Scroll reveal
-───────────────────────────────────────────────────── */
-function initScrollReveal() {
-  const targets = document.querySelectorAll('.fade-up');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  targets.forEach(el => observer.observe(el));
-}
-
-/* ─────────────────────────────────────────────────────
-   Theme toggle
-───────────────────────────────────────────────────── */
-function initTheme() {
-  const btn       = document.getElementById('theme-btn');
-  const icon      = document.getElementById('theme-icon');
-  const label     = document.getElementById('theme-label');
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-
-  const stored = localStorage.getItem('theme');
-  let theme = stored || 'light';
-
-  function apply(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    if (t === 'light') {
-      icon.textContent  = '◐';
-      label.textContent = 'dark_mode';
-      btn.setAttribute('aria-label', 'Switch to dark mode');
-      if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
-    } else {
-      icon.textContent  = '◑';
-      label.textContent = 'light_mode';
-      btn.setAttribute('aria-label', 'Switch to light mode');
-      if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
-    }
-    localStorage.setItem('theme', t);
-    theme = t;
-  }
-
-  apply(theme);
-  btn.addEventListener('click', () => apply(theme === 'dark' ? 'light' : 'dark'));
-}
-
-/* ─────────────────────────────────────────────────────
-   Project filter
-───────────────────────────────────────────────────── */
+/* ───────── Project filter ───────── */
 function initFilter() {
-  const btns  = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('#project-grid .card');
+  const buttons  = document.querySelectorAll('.filter-btn');
+  const projects = document.querySelectorAll('.project');
+  const counter  = document.getElementById('project-count');
 
-  btns.forEach(btn => {
+  if (!buttons.length || !projects.length) return;
+
+  const apply = (filter) => {
+    let visible = 0;
+    projects.forEach(p => {
+      const tags = (p.dataset.tags || '').split(/\s+/);
+      const match = filter === 'all' || tags.includes(filter);
+      p.hidden = !match;
+      if (match) visible++;
+    });
+    if (counter) {
+      counter.textContent = `${visible} ${visible === 1 ? 'project' : 'projects'}`;
+    }
+  };
+
+  buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-
-      const filter = btn.dataset.filter;
-      cards.forEach(card => {
-        const tags = card.dataset.tags || '';
-        const match = filter === 'all' || tags.split(' ').includes(filter);
-        card.classList.toggle('hidden', !match);
+      buttons.forEach(b => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
       });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-pressed', 'true');
+      apply(btn.dataset.filter);
     });
   });
 }
 
-/* ─────────────────────────────────────────────────────
-   Init
-───────────────────────────────────────────────────── */
+/* ───────── Project row click → primary link ───────── */
+function initRowClicks() {
+  document.querySelectorAll('.project').forEach(row => {
+    const primary = row.querySelector('.project-title-link');
+    if (!primary) return;
+
+    row.addEventListener('click', (e) => {
+      // Let real <a>, <button>, etc. handle their own clicks
+      if (e.target.closest('a, button')) return;
+      // Mid-click / cmd-click / ctrl-click → new tab
+      const newTab = e.metaKey || e.ctrlKey || e.button === 1 || primary.target === '_blank';
+      if (newTab) window.open(primary.href, '_blank', 'noopener');
+      else window.location.href = primary.href;
+    });
+
+    // Keyboard activation on the row
+    row.tabIndex = -1; // primary link already handles tab; row is just a click surface
+  });
+}
+
+/* ───────── Scroll reveal ───────── */
+function initReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('is-visible'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(t => io.observe(t));
+}
+
+/* ───────── Init ───────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  runHeroSequence();
-  initScrollReveal();
+  initClock();
   initFilter();
+  initRowClicks();
+  initReveal();
 });

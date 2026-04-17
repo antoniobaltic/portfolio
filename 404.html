@@ -3,114 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Antonio Baltic</title>
+  <title>Not Found — Antonio Baltic</title>
+  <meta name="description" content="The page you're looking for doesn't exist.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter+Tight:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2026-04">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#f4efe6">
-  <script>
-    (function() {
-      var t = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
   <style>
-    .error-wrap {
-      min-height: 100vh;
+    .error {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(4rem, 12vw, 10rem) var(--px) clamp(4rem, 8vw, 7rem);
+      min-height: calc(100vh - 200px);
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      padding: 2rem var(--px);
     }
 
-    .error-inner {
-      text-align: center;
-      max-width: 480px;
+    .error-eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
     }
 
     .error-code {
-      font-size: clamp(4rem, 12vw, 8rem);
-      font-weight: 700;
+      font-family: var(--f-display);
+      font-size: clamp(6rem, 22vw, 18rem);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .error-code .dot {
       color: var(--accent);
-      opacity: 0.25;
-      line-height: 1;
-      letter-spacing: -0.04em;
+      display: inline-block;
     }
 
     .error-msg {
-      font-size: 0.85rem;
-      color: var(--text-dim);
+      font-family: var(--f-display);
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--ink-soft);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .error-msg em {
+      font-style: italic;
+      color: var(--muted-2);
       font-weight: 300;
-      margin-top: 1.5rem;
-      line-height: 1.8;
     }
 
-    .error-prompt {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.8rem;
-      letter-spacing: 0.05em;
+    .error-cta {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6em;
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 0.3em;
+      transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+      align-self: flex-start;
     }
 
-    .error-link {
-      display: inline-block;
-      margin-top: 2.5rem;
-      font-size: 0.72rem;
+    .error-cta:hover {
       color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      opacity: 0.7;
-      transition: opacity 0.2s ease;
+      border-bottom-color: var(--accent);
     }
-
-    .error-link:hover { opacity: 1; }
   </style>
 </head>
 <body>
 
-  <button class="theme-btn" id="theme-btn" aria-label="Switch to dark mode">
-    <span class="theme-icon" id="theme-icon">&#9681;</span><span id="theme-label">light_mode</span>
-  </button>
-
-  <main class="error-wrap">
-    <div class="error-inner">
-      <p class="error-code">404</p>
-      <p class="error-msg">nothing here. the page you're looking for doesn't exist or was moved.</p>
-      <p class="error-prompt">antonio@portfolio:~$ cd /home</p>
-      <a href="/" class="error-link">&larr; back to portfolio</a>
+  <!-- ───────── Topbar ───────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand" aria-label="Antonio Baltic — back to portfolio">
+        <span class="brand-mark" aria-hidden="true">A·B</span>
+        <span class="brand-name">Antonio Baltic</span>
+      </a>
+      <div class="topbar-meta">
+        <a href="index.html" class="topbar-cell back-link">
+          <span aria-hidden="true">←</span>
+          <span class="topbar-value">Back to portfolio</span>
+        </a>
+      </div>
     </div>
+    <div class="topbar-rule" aria-hidden="true"></div>
+  </header>
+
+  <!-- ───────── Error ───────── -->
+  <main class="error">
+    <p class="error-eyebrow">Error 404</p>
+    <h1 class="error-code">Not<br>Found<span class="dot">.</span></h1>
+    <p class="error-msg">The page you're looking for doesn't exist <em>or has been moved elsewhere.</em></p>
+    <a href="index.html" class="error-cta">
+      <span aria-hidden="true">←</span>
+      <span>Back to portfolio</span>
+    </a>
   </main>
 
-  <script>
-    (function() {
-      var btn = document.getElementById('theme-btn');
-      var icon = document.getElementById('theme-icon');
-      var label = document.getElementById('theme-label');
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var theme = localStorage.getItem('theme') || 'light';
+  <!-- ───────── Footer ───────── -->
+  <footer class="footer">
+    <div class="footer-rule" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <div class="footer-cell">
+        <span class="footer-label">Status</span>
+        <span class="footer-value">Available for new projects</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Based</span>
+        <span class="footer-value">Graz, Austria</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Email</span>
+        <span class="footer-value"><a class="link-underline" href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Elsewhere</span>
+        <span class="footer-value"><a class="link-underline" href="https://github.com/antoniobaltic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></span>
+      </div>
+    </div>
 
-      function apply(t) {
-        document.documentElement.setAttribute('data-theme', t);
-        if (t === 'light') {
-          icon.textContent = '\u25D0'; label.textContent = 'dark_mode';
-          btn.setAttribute('aria-label', 'Switch to dark mode');
-          if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
-        } else {
-          icon.textContent = '\u25D1'; label.textContent = 'light_mode';
-          btn.setAttribute('aria-label', 'Switch to light mode');
-          if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
-        }
-        localStorage.setItem('theme', t);
-        theme = t;
-      }
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Antonio Baltic</span>
+    </div>
+  </footer>
 
-      apply(theme);
-      btn.addEventListener('click', function() { apply(theme === 'dark' ? 'light' : 'dark'); });
-    })();
-  </script>
 </body>
 </html>

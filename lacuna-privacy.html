@@ -7,274 +7,66 @@
   <meta name="description" content="Privacy Policy for the Lacuna app">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="antoniobaltic_dev_logo.png">
-  <link rel="apple-touch-icon" href="antoniobaltic_dev_logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter+Tight:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2026-04">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#f4efe6">
-  <script>
-    (function() {
-      var t = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-  <style>
-    /* ── Privacy page overrides ─────────────────────── */
-    .page-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1.2rem var(--px);
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    [data-theme="light"] .page-nav {
-      background: rgba(244, 239, 230, 0.92);
-    }
-
-    .page-nav-back {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .page-nav-back:hover { color: var(--accent); }
-
-    .page-nav-app {
-      font-size: 0.7rem;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-left: 1rem;
-      letter-spacing: 0.08em;
-    }
-
-    .policy-wrap {
-      max-width: 660px;
-      margin: 0 auto;
-      padding: clamp(4rem, 8vw, 6rem) var(--px) clamp(5rem, 10vw, 8rem);
-    }
-
-    .policy-header {
-      margin-bottom: 4rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .policy-label {
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      opacity: 0.65;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    .policy-title {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.8rem;
-    }
-
-    .policy-app {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .policy-updated {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 300;
-      margin-top: 0.6rem;
-    }
-
-    .policy-tldr {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      line-height: 1.85;
-      font-weight: 300;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      margin-bottom: 3rem;
-      background: var(--surface);
-    }
-
-    .policy-section {
-      margin-bottom: 3rem;
-    }
-
-    .policy-section h2 {
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
-    }
-
-    .policy-section h2 .section-num {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    .policy-section h3 {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.8rem;
-      margin-top: 1.5rem;
-    }
-
-    .policy-section h3:first-of-type {
-      margin-top: 0;
-    }
-
-    .policy-section p {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.85;
-      font-weight: 300;
-      margin-bottom: 0.6rem;
-    }
-
-    .policy-section p strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .policy-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 0.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .policy-section ul li {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      font-weight: 300;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .policy-section ul li::before {
-      content: '\2014';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    .policy-section a {
-      color: var(--accent);
-      text-decoration: none;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-    }
-
-    .policy-section a:hover { opacity: 1; }
-
-    .policy-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 0.8rem;
-      padding-left: 1.2rem;
-      border-left: 1px solid var(--border);
-    }
-
-    .policy-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 0 3rem;
-    }
-
-    /* Summary table */
-    .policy-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.8rem;
-    }
-
-    .policy-table th,
-    .policy-table td {
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--text-dim);
-      text-align: left;
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .policy-table th {
-      font-weight: 500;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .policy-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .policy-footer-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-  </style>
 </head>
 <body>
 
-  <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
-    <span class="theme-icon" id="theme-icon">&#9681;</span><span id="theme-label">light_mode</span>
-  </button>
+  <a href="#policy" class="skip-link">Skip to content</a>
 
-  <!-- ─── Nav ───────────────────────────────────────────── -->
-  <nav class="page-nav">
-    <a href="index.html" class="page-nav-back">&larr; back</a>
-    <span class="page-nav-app">Lacuna</span>
-  </nav>
+  <!-- ───────── Topbar ───────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand" aria-label="Antonio Baltic — back to portfolio">
+        <span class="brand-mark" aria-hidden="true">A·B</span>
+        <span class="brand-name">Antonio Baltic</span>
+      </a>
+      <div class="topbar-meta">
+        <a href="index.html" class="topbar-cell back-link">
+          <span aria-hidden="true">←</span>
+          <span class="topbar-value">Back to portfolio</span>
+        </a>
+      </div>
+    </div>
+    <div class="topbar-rule" aria-hidden="true"></div>
+  </header>
 
-  <!-- ─── Policy ────────────────────────────────────────── -->
-  <main class="policy-wrap">
+  <!-- ───────── Policy ───────── -->
+  <main class="policy" id="policy">
 
-    <header class="policy-header">
-      <span class="policy-label">// legal</span>
+    <header class="policy-hero">
+      <p class="policy-eyebrow">Privacy</p>
       <h1 class="policy-title">Privacy Policy</h1>
       <p class="policy-app">Lacuna &mdash; Time Capsule App</p>
-      <p class="policy-updated">Last updated: April 4, 2026</p>
+      <div class="policy-meta">
+        <div class="policy-meta-cell">
+          <span class="policy-meta-label">Last updated</span>
+          <span class="policy-meta-value">April 4, 2026</span>
+        </div>
+        <div class="policy-meta-cell">
+          <span class="policy-meta-label">Jurisdiction</span>
+          <span class="policy-meta-value">Austria · EU (GDPR / DSGVO)</span>
+        </div>
+      </div>
     </header>
 
-    <p class="policy-tldr"><strong>The short version:</strong> Lacuna stores everything locally on your device. I don't collect, transmit, or have access to any of your data. I can't see your capsules, photos, voice notes, or any other content you create.</p>
+    <aside class="policy-tldr">
+      <span class="policy-tldr-label">The short version</span>
+      <p>Lacuna stores everything locally on your device. I don't collect, transmit, or have access to any of your data. I can't see your capsules, photos, voice notes, or any other content you create.</p>
+    </aside>
 
-    <!-- 1 -->
+    <!-- 01 -->
     <section class="policy-section">
-      <h2><span class="section-num">01</span> Data Controller</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">01</span>
+        <span>Data Controller</span>
+      </h2>
       <ul>
         <li>Antonio Baltic</li>
         <li>Austria</li>
@@ -283,11 +75,12 @@
       <p>For the purposes of the EU General Data Protection Regulation (GDPR / DSGVO) and the Austrian Datenschutzgesetz (DSG), I am the data controller.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 2 -->
+    <!-- 02 -->
     <section class="policy-section">
-      <h2><span class="section-num">02</span> What Data Is Processed</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">02</span>
+        <span>What Data Is Processed</span>
+      </h2>
 
       <h3>2.1 Content You Create</h3>
       <p>When you create a capsule, the following data is stored <strong>on your device and, if iCloud is enabled, synced to your personal iCloud account</strong>:</p>
@@ -355,11 +148,12 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 3 -->
+    <!-- 03 -->
     <section class="policy-section">
-      <h2><span class="section-num">03</span> Legal Basis for Processing (GDPR Article 6)</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">03</span>
+        <span>Legal Basis for Processing (GDPR Article 6)</span>
+      </h2>
       <p>The minimal data processing that occurs is based on:</p>
       <ul>
         <li><strong>Article 6(1)(b) &mdash; Performance of a contract:</strong> Processing your locally stored content is necessary to provide the App's functionality (creating, sealing, and opening capsules). This also covers the transmission of anonymous purchase data to RevenueCat, which is necessary to validate and deliver the in-app purchase you initiated.</li>
@@ -367,11 +161,12 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 4 -->
+    <!-- 04 -->
     <section class="policy-section">
-      <h2><span class="section-num">04</span> Data Storage and Security</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">04</span>
+        <span>Data Storage and Security</span>
+      </h2>
       <p>All data is stored on your device and, if iCloud is enabled, synced to your personal iCloud account using Apple's standard frameworks:</p>
       <ul>
         <li><strong>SwiftData</strong> for capsule metadata and content</li>
@@ -387,11 +182,12 @@
       <p>I do not implement additional encryption because your device's native encryption already protects all locally stored data.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 5 -->
+    <!-- 05 -->
     <section class="policy-section">
-      <h2><span class="section-num">05</span> Data Sharing and Third Parties</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">05</span>
+        <span>Data Sharing and Third Parties</span>
+      </h2>
       <p>The App does not share your personal data with any third parties. The App contains:</p>
       <ul>
         <li>No analytics SDKs</li>
@@ -406,11 +202,12 @@
       <p>RevenueCat acts as a data processor on my behalf under GDPR Article 28. No personal data (name, email, Apple ID, device identifiers) is transmitted to RevenueCat. The anonymous user ID used by RevenueCat is generated locally and cannot be linked to your identity.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 6 -->
+    <!-- 06 -->
     <section class="policy-section">
-      <h2><span class="section-num">06</span> Data Retention and Deletion</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">06</span>
+        <span>Data Retention and Deletion</span>
+      </h2>
       <p>Your data is retained on your device for as long as you keep it:</p>
       <ul>
         <li><strong>Capsules</strong> &mdash; Stored until you delete them within the App</li>
@@ -422,11 +219,12 @@
       <p class="policy-note">If you made an in-app purchase, RevenueCat retains the anonymous purchase record (anonymous user ID and transaction data) for the purpose of restoring your purchase on a new device. This data cannot be linked to your identity. RevenueCat's data retention practices are governed by their privacy policy: <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">revenuecat.com/privacy</a></p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 7 -->
+    <!-- 07 -->
     <section class="policy-section">
-      <h2><span class="section-num">07</span> Your Rights Under GDPR / DSGVO</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">07</span>
+        <span>Your Rights Under GDPR / DSGVO</span>
+      </h2>
       <p>Under the General Data Protection Regulation and the Austrian Datenschutzgesetz, you have the following rights:</p>
       <ul>
         <li><strong>Right of access</strong> (Article 15 GDPR) &mdash; You can view all your data directly within the App at any time.</li>
@@ -440,29 +238,32 @@
       <p>Since I do not store any of your data on servers or have any way to access it, most of these rights are automatically fulfilled by the App's local-only architecture.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 8 -->
+    <!-- 08 -->
     <section class="policy-section">
-      <h2><span class="section-num">08</span> International Data Transfers</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">08</span>
+        <span>International Data Transfers</span>
+      </h2>
       <p>If iCloud is enabled, your capsule content (text, photos, voice recordings) is synced to Apple's iCloud servers to enable multi-device access. Apple stores this data in data centers across various jurisdictions, subject to Apple's privacy policy. This is your personal iCloud data &mdash; I have no access to it. If iCloud is disabled, your data remains exclusively on your device.</p>
       <p>When you make an in-app purchase, anonymous transaction data (anonymous user ID, product purchased, transaction ID) is processed by RevenueCat, Inc., which is based in the United States. This transfer is limited to non-personal, anonymous data and is covered by RevenueCat's data processing agreements and standard contractual clauses under GDPR Article 46.</p>
       <p>When you share a capsule with someone using the send feature, the data transfer occurs through the communication channel you choose (e.g., iMessage, email) and is governed by that service's privacy policy and the applicable laws of the jurisdictions involved.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 9 -->
+    <!-- 09 -->
     <section class="policy-section">
-      <h2><span class="section-num">09</span> Children's Privacy</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">09</span>
+        <span>Children's Privacy</span>
+      </h2>
       <p>The App does not knowingly collect any data from children under the age of 16 (the age threshold under GDPR). Since the App does not collect any personal data from any user, no special measures for children's data are required.</p>
     </section>
 
-    <hr class="policy-divider">
-
     <!-- 10 -->
     <section class="policy-section">
-      <h2><span class="section-num">10</span> Austrian-Specific Provisions (DSG)</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">10</span>
+        <span>Austrian-Specific Provisions (DSG)</span>
+      </h2>
       <p>In accordance with the Austrian Datenschutzgesetz (DSG) implementing the GDPR:</p>
       <ul>
         <li>The responsible data protection authority is the <strong>Österreichische Datenschutzbehörde</strong> (Austrian Data Protection Authority), Barichgasse 40-42, 1030 Wien, Austria. Website: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">dsb.gv.at</a></li>
@@ -472,11 +273,12 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
     <!-- 11 -->
     <section class="policy-section">
-      <h2><span class="section-num">11</span> Apple App Store Requirements</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">11</span>
+        <span>Apple App Store Requirements</span>
+      </h2>
       <p>In accordance with Apple's App Store Review Guidelines:</p>
       <ul>
         <li>The App's privacy nutrition label on the App Store declares "Purchases" and "Identifiers" (anonymous ID) as data used, marked as <strong>not linked to your identity</strong>, in accordance with RevenueCat's data processing for purchase validation.</li>
@@ -485,30 +287,33 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
     <!-- 12 -->
     <section class="policy-section">
-      <h2><span class="section-num">12</span> Changes to This Privacy Policy</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">12</span>
+        <span>Changes to This Privacy Policy</span>
+      </h2>
       <p>I may update this privacy policy from time to time. Any changes will be reflected by updating the "Last updated" date at the top of this policy. Since I have no way to contact you (I don't have your email or any contact information), I encourage you to review this policy periodically.</p>
       <p>Significant changes will also be noted in the App Store release notes when the App is updated.</p>
     </section>
 
-    <hr class="policy-divider">
-
     <!-- 13 -->
     <section class="policy-section">
-      <h2><span class="section-num">13</span> Contact</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">13</span>
+        <span>Contact</span>
+      </h2>
       <p>If you have any questions about this privacy policy, your rights, or the App's data practices, please contact me at:</p>
       <p><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></p>
       <p>I will respond to privacy-related inquiries within 30 days, as required by GDPR Article 12(3).</p>
     </section>
 
-    <hr class="policy-divider">
-
     <!-- 14 -->
     <section class="policy-section">
-      <h2><span class="section-num">14</span> Summary</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">14</span>
+        <span>Summary</span>
+      </h2>
       <table class="policy-table">
         <thead>
           <tr>
@@ -533,30 +338,36 @@
 
   </main>
 
-  <script>
-    (function() {
-      var btn = document.getElementById('theme-btn');
-      var icon = document.getElementById('theme-icon');
-      var label = document.getElementById('theme-label');
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var theme = localStorage.getItem('theme') || 'light';
+  <!-- ───────── Footer ───────── -->
+  <footer class="footer">
+    <div class="footer-rule" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <div class="footer-cell">
+        <span class="footer-label">Status</span>
+        <span class="footer-value">Available for new projects</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Based</span>
+        <span class="footer-value">Graz, Austria</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Email</span>
+        <span class="footer-value"><a class="link-underline" href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Elsewhere</span>
+        <span class="footer-value"><a class="link-underline" href="https://github.com/antoniobaltic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></span>
+      </div>
+    </div>
 
-      function apply(t) {
-        document.documentElement.setAttribute('data-theme', t);
-        if (t === 'light') {
-          icon.textContent = '\u25D0'; label.textContent = 'dark_mode';
-          if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
-        } else {
-          icon.textContent = '\u25D1'; label.textContent = 'light_mode';
-          if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
-        }
-        localStorage.setItem('theme', t);
-        theme = t;
-      }
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Antonio Baltic</span>
+      <a href="index.html" class="back-to-top">
+        <span>Back to portfolio</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </footer>
 
-      apply(theme);
-      btn.addEventListener('click', function() { apply(theme === 'dark' ? 'light' : 'dark'); });
-    })();
-  </script>
 </body>
 </html>

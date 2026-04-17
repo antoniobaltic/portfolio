@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antonio Baltic</title>
-  <meta name="description" content="Antonio Baltic — Building stuff • iOS indie developer">
+  <title>Antonio Baltic — Portfolio</title>
+  <meta name="description" content="Antonio Baltic — independent developer making small, opinionated software. iOS, web, and tools. Based in Graz, Austria.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter+Tight:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2026-04">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
   <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#f4efe6">
-  <meta property="og:title" content="Antonio Baltic">
-  <meta property="og:description" content="Building stuff • iOS indie developer">
+  <meta property="og:title" content="Antonio Baltic — Portfolio">
+  <meta property="og:description" content="Independent developer making small, opinionated software. iOS, web, and tools.">
   <meta property="og:url" content="https://antoniobaltic.xyz">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://antoniobaltic.xyz/antoniobaltic_ogimage.png">
@@ -27,172 +27,257 @@
 </head>
 <body>
 
-  <button class="theme-btn" id="theme-btn" aria-label="Switch to dark mode">
-    <span class="theme-icon" id="theme-icon">◑</span><span id="theme-label">light_mode</span>
-  </button>
+  <a href="#work" class="skip-link">Skip to work</a>
 
-  <main>
+  <!-- ───────── Topbar ───────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#top" class="brand" aria-label="Antonio Baltic — back to top">
+        <span class="brand-mark" aria-hidden="true">A·B</span>
+        <span class="brand-name">Antonio Baltic</span>
+      </a>
+      <div class="topbar-meta">
+        <span class="topbar-cell">
+          <span class="topbar-label">Graz</span>
+          <span class="topbar-value" id="local-time">— : —</span>
+        </span>
+        <span class="topbar-cell topbar-cell--status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="topbar-value">Available</span>
+        </span>
+      </div>
+    </div>
+    <div class="topbar-rule" aria-hidden="true"></div>
+  </header>
 
-    <!-- ─── Hero ─────────────────────────────────────────────── -->
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <p class="hero-prompt">
-          <span class="prompt-text">antonio@portfolio:~$</span><span class="prompt-cursor" id="prompt-cursor">_</span>
-        </p>
-        <h1 class="hero-name" id="hero-name" aria-label="Antonio Baltic"></h1>
-        <p class="hero-sub" id="hero-sub">Building stuff • iOS indie developer</p>
-        <a href="#work" class="hero-scroll" id="hero-scroll" aria-label="Scroll down">↓</a>
+  <main id="top">
+
+    <!-- ───────── Hero ───────── -->
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="hero-title" id="hero-title">
+        <span class="hero-line"><span class="hero-word" data-text="Antonio">Antonio</span></span>
+        <span class="hero-line"><span class="hero-word" data-text="Baltic.">Baltic<span class="hero-dot" aria-hidden="true">.</span></span></span>
+      </h1>
+
+      <p class="hero-tag">
+        An independent developer making small, opinionated software <em>for the people who use it.</em>
+      </p>
+
+      <!-- Bio strip -->
+      <div class="bio">
+        <div class="bio-cell">
+          <span class="bio-label">Discipline</span>
+          <span class="bio-value">iOS · Web · Tools</span>
+        </div>
+        <div class="bio-cell">
+          <span class="bio-label">Base</span>
+          <span class="bio-value">Graz, Austria <span class="bio-coords">47.07°N · 15.43°E</span></span>
+        </div>
+        <div class="bio-cell">
+          <span class="bio-label">Contact</span>
+          <span class="bio-value"><a class="link-underline" href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></span>
+        </div>
+        <div class="bio-cell">
+          <span class="bio-label">Elsewhere</span>
+          <span class="bio-value"><a class="link-underline" href="https://github.com/antoniobaltic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></span>
+        </div>
       </div>
     </section>
 
-    <!-- ─── Work ──────────────────────────────────────────────── -->
-    <section class="section" id="work">
-      <div class="container">
-        <div class="work-header fade-up">
-          <span class="section-label">// work</span>
-          <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all" aria-pressed="true">all</button>
-            <button class="filter-btn" data-filter="web" aria-pressed="false">web</button>
-            <button class="filter-btn" data-filter="iOS" aria-pressed="false">iOS</button>
-          </div>
+    <!-- ───────── Marquee divider ───────── -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Hardly Working</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Lacuna</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Ducky</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">AMS Scraper Studio</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Orbit</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Hardly Working</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Lacuna</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Ducky</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">AMS Scraper Studio</span><span class="marquee-sep">●</span>
+        <span class="marquee-item">Orbit</span><span class="marquee-sep">●</span>
+      </div>
+    </div>
+
+    <!-- ───────── Work / Index ───────── -->
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="section-head">
+        <div class="section-label">
+          <h2 class="section-title" id="work-title">Recent Work</h2>
+          <span class="section-count" id="project-count">5 projects</span>
         </div>
-        <div class="grid" id="project-grid">
-
-          <div class="card fade-up" data-tags="iOS">
-            <div class="card-top">
-              <h2 class="card-name"><a href="https://hardlyworking.app" class="card-name-link" target="_blank" rel="noopener">Hardly Working</a></h2>
-            </div>
-            <p class="card-desc">Break timer that tracks your slacking and shows you what it's worth. Built by Hardly Working Corp. — the world's leading time reclamation firm.</p>
-            <div class="card-tags">
-              <span class="tag">iOS</span>
-              <span class="tag">lifestyle</span>
-              <span class="tag">entertainment</span>
-            </div>
-            <div class="card-links">
-              <a href="https://hardlyworking.app" class="card-link card-link--primary" target="_blank" rel="noopener">web →</a>
-              <a href="https://apps.apple.com/app/id6761917321" class="card-link card-link--primary" target="_blank" rel="noopener">app store →</a>
-              <a href="https://github.com/antoniobaltic/hardlyworking_app" class="card-link" target="_blank" rel="noopener">github →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="iOS">
-            <div class="card-top">
-              <h2 class="card-name"><a href="https://apps.apple.com/app/lacuna-time-capsule/id6761478231" class="card-name-link" target="_blank" rel="noopener">Lacuna</a></h2>
-            </div>
-            <p class="card-desc">A time capsule for your thoughts. Seal a moment — for your future self or someone you love.</p>
-            <div class="card-tags">
-              <span class="tag">iOS</span>
-              <span class="tag">lifestyle</span>
-              <span class="tag">social networking</span>
-            </div>
-            <div class="card-links">
-              <a href="https://apps.apple.com/app/lacuna-time-capsule/id6761478231" class="card-link card-link--primary" target="_blank" rel="noopener">app store →</a>
-              <a href="https://github.com/antoniobaltic/lacuna_app" class="card-link" target="_blank" rel="noopener">github →</a>
-              <a href="lacuna-privacy.html" class="card-link">privacy →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="iOS">
-            <div class="card-top">
-              <h2 class="card-name"><a href="https://apps.apple.com/app/id6760419989" class="card-name-link" target="_blank" rel="noopener">Ducky</a></h2>
-            </div>
-            <p class="card-desc">Swim-day companion for Austrian lakes. Live weather, water quality & one score that tells you where to jump in.</p>
-            <div class="card-tags">
-              <span class="tag">iOS</span>
-              <span class="tag">weather</span>
-              <span class="tag">fitness</span>
-              <span class="tag">travel</span>
-            </div>
-            <div class="card-links">
-              <a href="https://apps.apple.com/app/id6760419989" class="card-link card-link--primary" target="_blank" rel="noopener">app store →</a>
-              <a href="https://github.com/antoniobaltic/ducky_app" class="card-link" target="_blank" rel="noopener">github →</a>
-              <a href="ducky-privacy.html" class="card-link">privacy →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="web">
-            <div class="card-top">
-              <h2 class="card-name"><a href="https://ams-scraper-studio.vercel.app/" class="card-name-link" target="_blank" rel="noopener">AMS Scraper Studio</a></h2>
-            </div>
-            <p class="card-desc">Web tool that scrapes the AMS website (Austrian Arbeitsmarktservice) and returns structured data.</p>
-            <div class="card-tags">
-              <span class="tag">web</span>
-              <span class="tag">utility</span>
-              <span class="tag">scraper</span>
-            </div>
-            <div class="card-links">
-              <a href="https://ams-scraper-studio.vercel.app/" class="card-link card-link--primary" target="_blank" rel="noopener">web →</a>
-              <a href="https://github.com/antoniobaltic/ams-scraper-studio" class="card-link" target="_blank" rel="noopener">github →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="iOS">
-            <div class="card-top">
-              <h2 class="card-name">Orbit</h2>
-              <span class="card-status"><span class="status-dot"></span>in progress</span>
-            </div>
-            <p class="card-desc">Visualize your relationships as a living orbital map.</p>
-            <div class="card-tags">
-              <span class="tag">iOS</span>
-              <span class="tag">lifestyle</span>
-              <span class="tag">social networking</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/antoniobaltic/orbit" class="card-link" target="_blank" rel="noopener">github →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="web">
-            <div class="card-top">
-              <h2 class="card-name">Laufbahn</h2>
-              <span class="card-status"><span class="status-dot"></span>in progress</span>
-            </div>
-            <p class="card-desc">Application management tool with tracking and document handling.</p>
-            <div class="card-tags">
-              <span class="tag">web</span>
-              <span class="tag">saas</span>
-              <span class="tag">utility</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/antoniobaltic/laufbahn" class="card-link" target="_blank" rel="noopener">github →</a>
-            </div>
-          </div>
-
-          <div class="card fade-up" data-tags="iOS">
-            <div class="card-top">
-              <h2 class="card-name">Phases</h2>
-              <span class="card-status"><span class="status-dot"></span>in progress</span>
-            </div>
-            <p class="card-desc">One face. Every day. Your story.</p>
-            <div class="card-tags">
-              <span class="tag">iOS</span>
-              <span class="tag">photo</span>
-              <span class="tag">journal</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/antoniobaltic/phases_app" class="card-link" target="_blank" rel="noopener">github →</a>
-            </div>
-          </div>
-
+        <div class="filter" role="group" aria-label="Filter projects by discipline">
+          <button class="filter-btn is-active" data-filter="all" aria-pressed="true">
+            <span class="filter-label">All</span>
+            <span class="filter-count">5</span>
+          </button>
+          <button class="filter-btn" data-filter="ios" aria-pressed="false">
+            <span class="filter-label">iOS</span>
+            <span class="filter-count">4</span>
+          </button>
+          <button class="filter-btn" data-filter="web" aria-pressed="false">
+            <span class="filter-label">Web</span>
+            <span class="filter-count">1</span>
+          </button>
         </div>
       </div>
+
+      <ol class="projects" id="projects">
+
+        <li class="project reveal" data-tags="ios" data-status="live" style="--i:0;">
+          <div class="project-grid">
+            <span class="project-num">01</span>
+            <div class="project-main">
+              <a class="project-title-link" href="https://hardlyworking.app" target="_blank" rel="noopener">
+                <h3 class="project-title">Hardly Working</h3>
+              </a>
+              <p class="project-desc">A satirical iOS break timer framed as a fictional corporation — tracking your non-productive time is called "reclamation" and every screen reads like a corporate memo.</p>
+              <div class="project-aux">
+                <a class="aux-link" href="https://hardlyworking.app" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="https://apps.apple.com/app/id6761917321" target="_blank" rel="noopener">App Store <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="https://github.com/antoniobaltic/hardlyworking_app" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">iOS</span>
+              <span class="project-status status-live">
+                <span class="status-pulse" aria-hidden="true"></span>Live
+              </span>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </div>
+        </li>
+
+        <li class="project reveal" data-tags="ios" data-status="live" style="--i:1;">
+          <div class="project-grid">
+            <span class="project-num">02</span>
+            <div class="project-main">
+              <a class="project-title-link" href="https://apps.apple.com/app/lacuna-time-capsule/id6761478231" target="_blank" rel="noopener">
+                <h3 class="project-title">Lacuna</h3>
+              </a>
+              <p class="project-desc">A time capsule for your thoughts. Seal a moment — for your future self, or someone you love.</p>
+              <div class="project-aux">
+                <a class="aux-link" href="https://apps.apple.com/app/lacuna-time-capsule/id6761478231" target="_blank" rel="noopener">App Store <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="https://github.com/antoniobaltic/lacuna_app" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="lacuna-privacy.html">Privacy</a>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">iOS</span>
+              <span class="project-status status-live">
+                <span class="status-pulse" aria-hidden="true"></span>Live
+              </span>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </div>
+        </li>
+
+        <li class="project reveal" data-tags="ios" data-status="live" style="--i:2;">
+          <div class="project-grid">
+            <span class="project-num">03</span>
+            <div class="project-main">
+              <a class="project-title-link" href="https://apps.apple.com/app/id6760419989" target="_blank" rel="noopener">
+                <h3 class="project-title">Ducky</h3>
+              </a>
+              <p class="project-desc">Swim-day companion for Austrian lakes. Live weather, water quality, and one score that tells you where to jump in.</p>
+              <div class="project-aux">
+                <a class="aux-link" href="https://apps.apple.com/app/id6760419989" target="_blank" rel="noopener">App Store <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="https://github.com/antoniobaltic/ducky_app" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="ducky-privacy.html">Privacy</a>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">iOS</span>
+              <span class="project-status status-live">
+                <span class="status-pulse" aria-hidden="true"></span>Live
+              </span>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </div>
+        </li>
+
+        <li class="project reveal" data-tags="web" data-status="live" style="--i:3;">
+          <div class="project-grid">
+            <span class="project-num">04</span>
+            <div class="project-main">
+              <a class="project-title-link" href="https://ams-scraper-studio.vercel.app/" target="_blank" rel="noopener">
+                <h3 class="project-title">AMS Scraper Studio</h3>
+              </a>
+              <p class="project-desc">Web tool that scrapes the AMS (Austrian Arbeitsmarktservice) and returns clean, structured data.</p>
+              <div class="project-aux">
+                <a class="aux-link" href="https://ams-scraper-studio.vercel.app/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a>
+                <a class="aux-link" href="https://github.com/antoniobaltic/ams-scraper-studio" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">Web</span>
+              <span class="project-status status-live">
+                <span class="status-pulse" aria-hidden="true"></span>Live
+              </span>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </div>
+        </li>
+
+        <li class="project reveal" data-tags="ios" data-status="wip" style="--i:4;">
+          <div class="project-grid">
+            <span class="project-num">05</span>
+            <div class="project-main">
+              <a class="project-title-link" href="https://github.com/antoniobaltic/orbit" target="_blank" rel="noopener">
+                <h3 class="project-title">Orbit</h3>
+              </a>
+              <p class="project-desc">Visualize your relationships as a living orbital map. Track who drifts away from you; and who moves closer.</p>
+              <div class="project-aux">
+                <a class="aux-link" href="https://github.com/antoniobaltic/orbit" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <div class="project-meta">
+              <span class="project-tag">iOS</span>
+              <span class="project-status status-wip">In progress</span>
+            </div>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </div>
+        </li>
+
+      </ol>
     </section>
 
   </main>
 
-  <!-- ─── Footer ────────────────────────────────────────────── -->
+  <!-- ───────── Footer ───────── -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <span class="footer-support"><span class="footer-label">support —</span> <a href="mailto:antoniobaltic@icloud.com" class="footer-email">antoniobaltic@icloud.com</a></span>
-      <span class="footer-right">
-        <a href="https://github.com/antoniobaltic" class="footer-github" target="_blank" rel="noopener">github →</a>
-        <span class="footer-copy">© 2026 Antonio Baltic</span>
-      </span>
+    <div class="footer-rule" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <div class="footer-cell">
+        <span class="footer-label">Status</span>
+        <span class="footer-value">Available for new projects</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Based</span>
+        <span class="footer-value">Graz, Austria</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Email</span>
+        <span class="footer-value"><a class="link-underline" href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Elsewhere</span>
+        <span class="footer-value"><a class="link-underline" href="https://github.com/antoniobaltic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Antonio Baltic</span>
+      <a href="#top" class="back-to-top">
+        <span>Back to top</span>
+        <span aria-hidden="true">↑</span>
+      </a>
     </div>
   </footer>
 
-  <script src="main.js" type="module"></script>
-  
+  <script src="main.js?v=2026-01" type="module"></script>
+
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };

@@ -7,197 +7,61 @@
   <meta name="description" content="Datenschutzerklärung für die Ducky App">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="antoniobaltic_dev_logo.png">
-  <link rel="apple-touch-icon" href="antoniobaltic_dev_logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Inter+Tight:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2026-04">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#f4efe6">
-  <script>
-    (function() {
-      var t = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-  <style>
-    /* ── Privacy page overrides ─────────────────────── */
-    .page-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1.2rem var(--px);
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    [data-theme="light"] .page-nav {
-      background: rgba(244, 239, 230, 0.92);
-    }
-
-    .page-nav-back {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .page-nav-back:hover { color: var(--accent); }
-
-    .page-nav-app {
-      font-size: 0.7rem;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-left: 1rem;
-      letter-spacing: 0.08em;
-    }
-
-    .policy-wrap {
-      max-width: 660px;
-      margin: 0 auto;
-      padding: clamp(4rem, 8vw, 6rem) var(--px) clamp(5rem, 10vw, 8rem);
-    }
-
-    .policy-header {
-      margin-bottom: 4rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .policy-label {
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      opacity: 0.65;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    .policy-title {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.8rem;
-    }
-
-    .policy-app {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .policy-section {
-      margin-bottom: 3rem;
-    }
-
-    .policy-section h2 {
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
-    }
-
-    .policy-section h2 .section-num {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    .policy-section p {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.85;
-      font-weight: 300;
-      margin-bottom: 0.6rem;
-    }
-
-    .policy-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .policy-section ul li {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      font-weight: 300;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .policy-section ul li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    .policy-section a {
-      color: var(--accent);
-      text-decoration: none;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-    }
-
-    .policy-section a:hover { opacity: 1; }
-
-    .policy-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 0.8rem;
-      padding-left: 1.2rem;
-      border-left: 1px solid var(--border);
-    }
-
-    .policy-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 0 3rem;
-    }
-  </style>
 </head>
 <body>
 
-  <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
-    <span class="theme-icon" id="theme-icon">◑</span><span id="theme-label">light_mode</span>
-  </button>
+  <a href="#policy" class="skip-link">Zum Inhalt springen</a>
 
-  <!-- ─── Nav ───────────────────────────────────────────── -->
-  <nav class="page-nav">
-    <a href="index.html" class="page-nav-back">← back</a>
-    <span class="page-nav-app">Ducky</span>
-  </nav>
+  <!-- ───────── Topbar ───────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand" aria-label="Antonio Baltic — zurück zum Portfolio">
+        <span class="brand-mark" aria-hidden="true">A·B</span>
+        <span class="brand-name">Antonio Baltic</span>
+      </a>
+      <div class="topbar-meta">
+        <a href="index.html" class="topbar-cell back-link">
+          <span aria-hidden="true">←</span>
+          <span class="topbar-value">Zurück zum Portfolio</span>
+        </a>
+      </div>
+    </div>
+    <div class="topbar-rule" aria-hidden="true"></div>
+  </header>
 
-  <!-- ─── Policy ────────────────────────────────────────── -->
-  <main class="policy-wrap">
+  <!-- ───────── Policy ───────── -->
+  <main class="policy" id="policy">
 
-    <header class="policy-header">
-      <span class="policy-label">// rechtliches</span>
+    <header class="policy-hero">
+      <p class="policy-eyebrow">Rechtliches</p>
       <h1 class="policy-title">Datenschutzerklärung</h1>
       <p class="policy-app">Transparenz zu Daten, Rechten und Diensten</p>
+      <div class="policy-meta">
+        <div class="policy-meta-cell">
+          <span class="policy-meta-label">Stand</span>
+          <span class="policy-meta-value">April 2026</span>
+        </div>
+        <div class="policy-meta-cell">
+          <span class="policy-meta-label">Geltungsbereich</span>
+          <span class="policy-meta-value">Österreich · EU (DSGVO / DSG)</span>
+        </div>
+      </div>
     </header>
 
-    <!-- 1 -->
+    <!-- 01 -->
     <section class="policy-section">
-      <h2><span class="section-num">01</span> Verantwortlicher</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">01</span>
+        <span>Verantwortlicher</span>
+      </h2>
       <ul>
         <li>Antonio Baltic</li>
         <li>Schörgelgasse 55, 8010 Graz, Österreich</li>
@@ -205,68 +69,73 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 2 -->
+    <!-- 02 -->
     <section class="policy-section">
-      <h2><span class="section-num">02</span> Welche Daten verarbeitet die App?</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">02</span>
+        <span>Welche Daten verarbeitet die App?</span>
+      </h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">Standort (nur mit deiner Freigabe)</strong> — Wird verwendet, um Gewässer in deiner Nähe zu sortieren und Entfernungen anzuzeigen. Der Standort wird nicht gespeichert oder übertragen.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Netzwerk-Anfragen</strong> — Beim Abruf von Wetter-, Badegewässer-, Karten- und Wikipedia-Daten werden technische Anfragen an externe Dienste gestellt. Dabei wird deine IP-Adresse übermittelt.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Lokaler Cache</strong> — Gewässer- und Wetterdaten werden auf deinem Gerät zwischengespeichert (Caches-Verzeichnis), damit die App schneller startet.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Lokale Nutzerdaten</strong> — Favoriten, besuchte Seen und persönliche Notizen werden ausschließlich auf deinem Gerät gespeichert (SwiftData). Es erfolgt keine Übertragung an Server.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">In-App-Käufe</strong> — Trinkgeld-Käufe werden über Apple StoreKit und RevenueCat abgewickelt. RevenueCat verarbeitet anonyme Kaufdaten zur Umsatzanalyse. Der Entwickler erhält keine persönlichen Zahlungsdaten.</li>
+        <li><strong>Standort (nur mit deiner Freigabe)</strong> — Wird verwendet, um Gewässer in deiner Nähe zu sortieren und Entfernungen anzuzeigen. Der Standort wird nicht gespeichert oder übertragen.</li>
+        <li><strong>Netzwerk-Anfragen</strong> — Beim Abruf von Wetter-, Badegewässer-, Karten- und Wikipedia-Daten werden technische Anfragen an externe Dienste gestellt. Dabei wird deine IP-Adresse übermittelt.</li>
+        <li><strong>Lokaler Cache</strong> — Gewässer- und Wetterdaten werden auf deinem Gerät zwischengespeichert (Caches-Verzeichnis), damit die App schneller startet.</li>
+        <li><strong>Lokale Nutzerdaten</strong> — Favoriten, besuchte Seen und persönliche Notizen werden ausschließlich auf deinem Gerät gespeichert (SwiftData). Es erfolgt keine Übertragung an Server.</li>
+        <li><strong>In-App-Käufe</strong> — Trinkgeld-Käufe werden über Apple StoreKit und RevenueCat abgewickelt. RevenueCat verarbeitet anonyme Kaufdaten zur Umsatzanalyse. Der Entwickler erhält keine persönlichen Zahlungsdaten.</li>
         <li>Kein Tracking, keine Werbung, keine Benutzerkonten, kein Profiling.</li>
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 3 -->
+    <!-- 03 -->
     <section class="policy-section">
-      <h2><span class="section-num">03</span> Rechtsgrundlagen (DSGVO)</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">03</span>
+        <span>Rechtsgrundlagen (DSGVO)</span>
+      </h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">Einwilligung (Art. 6 Abs. 1 lit. a)</strong> — Standortzugriff — nur nach ausdrücklicher Freigabe in iOS.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Vertragserfüllung (Art. 6 Abs. 1 lit. b)</strong> — Abruf von Gewässer- und Wetterdaten zur Bereitstellung der Kernfunktionen.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Berechtigtes Interesse (Art. 6 Abs. 1 lit. f)</strong> — Lokale Zwischenspeicherung zur Verbesserung der Ladezeiten.</li>
+        <li><strong>Einwilligung (Art. 6 Abs. 1 lit. a)</strong> — Standortzugriff — nur nach ausdrücklicher Freigabe in iOS.</li>
+        <li><strong>Vertragserfüllung (Art. 6 Abs. 1 lit. b)</strong> — Abruf von Gewässer- und Wetterdaten zur Bereitstellung der Kernfunktionen.</li>
+        <li><strong>Berechtigtes Interesse (Art. 6 Abs. 1 lit. f)</strong> — Lokale Zwischenspeicherung zur Verbesserung der Ladezeiten.</li>
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 4 -->
+    <!-- 04 -->
     <section class="policy-section">
-      <h2><span class="section-num">04</span> Empfänger und externe Dienste</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">04</span>
+        <span>Empfänger und externe Dienste</span>
+      </h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">AGES</strong> — Österreichische Agentur für Gesundheit und Ernährungssicherheit (Badegewässerqualität)</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Open-Meteo</strong> — Wetterdaten (Open-Source-API, Server in der EU)</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia / Wikimedia</strong> — Beschreibungen zu Gewässern (deutschsprachige API)</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Apple Maps / MapKit</strong> — Kartenanzeige, Routen und Ortssuche</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Apple StoreKit</strong> — Abwicklung von In-App-Käufen</li>
-        <li><strong style="color: var(--text); font-weight: 500;">RevenueCat</strong> — Verwaltung und Analyse von In-App-Käufen (Server in den USA, DSGVO-konform)</li>
+        <li><strong>AGES</strong> — Österreichische Agentur für Gesundheit und Ernährungssicherheit (Badegewässerqualität)</li>
+        <li><strong>Open-Meteo</strong> — Wetterdaten (Open-Source-API, Server in der EU)</li>
+        <li><strong>Wikipedia / Wikimedia</strong> — Beschreibungen zu Gewässern (deutschsprachige API)</li>
+        <li><strong>Apple Maps / MapKit</strong> — Kartenanzeige, Routen und Ortssuche</li>
+        <li><strong>Apple StoreKit</strong> — Abwicklung von In-App-Käufen</li>
+        <li><strong>RevenueCat</strong> — Verwaltung und Analyse von In-App-Käufen (Server in den USA, DSGVO-konform)</li>
       </ul>
       <p class="policy-note">Bei diesen Anfragen kann deine IP-Adresse technisch bedingt vom jeweiligen Dienst verarbeitet werden. Es werden keine personenbezogenen Daten aktiv übermittelt.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 5 -->
+    <!-- 05 -->
     <section class="policy-section">
-      <h2><span class="section-num">05</span> Speicherdauer und Löschung</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">05</span>
+        <span>Speicherdauer und Löschung</span>
+      </h2>
       <ul>
-        <li><strong style="color: var(--text); font-weight: 500;">Gewässer-Cache</strong> — 24 Stunden, danach automatische Aktualisierung.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Wetter-Cache</strong> — 30 Minuten, danach automatische Aktualisierung.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Wikipedia-Cache</strong> — 30 Tage.</li>
-        <li><strong style="color: var(--text); font-weight: 500;">Favoriten, Besuche und Notizen</strong> — Solange die App installiert ist.</li>
+        <li><strong>Gewässer-Cache</strong> — 24 Stunden, danach automatische Aktualisierung.</li>
+        <li><strong>Wetter-Cache</strong> — 30 Minuten, danach automatische Aktualisierung.</li>
+        <li><strong>Wikipedia-Cache</strong> — 30 Tage.</li>
+        <li><strong>Favoriten, Besuche und Notizen</strong> — Solange die App installiert ist.</li>
       </ul>
       <p class="policy-note">Du kannst den Cache jederzeit in den Einstellungen löschen. Favoriten, Besuche und Notizen werden beim Deinstallieren der App gelöscht.</p>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 6 -->
+    <!-- 06 -->
     <section class="policy-section">
-      <h2><span class="section-num">06</span> Deine Rechte</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">06</span>
+        <span>Deine Rechte</span>
+      </h2>
       <ul>
         <li>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit (Art. 15–20 DSGVO).</li>
         <li>Du kannst den Standortzugriff jederzeit in den iOS-Einstellungen widerrufen.</li>
@@ -276,11 +145,12 @@
       </ul>
     </section>
 
-    <hr class="policy-divider">
-
-    <!-- 7 -->
+    <!-- 07 -->
     <section class="policy-section">
-      <h2><span class="section-num">07</span> Sonstiges</h2>
+      <h2 class="policy-section-title">
+        <span class="policy-section-num">07</span>
+        <span>Sonstiges</span>
+      </h2>
       <ul>
         <li>Die App richtet sich nicht an Kinder unter 16 Jahren.</li>
         <li>Es findet keine automatisierte Entscheidungsfindung oder Profiling statt.</li>
@@ -290,30 +160,36 @@
 
   </main>
 
-  <script>
-    (function() {
-      var btn = document.getElementById('theme-btn');
-      var icon = document.getElementById('theme-icon');
-      var label = document.getElementById('theme-label');
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var theme = localStorage.getItem('theme') || 'light';
+  <!-- ───────── Footer ───────── -->
+  <footer class="footer">
+    <div class="footer-rule" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <div class="footer-cell">
+        <span class="footer-label">Status</span>
+        <span class="footer-value">Available for new projects</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Based</span>
+        <span class="footer-value">Graz, Austria</span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Email</span>
+        <span class="footer-value"><a class="link-underline" href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></span>
+      </div>
+      <div class="footer-cell">
+        <span class="footer-label">Elsewhere</span>
+        <span class="footer-value"><a class="link-underline" href="https://github.com/antoniobaltic" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></span>
+      </div>
+    </div>
 
-      function apply(t) {
-        document.documentElement.setAttribute('data-theme', t);
-        if (t === 'light') {
-          icon.textContent = '◐'; label.textContent = 'dark_mode';
-          if (metaTheme) metaTheme.setAttribute('content', '#f4efe6');
-        } else {
-          icon.textContent = '◑'; label.textContent = 'light_mode';
-          if (metaTheme) metaTheme.setAttribute('content', '#0a0a0a');
-        }
-        localStorage.setItem('theme', t);
-        theme = t;
-      }
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Antonio Baltic</span>
+      <a href="index.html" class="back-to-top">
+        <span>Zurück zum Portfolio</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </footer>
 
-      apply(theme);
-      btn.addEventListener('click', function() { apply(theme === 'dark' ? 'light' : 'dark'); });
-    })();
-  </script>
 </body>
 </html>
