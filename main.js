@@ -102,3 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initRowClicks();
   initReveal();
 });
+
+/* ───────── bfcache safety net ─────────
+   When iOS Safari restores from the back-forward cache, the
+   IntersectionObserver doesn't re-fire and any row whose .is-visible
+   class wasn't set yet stays at opacity:0 — the row appears blank.
+   On any persisted restore, force-mark every reveal as visible. */
+window.addEventListener('pageshow', (e) => {
+  if (!e.persisted) return;
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+  if (document.activeElement && document.activeElement !== document.body) {
+    document.activeElement.blur();
+  }
+});
