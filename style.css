@@ -514,6 +514,11 @@ ol, ul { list-style: none; }
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Rows without a primary destination (e.g. WIP projects with no public
+   page yet) shouldn't look clickable or show the navigate-arrow. */
+.project:not(:has(.project-title-link)) { cursor: default; }
+.project:not(:has(.project-title-link)) .project-arrow { display: none; }
+
 .project::after {
   content: '';
   position: absolute;
