@@ -572,7 +572,6 @@ ol, ul { list-style: none; }
 
 .project-title-link {
   display: inline-block;
-  margin-bottom: 0.6rem;
   position: relative;
   z-index: 2;
 }
@@ -584,6 +583,7 @@ ol, ul { list-style: none; }
   letter-spacing: -0.035em;
   line-height: 1;
   color: var(--ink);
+  margin-bottom: 0.6rem;
   transition: color 0.35s var(--ease-out);
 }
 
