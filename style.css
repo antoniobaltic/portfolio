@@ -511,6 +511,7 @@ ol, ul { list-style: none; }
   position: relative;
   cursor: pointer;
   transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .project::after {
@@ -556,7 +557,9 @@ ol, ul { list-style: none; }
   transition: color 0.35s var(--ease-out), opacity 0.35s var(--ease-out);
 }
 
-.project:hover .project-num { color: var(--accent-fg); opacity: 0.7; }
+@media (hover: hover) {
+  .project:hover .project-num { color: var(--accent-fg); opacity: 0.7; }
+}
 
 .project-main {
   min-width: 0;
@@ -579,7 +582,9 @@ ol, ul { list-style: none; }
   transition: color 0.35s var(--ease-out);
 }
 
-.project:hover .project-title { color: var(--accent-fg); }
+@media (hover: hover) {
+  .project:hover .project-title { color: var(--accent-fg); }
+}
 
 .project-desc {
   font-family: var(--f-display);
@@ -592,7 +597,9 @@ ol, ul { list-style: none; }
   transition: color 0.35s var(--ease-out);
 }
 
-.project:hover .project-desc { color: var(--accent-fg); opacity: 0.92; }
+@media (hover: hover) {
+  .project:hover .project-desc { color: var(--accent-fg); opacity: 0.92; }
+}
 
 .project-aux {
   display: flex;
@@ -618,15 +625,17 @@ ol, ul { list-style: none; }
   border-bottom-color: var(--ink);
 }
 
-.project:hover .aux-link {
-  color: var(--accent-fg);
-  opacity: 0.75;
-}
+@media (hover: hover) {
+  .project:hover .aux-link {
+    color: var(--accent-fg);
+    opacity: 0.75;
+  }
 
-.project:hover .aux-link:hover {
-  color: var(--accent-fg);
-  opacity: 1;
-  border-bottom-color: var(--accent-fg);
+  .project:hover .aux-link:hover {
+    color: var(--accent-fg);
+    opacity: 1;
+    border-bottom-color: var(--accent-fg);
+  }
 }
 
 /* Right column — meta */
@@ -645,7 +654,9 @@ ol, ul { list-style: none; }
 
 .project-tag { color: var(--muted-2); }
 
-.project:hover .project-tag { color: var(--accent-fg); opacity: 0.7; }
+@media (hover: hover) {
+  .project:hover .project-tag { color: var(--accent-fg); opacity: 0.7; }
+}
 
 .project-status {
   display: inline-flex;
@@ -668,10 +679,12 @@ ol, ul { list-style: none; }
   color: var(--bg);
 }
 
-.project:hover .project-status {
-  color: var(--accent-fg);
-  border-color: var(--accent-fg);
-  background: transparent;
+@media (hover: hover) {
+  .project:hover .project-status {
+    color: var(--accent-fg);
+    border-color: var(--accent-fg);
+    background: transparent;
+  }
 }
 
 .status-pulse {
@@ -692,8 +705,10 @@ ol, ul { list-style: none; }
   animation: dot-pulse 2.4s ease-out infinite;
 }
 
-.project:hover .status-pulse { background: var(--accent-fg); }
-.project:hover .status-pulse::after { background: var(--accent-fg); }
+@media (hover: hover) {
+  .project:hover .status-pulse { background: var(--accent-fg); }
+  .project:hover .status-pulse::after { background: var(--accent-fg); }
+}
 
 /* Arrow */
 .project-arrow {
@@ -707,9 +722,11 @@ ol, ul { list-style: none; }
   transition: transform 0.45s var(--ease-out), color 0.35s var(--ease-out);
 }
 
-.project:hover .project-arrow {
-  color: var(--accent-fg);
-  transform: translateX(8px);
+@media (hover: hover) {
+  .project:hover .project-arrow {
+    color: var(--accent-fg);
+    transform: translateX(8px);
+  }
 }
 
 /* Hidden filter state */
