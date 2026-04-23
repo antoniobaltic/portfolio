@@ -2,7 +2,7 @@
    Antonio Baltic — Index 2026
 ───────────────────────────────────────────────────── */
 
-/* ───────── Local time (Graz) ───────── */
+/* ───────── Local time ───────── */
 function initClock() {
   const el = document.getElementById('local-time');
   if (!el) return;
