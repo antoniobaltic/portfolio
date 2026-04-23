@@ -1,6 +1,6 @@
 # antoniobaltic.xyz
 
-Personal portfolio for an indie iOS / web developer based in Graz, Austria.
+Personal portfolio for an indie iOS / web developer based in Europe.
 One page, no build step, deployed on Vercel.
 
 ## Stack

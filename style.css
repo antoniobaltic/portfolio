@@ -349,6 +349,16 @@ ol, ul { list-style: none; }
   letter-spacing: 0.06em;
 }
 
+.bio-flag,
+.footer-flag {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 1em;
+  line-height: 1;
+  margin-left: 0.05em;
+  display: inline-block;
+  vertical-align: -0.08em;
+}
+
 /* ═══════════════════════════════════════════════════════════
    MARQUEE
    ═══════════════════════════════════════════════════════════ */
