@@ -287,6 +287,18 @@ ol, ul { list-style: none; }
   font-weight: 300;
 }
 
+/* Multi-line creed variant — six imperatives stacked.
+   Open the leading and add a deliberate beat before the italic kicker. */
+.hero-creed {
+  line-height: 1.7;
+  max-width: 40ch;
+}
+
+.hero-creed em {
+  display: inline-block;
+  margin-top: 0.4em;
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
