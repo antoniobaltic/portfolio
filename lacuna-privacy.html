@@ -66,7 +66,7 @@
       <div class="policy-meta">
         <div class="policy-meta-cell">
           <span class="policy-meta-label">Last updated</span>
-          <span class="policy-meta-value">April 4, 2026</span>
+          <span class="policy-meta-value">May 13, 2026</span>
         </div>
         <div class="policy-meta-cell">
           <span class="policy-meta-label">Jurisdiction</span>
@@ -77,7 +77,7 @@
 
     <aside class="policy-tldr">
       <span class="policy-tldr-label">The short version</span>
-      <p>Lacuna stores everything locally on your device. I don't collect, transmit, or have access to any of your data. I can't see your capsules, photos, voice notes, or any other content you create.</p>
+      <p>Lacuna stores your capsules on your device. We operate no servers of our own, collect nothing about you, and never see your content. Anything sent via iMessage is end-to-end encrypted &mdash; neither Apple nor we can read it.</p>
     </aside>
 
     <!-- 01 -->
@@ -91,247 +91,112 @@
         <li>Austria</li>
         <li><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></li>
       </ul>
-      <p>For the purposes of the EU General Data Protection Regulation (GDPR / DSGVO) and the Austrian Datenschutzgesetz (DSG), I am the data controller.</p>
     </section>
 
     <!-- 02 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">02</span>
-        <span>What Data Is Processed</span>
+        <span>Where Your Data Lives</span>
       </h2>
-
-      <h3>2.1 Content You Create</h3>
-      <p>When you create a capsule, the following data is stored <strong>on your device and, if iCloud is enabled, synced to your personal iCloud account</strong>:</p>
-      <ul>
-        <li>Text content you write</li>
-        <li>Photos you select from your library or capture with the camera</li>
-        <li>Voice recordings you make</li>
-        <li>Capsule titles, creation dates, and unlock dates</li>
-        <li>Your sender name (if you choose to send a capsule to someone)</li>
-      </ul>
-      <p>If you have iCloud enabled on your device, your capsule data is automatically synced across your Apple devices using Apple's CloudKit framework. This data goes to <strong>your personal iCloud storage</strong> &mdash; not to any server I operate. I have no access to your iCloud data. Apple encrypts your data in transit and at rest.</p>
-      <p>If iCloud is disabled, all data remains exclusively on your device.</p>
-      <p>I have no access to any of this data. There are no servers I operate, no accounts, and no way for me or any third party to view your content.</p>
-
-      <h3>2.2 Preferences (Stored Locally Only)</h3>
-      <p>The App stores your preferences on your device using Apple's standard storage:</p>
-      <ul>
-        <li>Appearance mode (light, dark, or automatic)</li>
-        <li>Your sender name (so you don't have to re-enter it each time you send)</li>
-        <li>Onboarding completion status</li>
-        <li>Notification permission status</li>
-      </ul>
-      <p>These preferences are not transmitted anywhere.</p>
-
-      <h3>2.3 Shared Capsules</h3>
-      <p>When you use the "send to someone" feature, the App packages your capsule content into a <strong>.capsule</strong> file and opens the iOS share sheet. You choose how to share it (e.g., AirDrop, iMessage, email).</p>
-      <ul>
-        <li>The file is created locally on your device</li>
-        <li>It is shared through Apple's standard sharing mechanisms</li>
-        <li>I have no involvement in or access to the transmission</li>
-        <li>The recipient's copy is stored locally on their device</li>
-        <li>Your sender name is included in the file so the recipient knows who sent it</li>
-      </ul>
-      <p>The sharing is entirely peer-to-peer. No data passes through any server I operate.</p>
-
-      <h3>2.4 In-App Purchases</h3>
-      <p>The App offers a one-time in-app purchase ("Lacuna +") processed by Apple through the App Store. Purchase validation and entitlement management is handled by <strong>RevenueCat</strong>, a third-party service (see Section 5). RevenueCat receives:</p>
-      <ul>
-        <li>A randomly generated anonymous user ID (not linked to your Apple ID or any personal information)</li>
-        <li>Purchase transaction data from Apple (product purchased, date, transaction ID)</li>
-        <li>Your device's country/region (for currency and pricing purposes)</li>
-      </ul>
-      <p>RevenueCat does <strong>not</strong> receive your name, Apple ID, email address, payment details, or any other personally identifiable information. The anonymous user ID cannot be used to identify you.</p>
-      <p>I receive aggregate, anonymized sales data (e.g., number of purchases per country) from both Apple and RevenueCat. I do <strong>not</strong> receive any data that could identify individual users.</p>
-
-      <h3>2.5 Notifications</h3>
-      <p>The App uses Apple's local notification system to alert you when a capsule is ready to open. These notifications are:</p>
-      <ul>
-        <li>Scheduled locally on your device</li>
-        <li>Not routed through any external server</li>
-        <li>Not used for marketing or advertising</li>
-      </ul>
-
-      <h3>2.6 Data I Do NOT Collect</h3>
-      <p>To be explicit, the App does <strong>not</strong> collect or process:</p>
-      <ul>
-        <li>Personal identification information (name, email, phone number)</li>
-        <li>Location data</li>
-        <li>Device identifiers or fingerprints</li>
-        <li>Usage analytics or behavioral data</li>
-        <li>Crash reports or diagnostics</li>
-        <li>Advertising identifiers</li>
-        <li>Cookies or tracking technologies</li>
-        <li>Health, financial, or biometric data</li>
-      </ul>
+      <p>All capsule data &mdash; text, photos, voice recordings, titles, dates &mdash; is stored on your device using Apple's <strong>SwiftData</strong> framework.</p>
+      <p>If iCloud is enabled in your iOS settings, your capsules sync automatically across your Apple devices through Apple's <strong>CloudKit private database</strong>. This data lives in your personal iCloud, not on any server we operate or can access. Apple encrypts it in transit and at rest.</p>
+      <p>Your preferences (appearance mode, your name as sender, onboarding status) are stored locally and are not synced.</p>
+      <p>We do not operate any servers ourselves. For everything we use Apple's infrastructure for &mdash; sync, iMessage transit &mdash; see the sections below.</p>
     </section>
 
     <!-- 03 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">03</span>
-        <span>Legal Basis for Processing (GDPR Article 6)</span>
+        <span>Shared Capsules</span>
       </h2>
-      <p>The minimal data processing that occurs is based on:</p>
-      <ul>
-        <li><strong>Article 6(1)(b) &mdash; Performance of a contract:</strong> Processing your locally stored content is necessary to provide the App's functionality (creating, sealing, and opening capsules). This also covers the transmission of anonymous purchase data to RevenueCat, which is necessary to validate and deliver the in-app purchase you initiated.</li>
-        <li><strong>Article 6(1)(a) &mdash; Consent:</strong> Notification permissions and camera/microphone/photo library access are granted explicitly by you through iOS system prompts. You can revoke these at any time in your device settings.</li>
-      </ul>
+      <p>When you send a capsule, you can share it via iMessage (with a rich preview card) or via any other app (AirDrop, WhatsApp, email).</p>
+
+      <h3>3.1 iMessage with text capsules</h3>
+      <p>The entire content is packaged into the message itself. No data passes through any server we operate.</p>
+
+      <h3>3.2 iMessage with photos or voice notes</h3>
+      <p>The content is encrypted on your device with a one-time key and uploaded to Apple's <strong>iCloud public database</strong> so the recipient can fetch it. The decryption key travels only inside the iMessage and never reaches Apple's servers &mdash; your media is end-to-end encrypted. Records auto-expire and are cleaned up after 30 days.</p>
+
+      <h3>3.3 Sharing via other apps</h3>
+      <p>Your capsule is packaged into a local <strong>.capsule</strong> file and handed to the iOS share sheet. No data passes through any server we operate; the transfer is peer-to-peer through whichever app you pick.</p>
     </section>
 
     <!-- 04 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">04</span>
-        <span>Data Storage and Security</span>
+        <span>In-App Purchases</span>
       </h2>
-      <p>All data is stored on your device and, if iCloud is enabled, synced to your personal iCloud account using Apple's standard frameworks:</p>
-      <ul>
-        <li><strong>SwiftData</strong> for capsule metadata and content</li>
-        <li><strong>Apple CloudKit</strong> for iCloud sync (uses your personal iCloud storage, encrypted by Apple)</li>
-        <li><strong>UserDefaults</strong> for preferences (not synced)</li>
-      </ul>
-      <p>Data is protected by your device's built-in security features, including:</p>
-      <ul>
-        <li>Device encryption (enabled by default on all modern iOS devices)</li>
-        <li>App sandboxing (other apps cannot access Lacuna's data)</li>
-        <li>Biometric/passcode device lock</li>
-      </ul>
-      <p>I do not implement additional encryption because your device's native encryption already protects all locally stored data.</p>
+      <p><strong>Lacuna +</strong> is processed by Apple through the App Store. Purchase validation is handled by <strong>RevenueCat</strong>, a third-party service that receives only a randomly generated anonymous ID and transaction data. RevenueCat does not receive your name, Apple ID, email, or payment details.</p>
+      <p>We receive only aggregate, anonymized sales data. We do not receive any information that could identify individual users.</p>
     </section>
 
     <!-- 05 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">05</span>
-        <span>Data Sharing and Third Parties</span>
+        <span>Notifications</span>
       </h2>
-      <p>The App does not share your personal data with any third parties. The App contains:</p>
-      <ul>
-        <li>No analytics SDKs</li>
-        <li>No advertising frameworks</li>
-        <li>No social media tracking</li>
-      </ul>
-      <p>The App uses two third-party services, neither of which receives your personal data:</p>
-      <ul>
-        <li><strong>Apple</strong> processes in-app purchases through the App Store under Apple's own privacy policy: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></li>
-        <li><strong>RevenueCat, Inc.</strong> manages purchase validation and entitlement status. RevenueCat receives only an anonymous, randomly generated user ID and purchase transaction data. RevenueCat's privacy policy: <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">revenuecat.com/privacy</a></li>
-      </ul>
-      <p>RevenueCat acts as a data processor on my behalf under GDPR Article 28. No personal data (name, email, Apple ID, device identifiers) is transmitted to RevenueCat. The anonymous user ID used by RevenueCat is generated locally and cannot be linked to your identity.</p>
+      <p>The app uses Apple's local notification system to alert you when a capsule is ready. Notifications are scheduled locally on your device, not routed through any external server, and not used for marketing.</p>
     </section>
 
     <!-- 06 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">06</span>
-        <span>Data Retention and Deletion</span>
+        <span>What We Do Not Collect</span>
       </h2>
-      <p>Your data is retained on your device for as long as you keep it:</p>
-      <ul>
-        <li><strong>Capsules</strong> &mdash; Stored until you delete them within the App</li>
-        <li><strong>Preferences</strong> &mdash; Stored until you delete the App</li>
-        <li><strong>Voice recordings</strong> &mdash; Stored as files until the associated capsule is deleted</li>
-      </ul>
-      <p><strong>To delete all data permanently</strong>, simply delete the App from your device. This removes all locally stored data completely and irreversibly.</p>
-      <p>You can also delete individual capsules within the App at any time.</p>
-      <p class="policy-note">If you made an in-app purchase, RevenueCat retains the anonymous purchase record (anonymous user ID and transaction data) for the purpose of restoring your purchase on a new device. This data cannot be linked to your identity. RevenueCat's data retention practices are governed by their privacy policy: <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">revenuecat.com/privacy</a></p>
+      <p>We do not collect: personal identification information, location data, device identifiers, usage analytics, crash reports, advertising identifiers, cookies, tracking technologies, health data, financial data, or biometric data.</p>
+      <p>The app contains no analytics SDKs, no advertising frameworks, and no social media tracking. The only third-party service is RevenueCat for anonymous purchase validation (see above).</p>
     </section>
 
     <!-- 07 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">07</span>
-        <span>Your Rights Under GDPR / DSGVO</span>
+        <span>Your Rights (GDPR / DSGVO)</span>
       </h2>
-      <p>Under the General Data Protection Regulation and the Austrian Datenschutzgesetz, you have the following rights:</p>
-      <ul>
-        <li><strong>Right of access</strong> (Article 15 GDPR) &mdash; You can view all your data directly within the App at any time.</li>
-        <li><strong>Right to rectification</strong> (Article 16 GDPR) &mdash; You can modify capsule titles within the App. Sealed capsule content cannot be modified by design &mdash; this is a core feature, not a limitation.</li>
-        <li><strong>Right to erasure</strong> (Article 17 GDPR) &mdash; You can delete any capsule at any time, or delete the App entirely to remove all data.</li>
-        <li><strong>Right to data portability</strong> (Article 20 GDPR) &mdash; You can export capsules as .capsule files using the send feature.</li>
-        <li><strong>Right to restriction of processing</strong> (Article 18 GDPR) &mdash; Since all processing is local and under your control, you can restrict processing by simply not using the App.</li>
-        <li><strong>Right to object</strong> (Article 21 GDPR) &mdash; There is no profiling, automated decision-making, or direct marketing to object to.</li>
-        <li><strong>Right to withdraw consent</strong> (Article 7(3) GDPR) &mdash; You can revoke camera, microphone, photo library, and notification permissions at any time in your iOS Settings.</li>
-      </ul>
-      <p>Since I do not store any of your data on servers or have any way to access it, most of these rights are automatically fulfilled by the App's local-only architecture.</p>
+      <p>Under the General Data Protection Regulation and the Austrian Datenschutzgesetz, you have the right to access, rectify, erase, port, and restrict processing of your data.</p>
+      <p>Since your capsules live on your device, these rights are automatically fulfilled &mdash; you can view, delete, or export your data at any time within the app. Delete the app to remove everything from the device.</p>
+      <p>For media capsules sent via iMessage, the encrypted blob (ciphertext only, no identifying information) sits in Apple's iCloud for up to 30 days while in transit, then is automatically removed. Canceling an iMessage send before it goes through removes the blob immediately.</p>
+      <p>The responsible authority is the <strong>Österreichische Datenschutzbehörde</strong>, Barichgasse 40-42, 1030 Wien. <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">dsb.gv.at</a></p>
     </section>
 
     <!-- 08 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">08</span>
-        <span>International Data Transfers</span>
+        <span>Data Security</span>
       </h2>
-      <p>If iCloud is enabled, your capsule content (text, photos, voice recordings) is synced to Apple's iCloud servers to enable multi-device access. Apple stores this data in data centers across various jurisdictions, subject to Apple's privacy policy. This is your personal iCloud data &mdash; I have no access to it. If iCloud is disabled, your data remains exclusively on your device.</p>
-      <p>When you make an in-app purchase, anonymous transaction data (anonymous user ID, product purchased, transaction ID) is processed by RevenueCat, Inc., which is based in the United States. This transfer is limited to non-personal, anonymous data and is covered by RevenueCat's data processing agreements and standard contractual clauses under GDPR Article 46.</p>
-      <p>When you share a capsule with someone using the send feature, the data transfer occurs through the communication channel you choose (e.g., iMessage, email) and is governed by that service's privacy policy and the applicable laws of the jurisdictions involved.</p>
+      <p>On your device, your data is protected by iOS's built-in encryption, app sandboxing, and biometric / passcode lock.</p>
+      <p>For media capsules sent via iMessage, we add a second encryption layer: <strong>AES-GCM with a fresh 256-bit key generated for every capsule</strong>. The key is included only inside the iMessage itself and never sent to any server. Apple sees only ciphertext.</p>
     </section>
 
     <!-- 09 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">09</span>
-        <span>Children's Privacy</span>
+        <span>Children</span>
       </h2>
-      <p>The App does not knowingly collect any data from children under the age of 16 (the age threshold under GDPR). Since the App does not collect any personal data from any user, no special measures for children's data are required.</p>
+      <p>The app does not knowingly collect any data from children under 16. Since the app collects no personal data from any user, no special measures are required.</p>
     </section>
 
     <!-- 10 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">10</span>
-        <span>Austrian-Specific Provisions (DSG)</span>
+        <span>Changes</span>
       </h2>
-      <p>In accordance with the Austrian Datenschutzgesetz (DSG) implementing the GDPR:</p>
-      <ul>
-        <li>The responsible data protection authority is the <strong>Österreichische Datenschutzbehörde</strong> (Austrian Data Protection Authority), Barichgasse 40-42, 1030 Wien, Austria. Website: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">dsb.gv.at</a></li>
-        <li>You have the right to lodge a complaint with the Datenschutzbehörde if you believe your data protection rights have been violated.</li>
-        <li>As the App processes no personal data on external servers, no Data Protection Impact Assessment (DPIA) is required under Article 35 GDPR.</li>
-        <li>No Data Protection Officer (DPO) is appointed as I am an individual developer not engaged in large-scale processing of personal data (Article 37 GDPR).</li>
-      </ul>
+      <p>This policy may be updated. Changes will be reflected by the date below and noted in App Store release notes.</p>
     </section>
 
     <!-- 11 -->
     <section class="policy-section">
       <h2 class="policy-section-title">
         <span class="policy-section-num">11</span>
-        <span>Apple App Store Requirements</span>
-      </h2>
-      <p>In accordance with Apple's App Store Review Guidelines:</p>
-      <ul>
-        <li>The App's privacy nutrition label on the App Store declares "Purchases" and "Identifiers" (anonymous ID) as data used, marked as <strong>not linked to your identity</strong>, in accordance with RevenueCat's data processing for purchase validation.</li>
-        <li>The App requests camera, microphone, and photo library permissions only when needed and explains the purpose in the permission dialogs.</li>
-        <li>The App does not use any Apple frameworks for tracking or advertising.</li>
-      </ul>
-    </section>
-
-    <!-- 12 -->
-    <section class="policy-section">
-      <h2 class="policy-section-title">
-        <span class="policy-section-num">12</span>
-        <span>Changes to This Privacy Policy</span>
-      </h2>
-      <p>I may update this privacy policy from time to time. Any changes will be reflected by updating the "Last updated" date at the top of this policy. Since I have no way to contact you (I don't have your email or any contact information), I encourage you to review this policy periodically.</p>
-      <p>Significant changes will also be noted in the App Store release notes when the App is updated.</p>
-    </section>
-
-    <!-- 13 -->
-    <section class="policy-section">
-      <h2 class="policy-section-title">
-        <span class="policy-section-num">13</span>
-        <span>Contact</span>
-      </h2>
-      <p>If you have any questions about this privacy policy, your rights, or the App's data practices, please contact me at:</p>
-      <p><a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a></p>
-      <p>I will respond to privacy-related inquiries within 30 days, as required by GDPR Article 12(3).</p>
-    </section>
-
-    <!-- 14 -->
-    <section class="policy-section">
-      <h2 class="policy-section-title">
-        <span class="policy-section-num">14</span>
-        <span>Summary</span>
+        <span>Summary at a Glance</span>
       </h2>
       <table class="policy-table">
         <thead>
@@ -341,19 +206,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Do you collect my data?</td><td>No</td></tr>
-          <tr><td>Do you have servers?</td><td>No</td></tr>
-          <tr><td>Can you see my capsules?</td><td>No</td></tr>
-          <tr><td>Do you use analytics?</td><td>No</td></tr>
-          <tr><td>Do you track me?</td><td>No</td></tr>
-          <tr><td>Do you share data with third parties?</td><td>Anonymous purchase data only (RevenueCat)</td></tr>
-          <tr><td>Where is my data stored?</td><td>On your device and in your personal iCloud (if enabled)</td></tr>
-          <tr><td>How do I delete my data?</td><td>Delete the capsule or delete the App</td></tr>
+          <tr><td>Collect your data?</td><td>No</td></tr>
+          <tr><td>Run our own servers?</td><td>No</td></tr>
+          <tr><td>Use Apple's iCloud?</td><td>Yes &mdash; for sync + encrypted iMessage transit</td></tr>
+          <tr><td>See your capsules?</td><td>No</td></tr>
+          <tr><td>Use analytics?</td><td>No</td></tr>
+          <tr><td>Track you?</td><td>No</td></tr>
+          <tr><td>Share with third parties?</td><td>Anonymous purchase data only (RevenueCat)</td></tr>
+          <tr><td>Where is data stored?</td><td>Your device + your iCloud</td></tr>
+          <tr><td>How to delete?</td><td>Delete the app</td></tr>
         </tbody>
       </table>
     </section>
 
-    <p class="policy-footer-note">This privacy policy is governed by the laws of Austria and the European Union.</p>
+    <p class="policy-footer-note">
+      Governed by the laws of Austria and the European Union.<br>
+      <a href="mailto:antoniobaltic@icloud.com">antoniobaltic@icloud.com</a>
+    </p>
 
   </main>
 
