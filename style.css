@@ -22,6 +22,10 @@
   --accent-soft:   rgba(29, 63, 255, 0.08);
   --accent-fg:     #f4efe6;
 
+  /* Secondary — Abandoned (deep brick) */
+  --abandoned:     #8f2e22;
+  --abandoned-dim: rgba(143, 46, 34, 0.45);
+
   /* Type */
   --f-display:    'Inter Tight', system-ui, sans-serif;
   --f-mono:       'Geist Mono', ui-monospace, monospace;
@@ -513,6 +517,22 @@ ol, ul { list-style: none; }
 
 .filter-btn.is-active .filter-count { color: var(--accent-fg); opacity: 0.5; }
 
+/* Abandoned filter — subtle red signal, replaces ink with brick when
+   active so the filter set stays visually distinct without competing
+   with the cobalt brand color. */
+.filter-btn[data-filter="abandoned"] .filter-label { color: var(--abandoned-dim); }
+.filter-btn[data-filter="abandoned"] .filter-count { color: var(--abandoned); opacity: 0.85; }
+
+.filter-btn[data-filter="abandoned"]:hover { color: var(--abandoned); }
+.filter-btn[data-filter="abandoned"]:hover .filter-label { color: var(--abandoned); }
+
+.filter-btn[data-filter="abandoned"].is-active {
+  color: var(--accent-fg);
+  background: var(--abandoned);
+}
+.filter-btn[data-filter="abandoned"].is-active .filter-label { color: var(--accent-fg); }
+.filter-btn[data-filter="abandoned"].is-active .filter-count { color: var(--accent-fg); opacity: 0.55; }
+
 /* ═══════════════════════════════════════════════════════════
    PROJECT ROWS
    ═══════════════════════════════════════════════════════════ */
@@ -694,6 +714,15 @@ ol, ul { list-style: none; }
   border: 1px solid var(--ink);
   background: var(--ink);
   color: var(--bg);
+}
+
+/* Abandoned — outlined brick red, no pulse (project is no longer
+   alive). Sits visually distinct from Live/WIP without competing. */
+.status-abandoned {
+  color: var(--abandoned);
+  border: 1px solid var(--abandoned);
+  background: transparent;
+  letter-spacing: 0.14em;
 }
 
 @media (hover: hover) {
