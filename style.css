@@ -26,6 +26,10 @@
   --abandoned:     #8f2e22;
   --abandoned-dim: rgba(143, 46, 34, 0.45);
 
+  /* In Progress hover — warm charcoal, distinct from cobalt and brick
+     without competing with either. */
+  --wip:           #3a342e;
+
   /* Type */
   --f-display:    'Inter Tight', system-ui, sans-serif;
   --f-mono:       'Geist Mono', ui-monospace, monospace;
@@ -577,7 +581,13 @@ ol, ul { list-style: none; }
   cursor: pointer;
   transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
+  /* Per-status hover background — defaults to cobalt for live rows,
+     overridden below for in-progress and abandoned. */
+  --hover-bg: var(--accent);
 }
+
+.project[data-status="wip"]       { --hover-bg: var(--wip); }
+.project[data-status="abandoned"] { --hover-bg: var(--abandoned); }
 
 /* Rows without a primary destination (e.g. WIP projects with no public
    page yet) shouldn't look clickable or show the navigate-arrow. */
@@ -588,7 +598,7 @@ ol, ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--accent);
+  background: var(--hover-bg);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.45s var(--ease-out);
