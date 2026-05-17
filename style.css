@@ -895,19 +895,23 @@ ol, ul { list-style: none; }
   will-change: transform, opacity;
 }
 
-.pollen span:nth-child(1) { left:  8%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 22s; animation-delay: 0s;  }
-.pollen span:nth-child(2) { left: 24%; width: 4px; height: 4px; background: #b8d090; box-shadow: 0 0 4px #b8d090; animation-duration: 18s; animation-delay: 4s;  }
-.pollen span:nth-child(3) { left: 40%; width: 6px; height: 6px; background: #9bb87c; box-shadow: 0 0 6px #9bb87c; animation-duration: 25s; animation-delay: 2s;  }
-.pollen span:nth-child(4) { left: 58%; width: 4px; height: 4px; background: #c5d997; box-shadow: 0 0 4px #c5d997; animation-duration: 20s; animation-delay: 7s;  }
-.pollen span:nth-child(5) { left: 74%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 24s; animation-delay: 1s;  }
-.pollen span:nth-child(6) { left: 90%; width: 3px; height: 3px; background: #b8d090; box-shadow: 0 0 3px #b8d090; animation-duration: 17s; animation-delay: 10s; }
+.pollen span:nth-child(1)  { left:  6%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 18s; animation-delay:  0s;    }
+.pollen span:nth-child(2)  { left: 14%; width: 4px; height: 4px; background: #b8d090; box-shadow: 0 0 4px #b8d090; animation-duration: 15s; animation-delay: -3s;    }
+.pollen span:nth-child(3)  { left: 24%; width: 6px; height: 6px; background: #9bb87c; box-shadow: 0 0 6px #9bb87c; animation-duration: 22s; animation-delay: -7s;    }
+.pollen span:nth-child(4)  { left: 34%; width: 4px; height: 4px; background: #c5d997; box-shadow: 0 0 4px #c5d997; animation-duration: 17s; animation-delay: -11s;   }
+.pollen span:nth-child(5)  { left: 44%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 20s; animation-delay: -2s;    }
+.pollen span:nth-child(6)  { left: 54%; width: 3px; height: 3px; background: #b8d090; box-shadow: 0 0 3px #b8d090; animation-duration: 14s; animation-delay: -9s;    }
+.pollen span:nth-child(7)  { left: 64%; width: 5px; height: 5px; background: #9bb87c; box-shadow: 0 0 5px #9bb87c; animation-duration: 19s; animation-delay: -5s;    }
+.pollen span:nth-child(8)  { left: 74%; width: 4px; height: 4px; background: #c5d997; box-shadow: 0 0 4px #c5d997; animation-duration: 23s; animation-delay: -14s;   }
+.pollen span:nth-child(9)  { left: 84%; width: 6px; height: 6px; background: #a8c878; box-shadow: 0 0 6px #a8c878; animation-duration: 16s; animation-delay: -6s;    }
+.pollen span:nth-child(10) { left: 92%; width: 4px; height: 4px; background: #b8d090; box-shadow: 0 0 4px #b8d090; animation-duration: 21s; animation-delay: -10s;   }
 
 @keyframes pollen-drift {
-  0%   { transform: translate(0,     0)    scale(1);   opacity: 0;    }
-  15%  {                                                opacity: 0.55; }
-  50%  { transform: translate(10px,  -120px) scale(1.1); opacity: 0.45; }
-  85%  {                                                opacity: 0.30; }
-  100% { transform: translate(-6px,  -240px) scale(0.9); opacity: 0;   }
+  0%   { transform: translate(0,    0)     scale(1);   opacity: 0;   }
+  10%  {                                                opacity: 0.6; }
+  50%  { transform: translate(10px, -120px) scale(1.1); opacity: 0.5; }
+  90%  {                                                opacity: 0.3; }
+  100% { transform: translate(-6px, -240px) scale(0.9); opacity: 0;   }
 }
 
 @media (prefers-reduced-motion: reduce) {
