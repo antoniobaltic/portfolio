@@ -838,12 +838,14 @@ ol, ul { list-style: none; }
 
 /* Pull-quote that anchors the footer. Italic Inter Tight at display
    size, attribution in mono caps below — pairs the contemplative tone
-   of the quote with the brand mono register. Centered horizontally. */
+   of the quote with the brand mono register. Centered horizontally,
+   with a slow drift of soft green pollen particles in the background. */
 .footer-quote {
-  margin: clamp(2.5rem, 5vw, 4rem) auto;
-  padding: 0;
-  max-width: 32ch;
+  position: relative;
+  margin: clamp(2.5rem, 5vw, 4rem) 0;
+  padding: 1.5rem 0;
   text-align: center;
+  overflow: hidden;
 }
 
 .footer-quote p {
@@ -854,11 +856,16 @@ ol, ul { list-style: none; }
   line-height: 1.3;
   letter-spacing: -0.015em;
   color: var(--ink);
-  margin: 0;
+  max-width: 32ch;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-quote cite {
   display: block;
+  position: relative;
+  z-index: 1;
   font-family: var(--f-mono);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -866,6 +873,45 @@ ol, ul { list-style: none; }
   color: var(--muted-2);
   font-style: normal;
   margin-top: 1.4rem;
+}
+
+/* Pollen — six small soft-green particles drifting slowly upward
+   behind the quote. Each on its own duration / delay / horizontal
+   position so the motion never repeats visibly. Tiny box-shadow gives
+   each particle a soft halo for that "warm light through pollen" feel. */
+.pollen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pollen span {
+  position: absolute;
+  bottom: -8px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: pollen-drift linear infinite;
+  will-change: transform, opacity;
+}
+
+.pollen span:nth-child(1) { left:  8%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 22s; animation-delay: 0s;  }
+.pollen span:nth-child(2) { left: 24%; width: 4px; height: 4px; background: #b8d090; box-shadow: 0 0 4px #b8d090; animation-duration: 18s; animation-delay: 4s;  }
+.pollen span:nth-child(3) { left: 40%; width: 6px; height: 6px; background: #9bb87c; box-shadow: 0 0 6px #9bb87c; animation-duration: 25s; animation-delay: 2s;  }
+.pollen span:nth-child(4) { left: 58%; width: 4px; height: 4px; background: #c5d997; box-shadow: 0 0 4px #c5d997; animation-duration: 20s; animation-delay: 7s;  }
+.pollen span:nth-child(5) { left: 74%; width: 5px; height: 5px; background: #a8c878; box-shadow: 0 0 5px #a8c878; animation-duration: 24s; animation-delay: 1s;  }
+.pollen span:nth-child(6) { left: 90%; width: 3px; height: 3px; background: #b8d090; box-shadow: 0 0 3px #b8d090; animation-duration: 17s; animation-delay: 10s; }
+
+@keyframes pollen-drift {
+  0%   { transform: translate(0,     0)    scale(1);   opacity: 0;    }
+  15%  {                                                opacity: 0.55; }
+  50%  { transform: translate(10px,  -120px) scale(1.1); opacity: 0.45; }
+  85%  {                                                opacity: 0.30; }
+  100% { transform: translate(-6px,  -240px) scale(0.9); opacity: 0;   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pollen { display: none; }
 }
 
 /* Thinking indicator — three cobalt-family dots that bounce in sequence
