@@ -480,6 +480,29 @@ ol, ul { list-style: none; }
 }
 
 /* ───────── Filter ───────── */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.filter-group-label {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  min-width: 3.5rem;
+  text-align: right;
+}
+
 .filter {
   display: inline-flex;
   gap: 0.4rem;
@@ -517,21 +540,31 @@ ol, ul { list-style: none; }
 
 .filter-btn.is-active .filter-count { color: var(--accent-fg); opacity: 0.5; }
 
-/* Abandoned filter — subtle red signal, replaces ink with brick when
-   active so the filter set stays visually distinct without competing
-   with the cobalt brand color. */
-.filter-btn[data-filter="abandoned"] .filter-label { color: var(--abandoned-dim); }
-.filter-btn[data-filter="abandoned"] .filter-count { color: var(--abandoned); opacity: 0.85; }
+/* Live filter — cobalt active state, echoes the cobalt pulse on Live
+   project pills so the connection is wordlessly reinforced. */
+.filter-btn[data-filter-value="live"].is-active {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.filter-btn[data-filter-value="live"].is-active .filter-count {
+  color: var(--accent-fg);
+  opacity: 0.55;
+}
 
-.filter-btn[data-filter="abandoned"]:hover { color: var(--abandoned); }
-.filter-btn[data-filter="abandoned"]:hover .filter-label { color: var(--abandoned); }
+/* Abandoned filter — subtle red signal at rest, full brick when active,
+   echoing the brick Abandoned status pill. */
+.filter-btn[data-filter-value="abandoned"] .filter-label { color: var(--abandoned-dim); }
+.filter-btn[data-filter-value="abandoned"] .filter-count { color: var(--abandoned); opacity: 0.85; }
 
-.filter-btn[data-filter="abandoned"].is-active {
+.filter-btn[data-filter-value="abandoned"]:hover { color: var(--abandoned); }
+.filter-btn[data-filter-value="abandoned"]:hover .filter-label { color: var(--abandoned); }
+
+.filter-btn[data-filter-value="abandoned"].is-active {
   color: var(--accent-fg);
   background: var(--abandoned);
 }
-.filter-btn[data-filter="abandoned"].is-active .filter-label { color: var(--accent-fg); }
-.filter-btn[data-filter="abandoned"].is-active .filter-count { color: var(--accent-fg); opacity: 0.55; }
+.filter-btn[data-filter-value="abandoned"].is-active .filter-label { color: var(--accent-fg); }
+.filter-btn[data-filter-value="abandoned"].is-active .filter-count { color: var(--accent-fg); opacity: 0.55; }
 
 /* ═══════════════════════════════════════════════════════════
    PROJECT ROWS
@@ -1232,6 +1265,15 @@ ol, ul { list-style: none; }
 
   .section-head { flex-direction: column; align-items: flex-start; }
   .filter { align-self: flex-start; }
+  .filters { align-items: flex-start; width: 100%; }
+  .filter-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    width: 100%;
+  }
+  .filter-group-label { text-align: left; min-width: 0; }
+  .filter { flex-wrap: wrap; max-width: 100%; }
 
   .project-grid {
     grid-template-columns: 3rem 1fr;

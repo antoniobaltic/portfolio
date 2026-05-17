@@ -19,19 +19,35 @@ function initClock() {
   setInterval(tick, 30_000);
 }
 
-/* ───────── Project filter ───────── */
+/* ───────── Project filter ─────────
+   Two independent filter groups (status + type) AND'd together.
+   Each group is single-select with "all" as the default.
+   - status  → matched against data-status
+   - type    → matched against data-tags (whitespace-split list)
+*/
 function initFilter() {
-  const buttons  = document.querySelectorAll('.filter-btn');
+  const groups   = document.querySelectorAll('.filter-group');
   const projects = document.querySelectorAll('.project');
   const counter  = document.getElementById('project-count');
 
-  if (!buttons.length || !projects.length) return;
+  if (!groups.length || !projects.length) return;
 
-  const apply = (filter) => {
+  // Initial state — read whichever button starts .is-active in each group
+  const state = {};
+  groups.forEach(g => {
+    const key = g.dataset.filterGroup;
+    const active = g.querySelector('.filter-btn.is-active');
+    state[key] = active ? active.dataset.filterValue : 'all';
+  });
+
+  const apply = () => {
     let visible = 0;
     projects.forEach(p => {
-      const tags = (p.dataset.tags || '').split(/\s+/);
-      const match = filter === 'all' || tags.includes(filter);
+      const tags   = (p.dataset.tags || '').split(/\s+/).filter(Boolean);
+      const status = p.dataset.status || '';
+      const matchStatus = state.status === 'all' || status === state.status;
+      const matchType   = state.type   === 'all' || tags.includes(state.type);
+      const match = matchStatus && matchType;
       p.hidden = !match;
       if (match) visible++;
     });
@@ -40,15 +56,20 @@ function initFilter() {
     }
   };
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-pressed', 'false');
+  groups.forEach(group => {
+    const key = group.dataset.filterGroup;
+    const buttons = group.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+        state[key] = btn.dataset.filterValue;
+        apply();
       });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-pressed', 'true');
-      apply(btn.dataset.filter);
     });
   });
 }
