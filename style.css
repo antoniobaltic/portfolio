@@ -1373,24 +1373,30 @@ ol, ul { list-style: none; }
   }
   .filter-group-label { text-align: left; min-width: 0; }
 
-  /* Horizontal scroll on mobile — keeps chips on a single row,
-     prevents orphan wraps, looks intentional. Bleeds to the edge
-     so users can see there's more to scroll. */
+  /* Mobile filter — equal-width grid columns so every chip is
+     visible in one tidy row. No scroll, no orphan wrap, no clipping.
+     Tighter padding + letter-spacing keep "IN PROGRESS" inside its
+     cell at the narrowest viewports. */
   .filter {
-    flex-wrap: nowrap;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 0.2rem;
     width: 100%;
     max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
     align-self: stretch;
+    padding: 0.25rem;
   }
-  .filter::-webkit-scrollbar { display: none; }
   .filter-btn {
-    flex: 0 0 auto;
+    padding: 0.6em 0.35em;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    gap: 0.35em;
+    justify-content: center;
+    min-width: 0;
     white-space: nowrap;
   }
+  .filter-btn .filter-count { font-size: 0.58rem; }
 
   .project-grid {
     grid-template-columns: 3rem 1fr;
